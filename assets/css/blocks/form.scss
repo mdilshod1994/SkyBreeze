@@ -1,0 +1,26 @@
+.form {
+	&--white {
+		.form {
+			&__field {
+				color: rgba(255, 255, 255, 1);
+				border-color: #ffffff;
+				&::-webkit-input-placeholder {
+					color: rgba(255, 255, 255, 0.7);
+				}
+				&::-moz-placeholder {
+					color: rgba(255, 255, 255, 0.7);
+				}
+				&:-moz-placeholder {
+					color: rgba(255, 255, 255, 0.7);
+				}
+				&:-ms-input-placeholder {
+					color: rgba(255, 255, 255, 0.7);
+				}
+				&:focus {
+					border-color: #28aecb;
+					color: rgba(255, 255, 255, 1);
+				}
+			}
+		}
+	}
+}

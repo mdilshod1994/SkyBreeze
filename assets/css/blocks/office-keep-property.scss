@@ -1,0 +1,28 @@
+.office-keep-property {
+	margin-bottom: 210px;
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 40px;
+	}
+	&__coll {
+		width: calc(50% - 10px);
+	}
+	&__desc {
+		line-height: 170%;
+		color: #ffffff;
+	}
+}
+@media (max-width: 1200px) {
+	.office-keep-property {
+		margin-bottom: 160px;
+	}
+}
+@media (max-width: 1010px) {
+	.office-keep-property {
+		display: none;
+	}
+}
+@media (max-width: 760px) {
+}

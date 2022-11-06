@@ -1,0 +1,106 @@
+.reviews {
+	&__body {
+		margin-top: 60px;
+	}
+	&__swiper {
+		overflow: hidden;
+	}
+	&__slide {
+		height: auto !important;
+	}
+	&__box {
+		width: 100%;
+		height: 100%;
+		background-color: #16314e;
+		border-radius: 10px;
+		padding: 30px 30px 88px;
+	}
+	&__top {
+		display: flex;
+		align-items: center;
+		margin-bottom: 25px;
+	}
+	&__avatar {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		overflow: hidden;
+		margin-right: 20px;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+			overflow: hidden;
+		}
+	}
+	&__name {
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 24px;
+		color: #ffffff;
+	}
+	&__desc {
+		padding-right: 15px;
+		line-height: 163%;
+	}
+	&__arrows {
+		display: none;
+	}
+	.swiper-wrapper {
+		& * {
+			box-sizing: border-box;
+		}
+	}
+	.rating {
+		position: absolute;
+		left: 30px;
+		bottom: 30px;
+	}
+	.swiper-pagination {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		bottom: 0px;
+		margin-top: 44px;
+		padding-bottom: 10px;
+	}
+	.swiper-pagination-bullet {
+		width: 10px;
+		height: 10px;
+		background: #28aecb;
+		opacity: 0.3;
+		transition: all 0.3s;
+		&.swiper-pagination-bullet-active {
+			opacity: 1;
+			transform: scale(1.4);
+			transition: all 0.3s;
+		}
+	}
+}
+@media (max-width: 1200px) {
+}
+@media (max-width: 1010px) {
+}
+@media (max-width: 760px) {
+	.reviews {
+		padding-bottom: 80px;
+		&__body {
+			margin-top: 45px;
+		}
+		&__swiper {
+			overflow: visible;
+		}
+		&__desc {
+			font-size: 16px;
+			padding-right: 15px;
+		}
+		&__arrows {
+			display: flex;
+			margin-top: 50px;
+		}
+		.swiper-pagination {
+			display: none;
+		}
+	}
+}

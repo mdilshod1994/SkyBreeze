@@ -1,0 +1,440 @@
+.header {
+	padding: 27px 0px;
+	background-color: #0c1829;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
+	transition: all 0.3s;
+	&__wrap {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__first {
+		display: flex;
+		align-items: center;
+	}
+	&__burger {
+		display: none;
+		align-content: space-between;
+		flex-wrap: wrap;
+		width: 40px;
+		height: 26px;
+		margin-right: 26px;
+		span {
+			display: block;
+			width: 100%;
+			height: 4px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			position: relative;
+			transition: all 0.3s;
+		}
+		&.active {
+			span {
+				&:first-child {
+					transform: rotate(45deg);
+					top: 11px;
+					transition: all 0.3s;
+				}
+				&:nth-child(2) {
+					background-color: transparent;
+					transition: all 0.3s;
+				}
+				&:last-child {
+					transform: rotate(-45deg);
+					top: -10px;
+					transition: all 0.3s;
+				}
+			}
+		}
+	}
+	&__content {
+		&.dragscroll {
+			overflow: visible;
+		}
+		.header__buttons {
+			display: none;
+		}
+	}
+	&__scroll {
+		&.dragscroll {
+			overflow: visible;
+		}
+	}
+	&__menu {
+		margin-left: 35px;
+		ul {
+			display: flex;
+			align-items: center;
+			li {
+				margin-right: 30px;
+				a {
+					line-height: 19px;
+					color: #ffffff;
+					transition: color 0.3s;
+					&:hover {
+						color: #28aecb;
+						transition: color 0.3s;
+					}
+				}
+				&.menu-item-has-children {
+					position: relative;
+					z-index: 1000;
+					&::before {
+						content: "";
+						position: absolute;
+						height: 10px;
+						width: 100%;
+						top: 100%;
+						right: 0px;
+					}
+					& > a {
+						position: relative;
+						padding-right: 18px;
+						&::after {
+							content: "";
+							position: absolute;
+							height: 11px;
+							width: 8px;
+							background-image: url("@/assets/img/icons/arrow.svg");
+							background-repeat: no-repeat;
+							background-size: contain;
+							top: calc(50% - 3.5px);
+							right: 0px;
+							transition: transform 0.3s;
+						}
+					}
+					& > ul {
+						position: absolute;
+						left: 0px;
+						top: 35px;
+						z-index: 10;
+						width: max-content;
+						visibility: hidden;
+						opacity: 0;
+						transform: translateY(20px);
+						transition: 0.3s ease-in-out;
+						background-color: #11263e;
+						border-bottom: none;
+						padding: 10px 15px;
+						display: block;
+						border-radius: 10px;
+						overflow: hidden;
+						& > li {
+							position: relative;
+							& > a {
+								display: inline-block;
+								padding: 5px 0px;
+								white-space: nowrap;
+							}
+						}
+						& > li + li {
+							margin-left: 0;
+						}
+					}
+					&:hover {
+						& > ul {
+							visibility: visible;
+							opacity: 1;
+							transform: translateY(0px);
+						}
+					}
+				}
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+	&__last {
+		display: flex;
+		align-items: center;
+	}
+	&__buttons {
+		display: flex;
+		align-items: center;
+		margin-right: 30px;
+		margin-left: 33px;
+	}
+	&__user {
+		display: none;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		overflow: hidden;
+		svg {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			& * {
+				transition: all 0.3s;
+			}
+		}
+		&:hover {
+			svg {
+				& * {
+					stroke: #fff;
+					transition: all 0.3s;
+				}
+			}
+		}
+	}
+	&__link {
+		margin-left: 27px;
+		transition: color 0.3s;
+		&:hover {
+			color: #28aecb;
+			transition: color 0.3s;
+		}
+	}
+	&__phone {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		border: 1px solid #28aecb;
+		border-radius: 50%;
+		transition: all 0.3s;
+		svg {
+			& * {
+				transition: all 0.3s;
+			}
+		}
+		&:hover {
+			border-color: #ffffff;
+			transition: all 0.3s;
+			svg {
+				& * {
+					stroke: #ffffff;
+					transition: all 0.3s;
+				}
+			}
+		}
+	}
+	&.active {
+		padding: 15px 0px;
+		transition: all 0.3s;
+	}
+}
+@media (max-width: 1200px) {
+	.header {
+		&__burger {
+			display: flex;
+			position: relative;
+			z-index: 1000;
+		}
+		&__content {
+			display: flex;
+			align-content: space-between;
+			flex-wrap: wrap;
+			position: fixed;
+			top: 0;
+			left: -120%;
+			width: 330px;
+			height: 100vh;
+			padding: 80px 5px 30px;
+			text-align: left;
+			overflow-x: auto;
+			z-index: 200;
+			background-color: #11263e;
+			transition: left 0.3s;
+			&.active {
+				left: 0;
+				transition: left 0.3s;
+			}
+			&::before {
+				content: "";
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				bottom: 0px;
+				left: 0px;
+				background-image: url("@/assets/img/icons/menu-bg-table.svg");
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: bottom;
+				z-index: 1;
+			}
+		}
+		&__scroll {
+			position: relative;
+			z-index: 10;
+			display: flex;
+			flex-wrap: wrap;
+			align-content: space-between;
+			&.dragscroll {
+				overflow: auto;
+				height: 100%;
+				padding: 45px 25px 0px;
+
+				&::-webkit-scrollbar {
+					width: 2px;
+					height: 100%;
+					background-color: rgba(255, 255, 255, 0.2);
+					border-radius: 4px;
+					opacity: 1;
+					display: block;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background-color: rgba(255, 255, 255, 0.6);
+					border-radius: 4px;
+					transition: all 0.3s;
+					display: block;
+				}
+				&::-webkit-scrollbar-thumb:hover {
+					background-color: rgba(255, 255, 255, 1);
+					transition: all 0.3s;
+				}
+			}
+		}
+		&__menu {
+			margin-left: 0px;
+			ul {
+				flex-wrap: wrap;
+				li {
+					width: 100%;
+					margin-right: 0px;
+					margin-bottom: 20px;
+					a {
+						font-size: 16px;
+						line-height: 19px;
+					}
+					&.menu-item-has-children {
+						& > a {
+							position: relative;
+							padding-right: 18px;
+							&::after {
+								content: "";
+								position: absolute;
+								height: 11px;
+								width: 8px;
+								background-image: url("@/assets/img/icons/arrow.svg");
+								background-repeat: no-repeat;
+								background-size: contain;
+								top: calc(50% - 3.5px);
+								right: 0px;
+								transition: transform 0.3s;
+							}
+						}
+						& > ul {
+							position: relative;
+							top: 0px;
+							width: auto;
+							visibility: visible;
+							opacity: 1;
+							background-color: transparent;
+							transform: translateY(0px);
+							transition: 0s;
+							padding: 5px 0px 0px 0px;
+							display: none;
+							& > li {
+								margin-bottom: 0;
+								& > a {
+									font-size: 15px;
+									line-height: 16px;
+									padding: 6px 0;
+								}
+							}
+						}
+					}
+					&:last-child {
+						margin-bottom: 0px;
+					}
+				}
+			}
+		}
+		.logo {
+			position: relative;
+			z-index: 1000;
+		}
+	}
+}
+@media (max-width: 1010px) {
+}
+@media (max-width: 760px) {
+	.header {
+		&__burger {
+			margin-right: 18px;
+		}
+		&__content {
+			display: flex;
+			align-content: space-between;
+			flex-wrap: wrap;
+			position: fixed;
+			top: 0;
+			left: -120%;
+			width: 85vw;
+			height: 100vh;
+			padding: 80px 5px 30px;
+			text-align: left;
+			overflow-x: auto;
+			z-index: 200;
+			background-color: #11263e;
+			transition: left 0.3s;
+			.header__buttons {
+				display: block;
+			}
+		}
+		&__buttons {
+			margin-right: 0px;
+			margin-left: 0px;
+			flex-wrap: wrap;
+			margin-top: 20px;
+		}
+		&__link {
+			margin-left: 0;
+			margin-top: 30px;
+		}
+		&__last {
+			.header__buttons {
+				display: none;
+			}
+		}
+		&__user {
+			display: inline-flex;
+			margin-left: 20px;
+		}
+		&--item {
+			.header {
+				&__scroll {
+					&.dragscroll {
+						align-content: flex-start;
+					}
+				}
+				&__buttons {
+					margin-top: 0px;
+					margin-bottom: 20px;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 350px) {
+	.header {
+		&__burger {
+			width: 32px;
+			margin-right: 12px;
+		}
+		&__phone {
+			width: 26px;
+			height: 26px;
+			padding: 4px;
+		}
+		&__user {
+			width: 26px;
+			height: 26px;
+			margin-left: 12px;
+		}
+		.language {
+			margin-right: 12px;
+		}
+		.logo {
+			width: 100px;
+		}
+	}
+}

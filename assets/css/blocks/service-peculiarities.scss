@@ -1,0 +1,191 @@
+.service-peculiarities {
+	&__wrap {
+		margin-top: 100px;
+	}
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 40px;
+	}
+	&__coll {
+		width: calc(50% - 14px);
+	}
+	&__column {
+		width: 80%;
+		.service-peculiarities {
+			&__desc {
+				max-width: 100%;
+			}
+		}
+	}
+	&__desc {
+		max-width: 500px;
+		p {
+			strong {
+				font-weight: 600;
+			}
+		}
+		p + p {
+			margin-top: 20px;
+		}
+	}
+	&__img {
+		width: 100%;
+		border-radius: 10px;
+		overflow: hidden;
+		margin-top: 40px;
+	}
+	&--office,
+	&--for-elderly {
+		.service-peculiarities {
+			&__desc {
+				max-width: 545px;
+			}
+		}
+	}
+	.service-benefits {
+		&__row {
+			margin-top: 45px;
+		}
+		&__coll {
+			padding: 26px 25px 34px 25px;
+		}
+		&__desc {
+			max-width: 285px;
+		}
+		& + .service-peculiarities__row {
+			margin-top: 67px;
+		}
+	}
+}
+@media (max-width: 1200px) {
+}
+@media (max-width: 1010px) {
+	.service-peculiarities {
+		&__title {
+			br {
+				display: none;
+			}
+		}
+		&__row {
+			margin-top: 46px;
+		}
+		&__coll {
+			width: 98%;
+			& + & {
+				margin-top: 20px;
+			}
+		}
+		&__column {
+			width: 90%;
+		}
+		&__desc {
+			max-width: 100%;
+		}
+		&__img {
+			margin-top: 36px;
+			margin-bottom: -6px;
+			img {
+				min-height: 300px;
+			}
+		}
+		&--office,
+		&--for-elderly {
+			.service-peculiarities {
+				&__desc {
+					max-width: 100%;
+				}
+			}
+		}
+		.service-benefits {
+			&__coll {
+				&:last-child {
+					.service-benefits {
+						&__desc {
+							max-width: 100%;
+						}
+					}
+				}
+			}
+			&__caption {
+				max-width: 315px;
+			}
+			&__desc {
+				max-width: 310px;
+			}
+			& + .service-peculiarities__row {
+				margin-top: 50px;
+			}
+		}
+		.peculiarities {
+			& + .service-peculiarities__row {
+				margin-top: 20px;
+			}
+		}
+	}
+}
+@media (max-width: 760px) {
+	.service-peculiarities {
+		&__title {
+			padding-right: 50px;
+		}
+		&__row {
+			margin-top: 32px;
+		}
+		&__img {
+			margin-top: 30px;
+			margin-bottom: 40px;
+		}
+		&__desc {
+			p + p {
+				margin-top: 26px;
+			}
+		}
+		&--office {
+			padding-bottom: 7px;
+			.service-peculiarities {
+				&__title {
+					padding-right: 0px;
+					max-width: 250px;
+				}
+				&__row {
+					margin-top: 22px;
+				}
+				&__desc {
+					max-width: 100%;
+				}
+			}
+		}
+		&--for-elderly {
+			.service-peculiarities {
+				&__title {
+					padding-right: 0px;
+					max-width: 250px;
+				}
+				&__row {
+					margin-top: 22px;
+				}
+				&__desc {
+					max-width: 100%;
+				}
+			}
+		}
+		.service-benefits {
+			&__row {
+				margin-top: 38px;
+			}
+			&__caption {
+				margin-bottom: 16px;
+			}
+			& + .service-peculiarities {
+				&__row {
+					margin-top: 42px;
+					.service-peculiarities__coll + .service-peculiarities__coll {
+						margin-top: 26px;
+					}
+				}
+			}
+		}
+	}
+}
