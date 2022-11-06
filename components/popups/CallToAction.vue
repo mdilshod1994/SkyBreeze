@@ -155,7 +155,8 @@ export default {
                 start: new Date(),
                 end: new Date()
             },
-            isOpen: false
+            isOpen: false,
+            statePost: []
         }
     },
     computed: {
@@ -170,6 +171,11 @@ export default {
         closePopup() {
             this.$store.dispatch('choose-service-popup/closePopup')
         }
+    },
+    async mounted() {
+        await this.$axios.$get('/postal_codes').then(res => {
+            this.statePost = res.data
+        })
     },
     watch: {
         range(newVal) {

@@ -1,5 +1,5 @@
 <template>
-    <section class="why-we" v-if="whyWe.length > 0">
+    <section class="why-we">
         <div class="wrapper">
             <div class="why-we__top">
                 <div class="why-we__title title h2">Почему выбирают нас</div>
@@ -11,53 +11,12 @@
                         <div class="why-we__slide swiper-slide" v-for="item in whyWe" :key="item.id">
                             <div class="why-we__item">
                                 <div class="why-we__icon">
-                                    <img src="@/assets/img/why-we/icon-1.svg" alt="">
+                                    <img :src="`${item.files.server}/${item.files.path}`" alt="">
                                 </div>
-                                <div class="why-we__caption">Выгодные тарифы</div>
-                                <div class="why-we__desc">Мы предлагаем оптимальные цены на перевозку личного имущества
-                                    – бытовой техники, мебели, элементов интерьера и других изделий.</div>
+                                <div class="why-we__caption">{{ item.name }}</div>
+                                <div class="why-we__desc">{{ item.description }}</div>
                             </div>
                         </div>
-                        <!-- <div class="why-we__slide swiper-slide">
-                            <div class="why-we__item">
-                                <div class="why-we__icon">
-                                    <img src="@/assets/img/why-we/icon-2.svg" alt="">
-                                </div>
-                                <div class="why-we__caption">Различные услуги</div>
-                                <div class="why-we__desc">В компании можно заказать разные виды переездов – квартирный,
-                                    домашний, офисный и не только.</div>
-                            </div>
-                        </div>
-                        <div class="why-we__slide swiper-slide">
-                            <div class="why-we__item">
-                                <div class="why-we__icon">
-                                    <img src="@/assets/img/why-we/icon-3.svg" alt="">
-                                </div>
-                                <div class="why-we__caption">Бережная доставка</div>
-                                <div class="why-we__desc">Компания соблюдает стандарты организации перевозки.<br> Для
-                                    гарантии сохранности имущества заключается страховка.</div>
-                            </div>
-                        </div>
-                        <div class="why-we__slide swiper-slide">
-                            <div class="why-we__item">
-                                <div class="why-we__icon">
-                                    <img src="@/assets/img/why-we/icon-4.svg" alt="">
-                                </div>
-                                <div class="why-we__caption">Оперативная грузоперевозка</div>
-                                <div class="why-we__desc">Доставка вещей осуществляется по оптимальным маршрутам, с
-                                    учетом экономии времени.</div>
-                            </div>
-                        </div>
-                        <div class="why-we__slide swiper-slide">
-                            <div class="why-we__item">
-                                <div class="why-we__icon">
-                                    <img src="@/assets/img/why-we/icon-5.svg" alt="">
-                                </div>
-                                <div class="why-we__caption">Собственный автопарк</div>
-                                <div class="why-we__desc">Располагаем автопарком различных транспортных средств,
-                                    автомобиль для перевозки подбирается с учетом характера груза.</div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <div class="why-we__arrows">
@@ -89,7 +48,7 @@ import 'swiper/swiper-bundle.min.css'
 export default {
     computed: {
         whyWe() {
-            return this.$store.getters['whyWe/WHY_WE']
+            return this.$store.getters['why-we/WHY_WE']
         }
     },
     mounted() {
