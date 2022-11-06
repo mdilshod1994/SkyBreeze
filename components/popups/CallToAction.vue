@@ -69,7 +69,7 @@
                                     <span class="call-to-action__text">
                                         Штат
                                     </span>
-                                    <input type="text" class="form__field field" placeholder="NY">
+                                    <input type="text" class="form__field field" placeholder="NY" v-model="stateVal">
                                     <img src="" alt="">
                                 </label>
                                 <label class="form__label call-to-action__label call-to-action__label--second">
@@ -117,7 +117,7 @@
                                         Штат
                                     </span>
                                     <input type="text" class="form__field field" placeholder="NY">
-                                    <img src="" alt="">
+                                    <img src="@/assets/img/icons/arrow-d.svg" alt="">
                                 </label>
                                 <label class="form__label call-to-action__label call-to-action__label--second">
                                     <span class="call-to-action__text">
@@ -151,6 +151,7 @@ export default {
     },
     data() {
         return {
+            stateVal: 'NY',
             range: {
                 start: new Date(),
                 end: new Date()
@@ -328,6 +329,13 @@ export default {
     &__state {
         display: flex;
         align-items: center;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 10px;
+            right: 10px
+        }
     }
 
     &__minus {
