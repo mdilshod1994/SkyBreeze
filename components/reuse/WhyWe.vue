@@ -3,7 +3,11 @@
         <div class="wrapper">
             <div class="why-we__top">
                 <div class="why-we__title title h2">Почему выбирают нас</div>
-                <nuxt-link to="/about-us" class="why-we__link">Подробнее о нас</nuxt-link>
+                <div @click="$router.push(localePath('/about-us'))" class="why-we__link">
+                    <nuxt-link :to="switchLocalePath($i18n.locale)" class="why-we__link">
+                        Подробнее о нас
+                    </nuxt-link>
+                </div>
             </div>
             <div class="why-we__body">
                 <div class="why-we__swiper swiper">

@@ -5,7 +5,7 @@
             <div class="main-services__body" v-if="services.length > 0">
                 <div class="main-services__row">
                     <div class="main-services__coll"
-                        @click="$router.push(localePath({ path: `/our-services/${services[2].alias}`, query: { page: `${services[2].alias}` } }))">
+                        @click="$router.push(localePath({ path: `/our-services/${services[2].alias}` }))">
                         <nuxt-link :to="switchLocalePath($i18n.locale)"
                             class="main-services__box main-services__box--blue">
                             <div class="main-services__caption">{{ services[2].name }}</div>
@@ -23,7 +23,7 @@
                         </nuxt-link>
                     </div>
                     <div class="main-services__coll main-services__coll--flex">
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[3].alias}`, query: { page: `${services[3].alias}` } }))"
+                        <div @click="$router.push(localePath({ path: `/our-services/${services[3].alias}` }))"
                             class="main-services__box">
                             <nuxt-link :to="switchLocalePath($i18n.locale)">
                                 <div class="main-services__caption">{{ services[3].name }}</div>
@@ -54,7 +54,7 @@
                                 </div>
                             </nuxt-link>
                         </div>
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[1].alias}`, query: { page: `${services[1].alias}` } }))"
+                        <div @click="$router.push(localePath({ path: `/our-services/${services[1].alias}` }))"
                             class="main-services__box">
                             <nuxt-link :to="switchLocalePath($i18n.locale)">
                                 <div class="main-services__caption">{{ services[1].name }}</div>
@@ -82,7 +82,7 @@
 
                     </div>
                     <div class="main-services__coll main-services__coll--table">
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[3].alias}`, query: { page: `${services[3].alias}` } }))"
+                        <div @click="$router.push(localePath({ path: `/our-services/${services[3].alias}` }))"
                             class="main-services__box">
                             <nuxt-link :to="switchLocalePath($i18n.locale)">
                                 <div class="main-services__caption">{{ services[3].name }}</div>
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="main-services__coll main-services__coll--table">
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[1].alias}`, query: { page: `${services[1].alias}` } }))"
+                        <div @click="$router.push(localePath({ path: `/our-services/${services[1].alias}` }))"
                             class="main-services__box">
                             <nuxt-link :to="switchLocalePath($i18n.locale)">
                                 <div class="main-services__caption">{{ services[1].name }}</div>
@@ -143,7 +143,7 @@
 
                     </div>
                     <div class="main-services__coll"
-                        @click="$router.push(localePath({ path: `/our-services/${services[0].alias}`, query: { page: `${services[0].alias}` } }))">
+                        @click="$router.push(localePath({ path: `/our-services/${services[0].alias}` }))">
                         <nuxt-link :to="switchLocalePath($i18n.locale)" class="main-services__box main-services__box">
                             <div class="main-services__caption">{{ services[0].name }}</div>
                             <div class="main-services__icon">

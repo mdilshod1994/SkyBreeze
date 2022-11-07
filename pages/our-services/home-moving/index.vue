@@ -55,7 +55,7 @@ export default {
         async getService() {
             try {
                 const langID = this.$cookies.get('langId')
-                const service = await this.$axios.get(`/services?search[alias]=${this.$route.query.page}`)
+                const service = await this.$axios.get(`/services?search[alias]=${this.$route.path.split("/").pop()}`)
                     .then(res => {
                         return res.data.data
                     })
@@ -73,7 +73,7 @@ export default {
     },
     async mounted() {
         await this.getService()
-        console.log(this.$route);
+        console.log('home', this.$route);
     },
     watch: {
         services(newVal) {

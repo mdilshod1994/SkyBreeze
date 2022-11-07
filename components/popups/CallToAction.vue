@@ -31,12 +31,12 @@
                                 Выбрать диапазон дат
                             </span>
                             <input type="text" class="form__field field call-to-action__input"
-                                :value="`${(range.start).toDateString()} - ${(range.end).toDateString()}`"
+                                :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
                                 placeholder="Выбрать диапазон дат" @click="datePick">
                             <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
                         </label>
                         <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
-                            :class="{ active: isOpen }" />
+                            :class="{ active: isOpen }" :locale="$i18n.locale" />
                         <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }"
                             @click="isOpen = false">
                         </div>
@@ -69,19 +69,22 @@
                                     <span class="call-to-action__text">
                                         Штат
                                     </span>
-                                    <input type="text" class="form__field field" placeholder="NY" v-model="stateVal">
-                                    <img src="" alt="">
+                                    <input type="text" class="form__field field" v-model="stateValStart"
+                                        @click="openZipListStart">
+                                    <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                        :class="`${isActiveZipStart ? 'active' : ''}`">
+                                    <div :class="`call-to-action__select ${isActiveZipStart ? 'active' : ''}`">
+                                        <ul class="call-to-action__select-list">
+                                            <li v-for="zip in this.statePost" :key="zip.id" @click="setZipStart(zip)"
+                                                :class="`call-to-action__select-item ${zip.name === stateValStart ? 'active' : ''}`">
+                                                {{ zip.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </label>
                                 <label class="form__label call-to-action__label call-to-action__label--second">
                                     <span class="call-to-action__text">
                                         Zip
-                                    </span>
-                                    <input type="text" class="form__field field" placeholder="">
-                                </label>
-                                <span class="call-to-action__minus">-</span>
-                                <label class="form__label call-to-action__label call-to-action__label--third">
-                                    <span class="call-to-action__text call-to-action__text--hidden">
-                                        a
                                     </span>
                                     <input type="text" class="form__field field" placeholder="">
                                 </label>
@@ -116,19 +119,22 @@
                                     <span class="call-to-action__text">
                                         Штат
                                     </span>
-                                    <input type="text" class="form__field field" placeholder="NY">
-                                    <img src="@/assets/img/icons/arrow-d.svg" alt="">
+                                    <input type="text" class="form__field field" placeholder="NY" v-model="stateValEnd"
+                                        @click="openZipListEnd">
+                                    <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                        :class="`${isActiveZipEnd ? 'active' : ''}`">
+                                    <div :class="`call-to-action__select ${isActiveZipEnd ? 'active' : ''}`">
+                                        <ul class="call-to-action__select-list">
+                                            <li v-for="zip in this.statePost" :key="zip.id" @click="setZipEnd(zip)"
+                                                :class="`call-to-action__select-item ${zip.name === stateValEnd ? 'active' : ''}`">
+                                                {{ zip.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </label>
                                 <label class="form__label call-to-action__label call-to-action__label--second">
                                     <span class="call-to-action__text">
                                         Zip
-                                    </span>
-                                    <input type="text" class="form__field field" placeholder="">
-                                </label>
-                                <span class="call-to-action__minus">-</span>
-                                <label class="form__label call-to-action__label call-to-action__label--third">
-                                    <span class="call-to-action__text call-to-action__text--hidden">
-                                        a
                                     </span>
                                     <input type="text" class="form__field field" placeholder="">
                                 </label>
@@ -151,7 +157,10 @@ export default {
     },
     data() {
         return {
-            stateVal: 'NY',
+            isActiveZipStart: false,
+            isActiveZipEnd: false,
+            stateValStart: 'NY',
+            stateValEnd: 'NY',
             range: {
                 start: new Date(),
                 end: new Date()
@@ -166,6 +175,18 @@ export default {
         }
     },
     methods: {
+        openZipListStart() {
+            this.isActiveZipStart = !this.isActiveZipStart
+        },
+        openZipListEnd() {
+            this.isActiveZipEnd = !this.isActiveZipEnd
+        },
+        setZipStart(e) {
+            this.stateValStart = e.name
+        },
+        setZipEnd(e) {
+            this.stateValEnd = e.name
+        },
         datePick() {
             this.isOpen = true
         },
@@ -205,6 +226,73 @@ export default {
     &.active {
         visibility: visible;
         opacity: 1;
+    }
+
+    &__select {
+        position: absolute;
+        right: -85px;
+        bottom: 0;
+        height: 0;
+        width: 85px;
+        border: 1px solid #0f1d32;
+        border-radius: 15px;
+        background: #fff;
+        z-index: 9;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease-in;
+
+        &.active {
+            height: 175px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__select-list {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: none;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: 3px solid rgba(0, 0, 0, 0);
+            background-clip: padding-box;
+            border-radius: 9999px;
+            background-color: rgba(15, 29, 50, 0.5);
+            transition: 0.3s;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            border: 3px solid rgba(0, 0, 0, 0);
+            background-color: rgba(15, 29, 50, 1);
+        }
+    }
+
+    &__select-item {
+        color: #000;
+        width: 100%;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease-in-out;
+
+        &.active,
+        &:hover {
+            background-color: rgba(15, 29, 50, 1);
+            color: #fff;
+
+        }
     }
 
     &__body {
@@ -253,6 +341,8 @@ export default {
             margin-bottom: 0;
         }
     }
+
+
 
     &__form {}
 
@@ -315,14 +405,11 @@ export default {
         &--first {
             width: 85px;
             margin-right: 30px;
+            position: relative;
         }
 
         &--second {
-            width: 80px;
-        }
-
-        &--third {
-            width: 100px;
+            width: 205px;
         }
     }
 
@@ -333,8 +420,20 @@ export default {
 
         img {
             position: absolute;
-            top: 10px;
-            right: 10px
+            top: 50px;
+            right: 22px;
+            transition: 0.3s ease-in-out;
+
+            &.active {
+                transform: rotate(-90deg);
+            }
+        }
+
+        .field {
+            padding: 14px 15px 14px 22px;
+            cursor: pointer;
+            caret-color: transparent;
+
         }
     }
 

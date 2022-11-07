@@ -28,7 +28,9 @@ import ServicePromo from '../../../components/reuse/ServicePromo.vue'
 import WhyApply from '../../../components/reuse/WhyApply.vue'
 export default {
     components: { ServicePromo, ServicePeculiarities, WarehousePeculiarities, WhyApply, MainOrder },
-
+    mounted() {
+        // console.log(this.$route);
+    }
 }
 </script>
 <style>

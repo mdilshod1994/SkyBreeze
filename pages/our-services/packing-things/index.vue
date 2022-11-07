@@ -14,17 +14,19 @@
                 </div>
             </div>
         </section>
-        <section class="promo">
-            <div class="promo__bg" v-html="service[0].photos">
-                <!-- <img class="img-desctop" src="@/assets/img/main/promo/bg.svg" alt="">
-                <img class="img-table" src="@/assets/img/main/promo/bg-table.svg" alt="">
-                <img class="img-mobile" src="@/assets/img/main/promo/bg-mobile.svg" alt=""> -->
-            </div>
+        <section class="service-promo ">
             <div class="wrapper">
-                <div class="promo__wrap">
-                    <div class="promo__title">{{ service[0].name }}</div>
-                    <div class="promo__subtitle">{{ service[0].description }}</div>
-                    <choose-service-btn class="promo__btn"> Выбери услугу</choose-service-btn>
+                <div class="service-promo__body">
+                    <div class="service-promo__bg img-cover p-absolute" v-html="service[0].photos">
+                        <!-- <img class="img-desctop" src="img/furniture-transportation/service-promo/bg.jpg" alt="">
+                        <img class="img-table" src="img/furniture-transportation/service-promo/bg-table.jpg" alt="">
+                        <img class="img-mobile" src="img/furniture-transportation/service-promo/bg-mobile.jpg" alt=""> -->
+                    </div>
+                    <div class="service-promo__wrap">
+                        <div class="service-promo__title h1">{{ service[0].name }}</div>
+                        <div class="service-promo__desc desc"> {{ service[0].description }} </div>
+                        <choose-service-btn class="promo__btn"> Оформить заявку</choose-service-btn>
+                    </div>
                 </div>
             </div>
         </section>
@@ -54,7 +56,7 @@ export default {
         async getService() {
             try {
                 const langID = this.$cookies.get('langId')
-                const service = await this.$axios.get(`/services?search[alias]=${this.$route.query.page}`)
+                const service = await this.$axios.get(`/services?search[alias]=${this.$route.path.split("/").pop()}`)
                     .then(res => {
                         return res.data.data
                     })

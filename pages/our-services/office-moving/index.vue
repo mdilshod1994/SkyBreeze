@@ -14,38 +14,23 @@
                 </div>
             </div>
         </section>
-        <section class="promo service-promo--office">
-            <div class="promo__bg" v-html="service[0].photos">
-                <!-- <img class="img-desctop" src="@/assets/img/main/promo/bg.svg" alt="">
-                <img class="img-table" src="@/assets/img/main/promo/bg-table.svg" alt="">
-                <img class="img-mobile" src="@/assets/img/main/promo/bg-mobile.svg" alt=""> -->
-            </div>
+        <section class="service-promo service-promo--office">
             <div class="wrapper">
-                <div class="promo__wrap">
-                    <div class="promo__title">{{ service[0].name }}</div>
-                    <div class="promo__subtitle">{{ service[0].description }}</div>
-                    <choose-service-btn class="promo__btn"> Выбери услугу</choose-service-btn>
+                <div class="service-promo__body">
+                    <div class="service-promo__bg img-cover p-absolute" v-html="service[0].photos">
+                        <!-- <img class="img-desctop" src="img/furniture-transportation/service-promo/bg.jpg" alt="">
+                        <img class="img-table" src="img/furniture-transportation/service-promo/bg-table.jpg" alt="">
+                        <img class="img-mobile" src="img/furniture-transportation/service-promo/bg-mobile.jpg" alt=""> -->
+                    </div>
+                    <div class="service-promo__wrap">
+                        <div class="service-promo__title h1">{{ service[0].name }}</div>
+                        <div class="service-promo__desc desc"> {{ service[0].description }} </div>
+                        <choose-service-btn class="promo__btn"> Оформить заявку</choose-service-btn>
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- <service-promo class="service-promo--office" /> -->
-        <!-- <service-peculiarities class="service-peculiarities--office" /> -->
-        <!-- <section class="office-info bg-white">
-            <div class="wrapper">
-                <div class="office-info__row">
-                    <div class="office-info__coll">
-                        <div class="office-info__desc">Поэтому лучше всего для переезда заказать мувинг-сервис.
-                            Сотрудники перевозчика аккуратно погрузят технику, коробки и мебель в машину.</div>
-                    </div>
-                    <div class="office-info__coll">
-                        <div class="office-info__desc">При использовании мувинг-сервиса рабочие места будут перевезены в
-                            полной комплектации, вне зависимости от сложности процедуры.</div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
         <div v-html="service[0].content">
-
         </div>
         <main-order :item="service[0].content_in_form" class="main-order--big" />
     </div>
@@ -70,7 +55,7 @@ export default {
         async getService() {
             try {
                 const langID = this.$cookies.get('langId')
-                const service = await this.$axios.get(`/services?search[alias]=${this.$route.query.page}`)
+                const service = await this.$axios.get(`/services?search[alias]=${this.$route.path.split("/").pop()}`)
                     .then(res => {
                         return res.data.data
                     })

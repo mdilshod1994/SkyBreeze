@@ -38,6 +38,11 @@
 <script>
 export default {
     name: 'blogs',
+    // head() {
+    //     return {
+    //         title: "About page"
+    //     };
+    // },
     computed: {
         blogs() {
             return this.$store.getters['blog/BLOGS']

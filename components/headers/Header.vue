@@ -30,15 +30,6 @@
                                                 </nuxt-link>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div @click="$router.push(localePath('/our-services/warehouse-moving'))">
-                                                <nuxt-link class="text-header-bold text-middle"
-                                                    :to="switchLocalePath($i18n.locale)">
-                                                    Складские переезды,
-                                                    контейнеры
-                                                </nuxt-link>
-                                            </div>
-                                        </li>
                                         <!-- <li>
                                             <div @click="$router.push(localePath('/our-services/apartment-moving'))">
                                                 <nuxt-link class="text-header-bold text-middle"
@@ -55,7 +46,15 @@
                                                 </nuxt-link>
                                             </div>
                                         </li>
-                                        
+                                        <li>
+                                            <div @click="$router.push(localePath('/our-services/warehouse-moving'))">
+                                                <nuxt-link class="text-header-bold text-middle"
+                                                    :to="switchLocalePath($i18n.locale)">
+                                                    Складские переезды,
+                                                    контейнеры
+                                                </nuxt-link>
+                                            </div>
+                                        </li>
                                         <li>
                                             <div @click="$router.push(localePath('/our-services/elderly-moving'))">
                                                 <nuxt-link class="text-header-bold text-middle"
@@ -217,6 +216,7 @@ export default {
     methods: {
         async langSwitch() {
             await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
+            console.log(this.$cookies.get('langId'));
             this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()
         }
     },

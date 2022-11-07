@@ -26,38 +26,12 @@
                     <div class="footer__caption">Наши услуги</div>
                     <div class="footer__menu">
                         <ul>
-                            <li>
-                                <a href="#">Домашний переезд</a>
-                            </li>
-                            <li>
-                                <a href="#">Квартирный переезд</a>
-                            </li>
-                            <li>
-                                <a href="#">Офисный переезд</a>
-                            </li>
-                            <li>
-                                <a href="#">Складской переезд</a>
-                            </li>
-                            <li>
-                                <a href="#">Переезд для пожилых</a>
-                            </li>
-                            <li>
-                                <a href="#">Локальный переезд </a>
-                            </li>
-                            <li>
-                                <a href="#">Переезд на длинную дистанцию</a>
-                            </li>
-                            <li>
-                                <a href="#">Перевозка мебели</a>
-                            </li>
-                            <li>
-                                <a href="#">Перевозка личных вещей</a>
-                            </li>
-                            <li>
-                                <a href="#">Сборка и разборка мебели</a>
-                            </li>
-                            <li>
-                                <a href="#">Услуги по упаковке и распаковке</a>
+                            <li v-for="link in services" :key="link.id">
+                                <div @click="$router.push(localePath(`/our-services/${link.alias}`))">
+                                    <nuxt-link :to="switchLocalePath($i18n.locale)">
+                                        {{ link.name_short }}
+                                    </nuxt-link>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -121,7 +95,11 @@
 </template>
 <script>
 export default {
-
+    computed: {
+        services() {
+            return this.$store.getters['services/SERVICES']
+        }
+    },
 }
 </script>
 <style>
