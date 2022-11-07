@@ -1,29 +1,29 @@
 <template>
-    <div>
+    <div >
         <footer class="footer">
             <div class="wrapper footer__wrap">
-                <div class="footer__first">
+                <div class="footer__first" v-if="translations.length > 0">
                     <a href="#" class="footer__logo">
                         <img src="@/assets/img/icons/logo-footer.svg" alt="">
                     </a>
                     <div class="footer__first-items">
                         <div class="footer__first-item">
-                            <div class="footer__caption">Адрес</div>
-                            <div class="footer__first-desc">Los Angeles, CA 90015, USA</div>
+                            <div class="footer__caption">{{ translations[0].text }}</div>
+                            <div class="footer__first-desc">{{ translations[2].text }}</div>
                         </div>
                         <div class="footer__first-item">
-                            <div class="footer__caption">Часы работы</div>
-                            <div class="footer__first-desc">Пн-Вс: 07:00 AM - 09:00 PM</div>
+                            <div class="footer__caption">{{ translations[1].text }}</div>
+                            <div class="footer__first-desc">{{ translations[5].text }}</div>
                         </div>
                         <div class="footer__first-item">
-                            <div class="footer__caption">Телефон</div>
-                            <a href="tel:" class="footer__tel">+1 431 231 6523</a>
+                            <div class="footer__caption">{{ translations[3].text }}</div>
+                            <a :href="`tel:${translations[4].text}`" class="footer__tel">{{ translations[4].text }}</a>
                         </div>
                     </div>
-                    <a href="#" class="footer__btn btn">Cвязаться с нами</a>
+                    <a href="#" class="footer__btn btn">{{ translations[6].text }}</a>
                 </div>
                 <div class="footer__center">
-                    <div class="footer__caption">Наши услуги</div>
+                    <div class="footer__caption" v-if="translations.length > 0">{{ translations[7].text }}</div>
                     <div class="footer__menu">
                         <ul>
                             <li v-for="link in services" :key="link.id">
@@ -36,9 +36,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="footer__last">
+                <div class="footer__last" v-if="translations.length > 0">
                     <div class="footer__last-box">
-                        <div class="footer__caption">Правила</div>
+                        <div class="footer__caption">{{ translations[8].text }}</div>
                         <div class="footer__menu">
                             <ul>
                                 <li>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="footer__last-box">
-                        <div class="footer__caption">Социальные сети</div>
+                        <div class="footer__caption" >{{ translations[9].text }}</div>
                         <div class="footer__social">
                             <a href="#" class="footer__social-link">
                                 <img src="@/assets/img/footer/instagram.svg" alt="">
@@ -83,11 +83,11 @@
             </div>
         </footer>
         <div class="bottom">
-            <div class="wrapper bottom__wrap flex">
-                <div class="bottom__copiright">© Sky Breeze 2022. Все права защищены </div>
+            <div class="wrapper bottom__wrap flex" v-if="translations.length > 0">
+                <div class="bottom__copiright">{{ translations[10].text }} </div>
                 <div class="bottom__buttons flex">
-                    <a href="#" class="bottom__link">Политика конфиденциальности</a>
-                    <a href="#" class="bottom__link">Обработка персональных данных</a>
+                    <a href="#" class="bottom__link">{{ translations[12].text }}</a>
+                    <a href="#" class="bottom__link">{{ translations[11].text }}</a>
                 </div>
             </div>
         </div>
@@ -98,6 +98,10 @@ export default {
     computed: {
         services() {
             return this.$store.getters['services/SERVICES']
+        },
+        translations() {
+            let footer = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'footer')
+            return footer
         }
     },
 }

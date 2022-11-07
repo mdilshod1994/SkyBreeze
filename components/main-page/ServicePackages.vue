@@ -1,7 +1,8 @@
 <template>
     <section class="scene service-packages bg-white">
         <div class="wrapper">
-            <div class="service-packages__title title h2">Комплексы услуг по переезду</div>
+            <div class="service-packages__title title h2" v-if="translations.length > 0">{{ translations[6].text }}
+            </div>
             <div class="service-packages__row swiper">
                 <div class="swiper-wrapper">
                     <div class="service-packages__slide swiper-slide">
@@ -132,6 +133,8 @@ import { Swiper } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 
 export default {
+    props: ['translations'],
+
     mounted() {
         let $windowWidth = window.innerWidth;
         if ($windowWidth <= 760) {

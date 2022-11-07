@@ -1,153 +1,164 @@
 <template>
-    <div :class="`call-to-action ${isActive ? 'active' : ''}`" @click="closePopup">
-        <transition>
-            <div class="call-to-action__body" @click.stop="">
-                <div class="call-to-action__title">
-                    Введите ваши данные для связи
-                </div>
-                <form class="call-to-action__form">
-                    <div class="call-to-action__top-block">
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                Имя и фамилия
-                            </span>
-                            <input type="text" class="form__field field" placeholder="Ваше имя">
-                        </label>
-                        <label class="form__label call-to-action__label call-to-action__label--width">
-                            <span class="call-to-action__text">
-                                Ваша эл. почта
-                            </span>
-                            <input type="email" class="form__field field" placeholder="jstone@gmail.com">
-                        </label>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                Ваш номер телефона (опционально)
-                            </span>
-                            <input type="tel" class="form__field field" placeholder="+12312312312">
-                        </label>
-                        <label
-                            class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
-                            <span class="call-to-action__text">
-                                Выбрать диапазон дат
-                            </span>
-                            <input type="text" class="form__field field call-to-action__input"
-                                :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
-                                placeholder="Выбрать диапазон дат" @click="datePick">
-                            <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
-                        </label>
-                        <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
-                            :class="{ active: isOpen }" :locale="$i18n.locale" />
-                        <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }"
-                            @click="isOpen = false">
-                        </div>
-                    </div>
-                    <div class="call-to-action__bottom">
-                        <div class="call-to-action__sides">
-                            <div class="call-to-action__title call-to-action__title--sides">
-                                Укажите адрес места погрузки
-                            </div>
-                            <label class="form__label call-to-action__label">
-                                <span class="call-to-action__text">
-                                    Адрес
-                                </span>
-                                <input type="text" class="form__field field" placeholder="Пример адреса">
-                            </label>
-                            <label class="form__label call-to-action__label">
-                                <span class="call-to-action__text">
-                                    Номер дома/квартиры
-                                </span>
-                                <input type="text" class="form__field field" placeholder="1А">
-                            </label>
-                            <label class="form__label call-to-action__label">
-                                <span class="call-to-action__text">
-                                    Город
-                                </span>
-                                <input type="text" class="form__field field" placeholder="Нью-йорк">
-                            </label>
-                            <div class="call-to-action__state">
-                                <label class="form__label  call-to-action__label call-to-action__label--first">
-                                    <span class="call-to-action__text">
-                                        Штат
-                                    </span>
-                                    <input type="text" class="form__field field" v-model="stateValStart"
-                                        @click="openZipListStart">
-                                    <img src="@/assets/img/icons/arrow-d.svg" alt=""
-                                        :class="`${isActiveZipStart ? 'active' : ''}`">
-                                    <div :class="`call-to-action__select ${isActiveZipStart ? 'active' : ''}`">
-                                        <ul class="call-to-action__select-list">
-                                            <li v-for="zip in this.statePost" :key="zip.id" @click="setZipStart(zip)"
-                                                :class="`call-to-action__select-item ${zip.name === stateValStart ? 'active' : ''}`">
-                                                {{ zip.name }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </label>
-                                <label class="form__label call-to-action__label call-to-action__label--second">
-                                    <span class="call-to-action__text">
-                                        Zip
-                                    </span>
-                                    <input type="text" class="form__field field" placeholder="">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="call-to-action__devider">
-                        </div>
-                        <div class="call-to-action__sides">
-                            <div class="call-to-action__title call-to-action__title--sides">
-                                Укажите адрес места погрузки
-                            </div>
-                            <label class="form__label call-to-action__label">
-                                <span class="call-to-action__text">
-                                    Адрес
-                                </span>
-                                <input type="text" class="form__field field" placeholder="Пример адреса">
-                            </label>
-                            <label class="form__label call-to-action__label">
-                                <span class="call-to-action__text">
-                                    Номер дома/квартиры
-                                </span>
-                                <input type="text" class="form__field field" placeholder="1А">
-                            </label>
-                            <label class="form__label call-to-action__label">
-                                <span class="call-to-action__text">
-                                    Город
-                                </span>
-                                <input type="text" class="form__field field" placeholder="Нью-йорк">
-                            </label>
-                            <div class="call-to-action__state">
-                                <label class="form__label call-to-action__label call-to-action__label--first">
-                                    <span class="call-to-action__text">
-                                        Штат
-                                    </span>
-                                    <input type="text" class="form__field field" placeholder="NY" v-model="stateValEnd"
-                                        @click="openZipListEnd">
-                                    <img src="@/assets/img/icons/arrow-d.svg" alt=""
-                                        :class="`${isActiveZipEnd ? 'active' : ''}`">
-                                    <div :class="`call-to-action__select ${isActiveZipEnd ? 'active' : ''}`">
-                                        <ul class="call-to-action__select-list">
-                                            <li v-for="zip in this.statePost" :key="zip.id" @click="setZipEnd(zip)"
-                                                :class="`call-to-action__select-item ${zip.name === stateValEnd ? 'active' : ''}`">
-                                                {{ zip.name }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </label>
-                                <label class="form__label call-to-action__label call-to-action__label--second">
-                                    <span class="call-to-action__text">
-                                        Zip
-                                    </span>
-                                    <input type="text" class="form__field field" placeholder="">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="call-to-action__btn btn">
-                        Оставить заявку
-                    </button>
-                </form>
+    <div :class="`call-to-action ${isActive ? 'active' : ''}`" @click="closePopup" v-if="translations.length > 0">
+        <div class="call-to-action__body" @click.stop="" v-if="show">
+            <img src="@/assets/img/icons/close.png" alt="close" class="call-to-action__btn-close" @click="closePopup">
+            <div class="call-to-action__title">
+                {{ translations[0].text }}
             </div>
-        </transition>
-
+            <form class="call-to-action__form" @submit.prevent="postOrder">
+                <div class="call-to-action__top-block">
+                    <label class="form__label call-to-action__label">
+                        <span class="call-to-action__text">
+                            {{ translations[1].text }}
+                        </span>
+                        <input type="text" class="form__field field" :placeholder="translations[1].text" v-model="name">
+                    </label>
+                    <label class="form__label call-to-action__label call-to-action__label--width">
+                        <span class="call-to-action__text">
+                            {{ translations[2].text }}
+                        </span>
+                        <input type="email" class="form__field field" :placeholder="translations[2].text"
+                            v-model="email">
+                    </label>
+                    <label class="form__label call-to-action__label">
+                        <span class="call-to-action__text">
+                            {{ translations[3].text }}
+                        </span>
+                        <input type="tel" class="form__field field" :placeholder="translations[3].text" v-model="phone">
+                    </label>
+                    <label
+                        class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
+                        <span class="call-to-action__text">
+                            {{ translations[4].text }}
+                        </span>
+                        <input type="text" class="form__field field call-to-action__input"
+                            :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
+                            placeholder="Выбрать диапазон дат" @click="datePick">
+                        <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
+                    </label>
+                    <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
+                        :class="{ active: isOpen }" :locale="$i18n.locale" />
+                    <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }" @click="isOpen = false">
+                    </div>
+                </div>
+                <div class="call-to-action__bottom">
+                    <div class="call-to-action__sides">
+                        <div class="call-to-action__title call-to-action__title--sides">
+                            {{ translations[5].text }}
+                        </div>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[7].text }}
+                            </span>
+                            <input type="text" class="form__field field" :placeholder="translations[7].text"
+                                v-model="address_from">
+                        </label>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[8].text }}
+                            </span>
+                            <input type="text" class="form__field field" placeholder="1А" v-model="house_from">
+                        </label>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[9].text }}
+                            </span>
+                            <input type="text" class="form__field field" :placeholder="translations[10].text"
+                                v-model="city_from">
+                        </label>
+                        <div class="call-to-action__state">
+                            <label class="form__label  call-to-action__label call-to-action__label--first">
+                                <span class="call-to-action__text">
+                                    {{ translations[11].text }}
+                                </span>
+                                <input type="text" class="form__field field" v-model="stateValStart"
+                                    @click="openZipListStart">
+                                <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                    :class="`${isActiveZipStart ? 'active' : ''}`">
+                                <div :class="`call-to-action__select ${isActiveZipStart ? 'active' : ''}`">
+                                    <ul class="call-to-action__select-list">
+                                        <li v-for="zip in this.statePost" :key="zip.id" @click="setZipStart(zip)"
+                                            :class="`call-to-action__select-item ${zip.name === stateValStart ? 'active' : ''}`">
+                                            {{ zip.name }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </label>
+                            <label class="form__label call-to-action__label call-to-action__label--second">
+                                <span class="call-to-action__text">
+                                    {{ translations[12].text }}
+                                </span>
+                                <input type="text" class="form__field field" placeholder="" v-model="zip_from">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="call-to-action__devider">
+                    </div>
+                    <div class="call-to-action__sides">
+                        <div class="call-to-action__title call-to-action__title--sides">
+                            {{ translations[6].text }}
+                        </div>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[7].text }}
+                            </span>
+                            <input type="text" class="form__field field" :placeholder="translations[7].text"
+                                v-model="address_to">
+                        </label>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[8].text }}
+                            </span>
+                            <input type="text" class="form__field field" placeholder="1А" v-model="house_to">
+                        </label>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[9].text }}
+                            </span>
+                            <input type="text" class="form__field field" :placeholder="translations[10].text"
+                                v-model="city_to">
+                        </label>
+                        <div class="call-to-action__state">
+                            <label class="form__label call-to-action__label call-to-action__label--first">
+                                <span class="call-to-action__text">
+                                    {{ translations[11].text }}
+                                </span>
+                                <input type="text" class="form__field field" placeholder="NY" v-model="stateValEnd"
+                                    @click="openZipListEnd">
+                                <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                    :class="`${isActiveZipEnd ? 'active' : ''}`">
+                                <div :class="`call-to-action__select ${isActiveZipEnd ? 'active' : ''}`">
+                                    <ul class="call-to-action__select-list">
+                                        <li v-for="zip in this.statePost" :key="zip.id" @click="setZipEnd(zip)"
+                                            :class="`call-to-action__select-item ${zip.name === stateValEnd ? 'active' : ''}`">
+                                            {{ zip.name }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </label>
+                            <label class="form__label call-to-action__label call-to-action__label--second">
+                                <span class="call-to-action__text">
+                                    {{ translations[12].text }}
+                                </span>
+                                <input type="text" class="form__field field" placeholder="" v-model="zip_to">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button class="call-to-action__btn btn" type="submit">
+                    {{ translations[13].text }}
+                </button>
+            </form>
+        </div>
+        <div class="call-to-action__thanks" v-if="!show">
+            <div class="call-to-action__thanks-title">
+                Спасибо за заказ!
+            </div>
+            <p class="call-to-action__thanks-text">
+                В скором времени мы свяжемся с Вами
+            </p>
+            <!-- <nuxt-link to=""></nuxt-link> -->
+        </div>
     </div>
 </template>
 <script>
@@ -159,22 +170,74 @@ export default {
         return {
             isActiveZipStart: false,
             isActiveZipEnd: false,
-            stateValStart: 'NY',
-            stateValEnd: 'NY',
+            stateValStart: 0,
+            stateValEnd: 0,
             range: {
                 start: new Date(),
                 end: new Date()
             },
             isOpen: false,
-            statePost: []
+            statePost: [],
+            show: false,
+            name: '',
+            email: '',
+            phone: '',
+            address_from: '',
+            house_from: '',
+            city_from: 0,
+            zip_from: 0,
+            address_to: 0,
+            house_to: 0,
+            city_to: 0,
+            zip_to: 0,
         }
     },
     computed: {
         isActive() {
             return this.$store.getters['choose-service-popup/IS_ACTIVE']
-        }
+        },
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'form_order')
+            return topMenu
+        },
     },
     methods: {
+        closePopup() {
+            this.$store.dispatch('choose-service-popup/closePopup')
+        },
+        async postOrder() {
+            try {
+                const orderMessage = {
+                    name: this.name,
+                    email: this.email,
+                    phone: this.phone,
+                    range_date: `${this.range.start} / ${this.range.end}`,
+                    address_from: this.address_from,
+                    house_from: this.house_from,
+                    city_from: this.city_from,
+                    state_from: this.stateValStart,
+                    zip_from: this.zip_from,
+                    address_to: this.address_to,
+                    house_to: this.house_to,
+                    city_to: this.city_to,
+                    state_to: this.stateValEnd,
+                    zip_to: this.zip_to,
+                }
+                const order = await this.$axios.post('/orders', orderMessage)
+                    .then(res => {
+                        return res
+                    })
+                if (order) {
+                    this.show = false
+                    setTimeout(() => {
+                        this.closePopup()
+                    }, 2000);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+
+        },
         openZipListStart() {
             this.isActiveZipStart = !this.isActiveZipStart
         },
@@ -190,9 +253,6 @@ export default {
         datePick() {
             this.isOpen = true
         },
-        closePopup() {
-            this.$store.dispatch('choose-service-popup/closePopup')
-        }
     },
     async mounted() {
         await this.$axios.$get('/postal_codes').then(res => {
@@ -203,6 +263,11 @@ export default {
         range(newVal) {
             if (newVal.end) {
                 this.isOpen = false
+            }
+        },
+        isActive(e) {
+            if (e) {
+                this.show = true
             }
         }
     }
@@ -228,6 +293,28 @@ export default {
         opacity: 1;
     }
 
+    &__thanks {
+        background: #FAFAFA;
+        padding: 35px;
+        color: #000000;
+        border-radius: 10px;
+    }
+
+    &__thanks-title {
+        font-family: 'Gilroy';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    &__thanks-text {
+        font-family: 'Gilroy';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
     &__select {
         position: absolute;
         right: -85px;
@@ -236,7 +323,7 @@ export default {
         width: 85px;
         border: 1px solid #0f1d32;
         border-radius: 15px;
-        background: #fff;
+        background: #FAFAFA;
         z-index: 9;
         overflow: hidden;
         opacity: 0;
@@ -296,7 +383,7 @@ export default {
     }
 
     &__body {
-        background: #fff;
+        background: #FAFAFA;
         padding: 35px 25px 35px 35px;
         border-radius: 10px;
         width: 810px;
@@ -342,10 +429,6 @@ export default {
         }
     }
 
-
-
-    &__form {}
-
     &__calendar {
         position: relative;
     }
@@ -357,7 +440,8 @@ export default {
     &__top-block {
         display: flex;
         flex-wrap: wrap;
-        gap: 30px 45px;
+        justify-content: space-between;
+        row-gap: 30px;
         margin-bottom: 55px;
     }
 
@@ -406,6 +490,13 @@ export default {
             width: 85px;
             margin-right: 30px;
             position: relative;
+
+            .field {
+                padding: 14px 15px 14px 22px;
+                cursor: pointer;
+                caret-color: transparent;
+
+            }
         }
 
         &--second {
@@ -429,12 +520,7 @@ export default {
             }
         }
 
-        .field {
-            padding: 14px 15px 14px 22px;
-            cursor: pointer;
-            caret-color: transparent;
 
-        }
     }
 
     &__minus {
@@ -474,6 +560,15 @@ export default {
         }
     }
 
+    &__btn-close {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        width: 35px;
+        height: 35px;
+        display: none;
+    }
+
 }
 
 
@@ -510,6 +605,87 @@ export default {
                     width: 50%;
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .call-to-action {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .call-to-action {
+
+        &__label,
+        &__input {
+            width: 100%;
+        }
+
+        &__top-block {
+            row-gap: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .call-to-action {
+        &__bottom {
+            flex-direction: column;
+        }
+
+        &__top-block {
+            margin-bottom: 32px;
+        }
+
+        &__sides {
+            gap: 15px
+        }
+
+        &__devider {
+            display: none;
+        }
+
+        &__title--sides {
+            max-width: 100%;
+        }
+    }
+
+    .vc-pane-layout {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+    .vc-container .vc-pane-container .vc-pane-layout {
+        gap: 15px;
+    }
+
+    .vc-header {
+        margin-bottom: 10px;
+    }
+
+    .vc-container .vc-pane-container div:nth-child(3) {
+        flex-direction: column;
+    }
+
+    .vc-container .vc-pane-container div:nth-child(3) .vc-time-picker {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .call-to-action {
+        padding: 0;
+
+        &__body {
+            width: 100%;
+            height: 100vh;
+            border-radius: 0;
+        }
+
+        &__btn-close {
+            display: block;
         }
     }
 }

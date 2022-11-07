@@ -1,5 +1,5 @@
 <template>
-    <header class="header  ">
+    <header class="header">
         <div class="wrapper header__wrap">
             <div class="header__first">
                 <div class="header__burger">
@@ -18,9 +18,9 @@
                 <div class="header__content">
                     <div class="header__scroll dragscroll">
                         <nav class="header__menu">
-                            <ul>
+                            <ul v-if="translations.length > 0">
                                 <li class="menu-item-has-children">
-                                    <a href="#">Услуги по переезду</a>
+                                    <a href="#">{{ translations[0].text }}</a>
                                     <ul>
                                         <li v-for="link in services" :key="link.id">
                                             <div @click="$router.push(localePath(`/our-services/${link.alias}`))">
@@ -120,7 +120,7 @@
                                     <div @click="$router.push(localePath('/our-services'))">
                                         <nuxt-link class="text-header-bold text-middle"
                                             :to="switchLocalePath($i18n.locale)">
-                                            Наши сервисы
+                                            {{ translations[1].text }}
                                         </nuxt-link>
                                     </div>
                                 </li>
@@ -128,7 +128,7 @@
                                     <div @click="$router.push(localePath('/about-us'))">
                                         <nuxt-link class="text-header-bold text-middle"
                                             :to="switchLocalePath($i18n.locale)">
-                                            О нас
+                                            {{ translations[2].text }}
                                         </nuxt-link>
                                     </div>
                                 </li>
@@ -136,7 +136,7 @@
                                     <div @click="$router.push(localePath('/blogs'))">
                                         <nuxt-link class="text-header-bold text-middle"
                                             :to="switchLocalePath($i18n.locale)">
-                                            Блог
+                                            {{ translations[3].text }}
                                         </nuxt-link>
                                     </div>
                                 </li>
@@ -211,12 +211,15 @@ export default {
         },
         services() {
             return this.$store.getters['services/SERVICES']
+        },
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'top_menu')
+            return topMenu
         }
     },
     methods: {
         async langSwitch() {
             await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
-            console.log(this.$cookies.get('langId'));
             this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()
         }
     },
@@ -275,14 +278,6 @@ export default {
                 $('.language__hide').slideUp(300);
             }
         });
-        const langVal = this.$cookies.get('i18n_redirected')
-        if (langVal == 'ru') {
-            this.$cookies.set('langId', 1)
-        } else if (langVal == 'en') {
-            this.$cookies.set('langId', 2)
-        } else {
-            this.$cookies.set('langId', 3)
-        }
     },
     watch: {
         $route(to, from) {
@@ -295,6 +290,12 @@ export default {
                 } else {
                     this.$cookies.set('langId', 3)
                 }
+            }
+            if (to || from) {
+                let content = document.querySelector('.header__content')
+                let burger = document.querySelector('.header__burger')
+                burger.classList.remove('active')
+                content.classList.remove('active')
             }
         }
     }

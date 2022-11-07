@@ -7,22 +7,25 @@
         </div>
         <div v-if="item" v-html="item">
         </div>
-        <div class="wrapper">
-            <div class="main-order__title h2">Оформите заявку и&nbsp;все остальное<br> мы сделаем это за&nbsp;вас</div>
-            <div class="main-order__desc"
-                v-if="$route.path === '/our-services/elderly-moving' || $route.path === '/our-services/local-moving'">
-                Наш мувинг-сервис
-                поможет организовать переезд пожилого человека таким
-                образом, чтобы этот процесс прошел с максимальным комфортом, и ваш родственник остался доволен.</div>
-            <choose-service-btn class="main-order__btn ">Оформить заявку</choose-service-btn>
+        <div class="wrapper" v-if="translations.length > 0">
+            <div class="main-order__title h2">{{ translations[3].text }}</div>
+            <choose-service-btn class="main-order__btn ">{{ translations[5].text }}</choose-service-btn>
         </div>
     </section>
 </template>
 <script>
 export default {
-    props: ['item']
+    props: ['item'],
+    computed: {
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
+            return topMenu
+        },
+    }
 }
 </script>
 <style>
-
+.main-order__title {
+    max-width: 750px;
+}
 </style>

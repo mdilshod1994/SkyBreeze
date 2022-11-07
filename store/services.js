@@ -32,7 +32,7 @@ export const actions = {
     getServices(ctx, services) {
         ctx.commit('setServices', services)
 
-        let servicesSortTopArray = ['home-moving', 'office-moving', 'for-elderly-moving', 'apartment-moving',]
+        let servicesSortTopArray = ['home-moving', 'office-moving', 'for-elderly-moving', 'apartment-moving', "warehouse-moving"]
 
         let sortedTop = services.filter(item => {
             for (let index = 0; index < servicesSortTopArray.length; index++) {

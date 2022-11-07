@@ -5,18 +5,16 @@
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <div @click="$router.push(localePath(`/`))">
-                                <nuxt-link :to="switchLocalePath($i18n.locale)">Главная</nuxt-link>
-                            </div>
+                            <bread-crump-btn-home />
                         </li>
-                        <li>Блог</li>
+                        <li v-if="translations.length > 0"> {{ translations[3].text }}</li>
                     </ul>
                 </div>
             </div>
         </section>
         <section class="blog">
             <div class="wrapper">
-                <div class="blog__title title-big h1">Блог</div>
+                <div class="blog__title title-big h1" v-if="translations.length > 0"> {{ translations[3].text }}</div>
                 <div class="blog__wrap">
                     <div v-for="blog in blogs" :key="blog.id"
                         @click="$router.push(localePath(`/blogs/${blog.files_id}`))">
@@ -36,17 +34,26 @@
     </div>
 </template>
 <script>
+import breadCrumpBtnHome from '../../components/UI/breadCrumpBtnHome.vue'
 export default {
+    components: { breadCrumpBtnHome },
     name: 'blogs',
-    // head() {
-    //     return {
-    //         title: "About page"
-    //     };
-    // },
     computed: {
         blogs() {
             return this.$store.getters['blog/BLOGS']
+        },
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'top_menu')
+            return topMenu
         }
+    },
+    mounted() {
+        let titleHeads = [{ name: 'Blog', val: 'en' }, { name: 'Blog', val: 'es' }, { name: 'Блог', val: 'ru' }, ''].filter(el => {
+            if (el.val === this.$cookies.get('i18n_redirected')) {
+                return el
+            }
+        })
+        document.title = titleHeads[0].name
     }
 }
 </script>

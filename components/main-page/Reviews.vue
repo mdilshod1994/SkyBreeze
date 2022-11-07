@@ -1,7 +1,7 @@
 <template>
     <section class="scene reviews">
         <div class="wrapper">
-            <div class="reviews__title title h2">Отзывы наших клиентов</div>
+            <div class="reviews__title title h2"  v-if="translations.length > 0">{{ translations[7].text }}</div>
             <div class="reviews__body">
                 <div class="reviews__swiper swiper">
                     <div class="swiper-wrapper">
@@ -102,6 +102,7 @@
 import { Swiper, Pagination, Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 export default {
+    props: ['translations'],
     mounted() {
         Swiper.use([Pagination, Navigation])
         const swiper = new Swiper('.reviews__swiper', {

@@ -5,13 +5,13 @@
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <div @click="$router.push(localePath(`/`))">
-                                <nuxt-link :to="switchLocalePath($i18n.locale)">Главная</nuxt-link>
-                            </div>
+                            <bread-crump-btn-home />
                         </li>
                         <li>
                             <div @click="$router.push(localePath(`/blogs`))">
-                                <nuxt-link :to="switchLocalePath($i18n.locale)">Блог</nuxt-link>
+                                <nuxt-link :to="switchLocalePath($i18n.locale)" v-if="translations.length > 0">{{
+                                        translations[3].text
+                                }}</nuxt-link>
                             </div>
                         </li>
                         <li>{{ blogItem[0].name }}</li>
@@ -72,7 +72,9 @@
     </div>
 </template>
 <script>
+import breadCrumpBtnHome from '../../../components/UI/breadCrumpBtnHome.vue'
 export default {
+    components: { breadCrumpBtnHome },
     name: 'blog',
     data() {
         return {
@@ -83,6 +85,10 @@ export default {
         blogs() {
             return this.$store.getters['blog/BLOGS']
         },
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'top_menu')
+            return topMenu
+        }
     },
     methods: {
         async getBlog() {
@@ -96,7 +102,7 @@ export default {
                     blogs.filter(el => {
                         if (el.files_id == this.$route.params.blog) {
                             this.blogItem.push(el)
-                            console.log(el);
+                            document.title = el.name
                         }
                     })
                 }
@@ -107,6 +113,7 @@ export default {
     },
     async mounted() {
         await this.getBlog()
+
     },
     watch: {
         blogs(newVal) {

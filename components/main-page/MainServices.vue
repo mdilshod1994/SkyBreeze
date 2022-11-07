@@ -1,7 +1,7 @@
 <template>
     <section class="scene main-services bg-white">
         <div class="wrapper">
-            <div class="main-services__title title h2">Наши услуги по&nbsp;переезду</div>
+            <div class="main-services__title title h2" v-if="translations.length > 0">{{ translations[2].text }}</div>
             <div class="main-services__body" v-if="services.length > 0">
                 <div class="main-services__row">
                     <div class="main-services__coll"
@@ -162,11 +162,14 @@
                             </div>
                         </nuxt-link>
                     </div>
-                    <div class="main-services__coll main-services__coll--big">
-                        <nuxt-link to="/our-services/warehouse-moving" class="main-services__box main-services__box">
-                            <div class="main-services__caption">Складской переезд</div>
+                    <div class="main-services__coll main-services__coll--big"
+                        @click="$router.push(localePath({ path: `/our-services/${services[4].alias}` }))">
+                        <nuxt-link :to="switchLocalePath($i18n.locale)" class="main-services__box main-services__box">
+                            <div class="main-services__caption">{{ services[4].name }}</div>
                             <div class="main-services__icon">
-                                <svg width="101" height="94" viewBox="0 0 101 94" fill="none"
+                                <img v-if="services[4].icon_home"
+                                    :src="`${services[4].icon_home.server}/${services[4].icon_home.path}`" alt="">
+                                <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
                                     <path
@@ -182,8 +185,9 @@
                         </nuxt-link>
                     </div>
                 </div>
-                <div class="service-selection">
-                    <choose-service-btn> Выбери услугу</choose-service-btn>
+                <div class="service-selection" v-if="translationsSite.length > 0">
+                    <choose-service-btn> {{ translationsSite[2].text }}
+                    </choose-service-btn>
                 </div>
             </div>
         </div>
@@ -191,6 +195,7 @@
 </template>
 <script>
 export default {
+    props: ['translations'],
     data() {
         return {
         }
@@ -198,7 +203,11 @@ export default {
     computed: {
         services() {
             return this.$store.getters['services/SERVICES_SORTED_TOP']
-        }
+        },
+        translationsSite() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
+            return topMenu
+        },
     }
 }
 </script>

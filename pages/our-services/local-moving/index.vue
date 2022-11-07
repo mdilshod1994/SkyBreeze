@@ -5,9 +5,7 @@
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <div @click="$router.push(localePath(`/`))">
-                                <nuxt-link :to="switchLocalePath($i18n.locale)">Главная</nuxt-link>
-                            </div>
+                            <bread-crump-btn-home />
                         </li>
                         <li>{{ service[0].name }}</li>
                     </ul>
@@ -25,7 +23,8 @@
                     <div class="service-promo__wrap">
                         <div class="service-promo__title h1">{{ service[0].name }}</div>
                         <div class="service-promo__desc desc"> {{ service[0].description }} </div>
-                        <choose-service-btn class="promo__btn"> Оформить заявку</choose-service-btn>
+                        <choose-service-btn class="promo__btn" v-if="translationsSite.length > 0">
+                            {{ translationsSite[5].text }}</choose-service-btn>
                     </div>
                 </div>
             </div>
@@ -40,11 +39,13 @@ import LocalPeculiarities from '../../../components/our-services/local/LocalPecu
 import MainOrder from '../../../components/reuse/MainOrder.vue'
 import ServicePromo from '../../../components/reuse/ServicePromo.vue'
 import WhyApply from '../../../components/reuse/WhyApply.vue'
+import BreadCrumpBtnHome from '../../../components/UI/breadCrumpBtnHome.vue'
 export default {
     components: {
         ServicePromo, LocalPeculiarities,
         WhyApply,
-        MainOrder
+        MainOrder,
+        BreadCrumpBtnHome
     },
     data() {
         return {
@@ -54,6 +55,10 @@ export default {
     computed: {
         services() {
             return this.$store.getters['services/SERVICES']
+        },
+        translationsSite() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
+            return topMenu
         },
     },
     methods: {
@@ -68,6 +73,7 @@ export default {
                     service.filter(el => {
                         if (el.langs_id == langID) {
                             this.service.push(el)
+                            document.title = el.name
                         }
                     })
                 }

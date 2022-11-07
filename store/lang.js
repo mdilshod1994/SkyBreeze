@@ -24,16 +24,22 @@ export const actions = {
     async getAllInfo(ctx, langID) {
         try {
             if (langID) {
+                const translations = await this.$axios.$get(`/translations?search[langs_id]=${langID}&limit=-1`)
+                    .then(res => {
+                        return res.data
+                    })
+                ctx.dispatch('translations/getTranslations', translations, { root: true })
+                const services = await this.$axios.$get(`/services?search[langs_id]=${langID}&limit=-1`)
+                    .then(res => {
+                        return res.data
+                    })
+                ctx.dispatch('services/getServices', services, { root: true })
                 const blog = await this.$axios.$get(`/articles?search[langs_id]=${langID}`)
                     .then(res => {
                         return res.data
                     })
                 ctx.dispatch('blog/getBlogs', blog, { root: true })
-                const services = await this.$axios.$get(`/services?search[langs_id]=${langID}`)
-                    .then(res => {
-                        return res.data
-                    })
-                ctx.dispatch('services/getServices', services, { root: true })
+
                 const faq = await this.$axios.$get(`/faq?search[langs_id]=${langID}`)
                     .then(res => {
                         return res.data
@@ -44,6 +50,7 @@ export const actions = {
                         return res.data
                     })
                 ctx.dispatch('why-we/getWhyWe', whyWe, { root: true })
+
             }
         } catch (error) {
             console.error(error);

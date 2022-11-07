@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Breeze',
+    title: 'SkyBreeze',
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,10 +15,15 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { property: 'og:site_name', content: "BRILLDAY" },
+      { property: 'og:title', content: "BRILLDAY" },
+      // { property: 'og:image', content: process.env.API_URL + '/avatar.png' },
+      // { property: 'og:image:width', content: "250" },
+      // { property: 'og:image:height', content: "250" }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
     ]
   },
 

@@ -1,11 +1,12 @@
 <template>
     <section class="why-we">
         <div class="wrapper">
-            <div class="why-we__top">
-                <div class="why-we__title title h2">Почему выбирают нас</div>
+            <div class="why-we__top" v-if="translations.length > 0">
+                <div class="why-we__title title h2">{{ translations[5].text }}</div>
                 <div @click="$router.push(localePath('/about-us'))" class="why-we__link">
-                    <nuxt-link :to="switchLocalePath($i18n.locale)" class="why-we__link">
-                        Подробнее о нас
+                    <nuxt-link :to="switchLocalePath($i18n.locale)" class="why-we__link"
+                        v-if="translationsSite.length > 0">
+                        {{ translationsSite[0].text }}
                     </nuxt-link>
                 </div>
             </div>
@@ -53,7 +54,15 @@ export default {
     computed: {
         whyWe() {
             return this.$store.getters['why-we/WHY_WE']
-        }
+        },
+        translationsSite() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
+            return topMenu
+        },
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'home_page')
+            return topMenu
+        },
     },
     mounted() {
         const swiper = new Swiper('.why-we__swiper', {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="translations.length > 0">
         <section class="about-promo">
             <div class="about-promo__bg p-absolute img-cover">
                 <img class="img-desctop" src="@/assets/img/about/about-promo/bg.svg" alt="">
@@ -10,52 +10,34 @@
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <div @click="$router.push(localePath(`/`))">
-                                <nuxt-link :to="switchLocalePath($i18n.locale)">Главная</nuxt-link>
-                            </div>
+                            <bread-crump-btn-home />
                         </li>
-                        <li>О нас</li>
+                        <li> {{ translations[0].text }}
+                        </li>
                     </ul>
                 </div>
                 <div class="about-promo__wrap">
-                    <div class="about-promo__title title-big h1">О нас</div>
-                    <div class="about-promo__subtitle">Наша компания занимается перевозкой вещей. Мы предлагаем большой
-                        спектр основных и дополнительных услуг, принимаем и доставляем грузы, осуществляем их упаковку и
-                        страхование. Если вам необходима перевозка имущества, мы с радостью выполним эту задачу.</div>
+                    <div class="about-promo__title title-big h1">{{ translations[0].text }}</div>
+                    <div class="about-promo__subtitle">{{ translations[1].text }}</div>
                 </div>
             </div>
         </section>
 
         <section class="scene about-story about-info bg-white">
             <div class="wrapper">
-                <div class="about-title title h2">История и миссия</div>
+                <div class="about-title title h2">{{ translations[2].text }}</div>
                 <div class="about-info__row">
                     <div class="about-info__coll">
                         <div class="about-info__desc">
-                            <p>Наша компания появилась в Калифорнии, но в будущем планирует расширить географию
-                                присутствия
-                                на другие штаты.</p>
-                            <p>Фирма была основана практикующими специалистами с опытом работы в мувинг-сфере. Основная
-                                задача нашей деятельности заключается в следующем – мы хотим предоставлять качественные
-                                услуги, связанные с перевозкой вещей, чтобы переезд доставлял людям только приятные
-                                эмоции.
-                            </p>
-                            <p>Мы не просто мувинг-сервис, а компания полного цикла со своим сайтом и мобильным
-                                приложением.
-                                Нашей особенностью является стремление к развитию и использование современных
-                                технологий.
-                            </p>
+                            <p v-html="translations[9].text"></p>
                         </div>
                     </div>
                     <div class="about-info__coll">
                         <div class="about-info__desc">
-                            <p>Миссия нашей организации – стать одной из ведущих транспортных компаний на уровне страны
-                                и
-                                объединить тысячи других мувинговых компаний и частных перевозчиков в США.</p>
+                            <p v-html="translations[10].text"></p>
                         </div>
                         <div class="about-story__info">
-                            <div class="about-story__caption">Мы стремимся к достижению этой глобальной цели, а пока что
-                                сами оказываем качественные услуги по переезду с высоким уровнем сервиса.</div>
+                            <div class="about-story__caption"> {{ translations[11].text }} </div>
                         </div>
                     </div>
                 </div>
@@ -64,22 +46,16 @@
 
         <section class="scene about-story about-info">
             <div class="wrapper">
-                <div class="about-title title h2">Особенности работы</div>
+                <div class="about-title title h2">{{ translations[3].text }}</div>
                 <div class="about-info__row">
                     <div class="about-info__coll">
                         <div class="about-info__desc">
-                            <p>Мы осуществляем доставку вещей по территории США. Наши специалисты успешно организуют не
-                                только местные, но и междугородние переезды. Вне зависимости от расстояния, на которое
-                                вам
-                                нужно доставить груз, мы с удовольствием возьмемся за эту работу.</p>
+                            <p v-html="translations[7].text"></p>
                         </div>
                     </div>
                     <div class="about-info__coll">
                         <div class="about-info__desc">
-                            <p>Работа компании ведется как в крупных городах, так и в маленьких населенных пунктах.
-                                Отработанная схема позволяет снизить влияние фактора удаленности и добиваться
-                                оптимальных
-                                результатов.</p>
+                            <p v-html="translations[8].text"></p>
                         </div>
                     </div>
                 </div>
@@ -88,29 +64,21 @@
 
         <section class="scene about-team about-info bg-white">
             <div class="wrapper">
-                <div class="about-title title h2">Наши лица</div>
+                <div class="about-title title h2">{{ translations[4].text }}</div>
                 <div class="about-info__row">
                     <div class="about-info__coll">
                         <div class="about-info__desc">
-                            <p>Наша компания многонациональная и лояльно относится ко всем. Поскольку мы расширяемся, то
-                                постоянно находимся в поиске новых лиц. Если вы интересуетесь мувинг-сферой, хотели бы
-                                работать в данной отрасли и (или) имеете аналогичный опыт работы, то приглашаем наладить
-                                деловые отношения. Наша организация всегда рада талантливым людям! Всем кандидатам
-                                гарантируем достойный уровень оплаты труда.</p>
+                            <p v-html="translations[5].text"></p>
                         </div>
                     </div>
                     <div class="about-info__coll">
                         <div class="about-info__desc">
-                            <p>Кроме того, мы заинтересованы в сотрудничестве с организациями разных уровней. Предлагаем
-                                системным интеграторам, предприятиям в сфере торговли и другим фирмам и частным лицам,
-                                которым интересны наши услуги, рассмотреть предложение о сотрудничестве. Если вы
-                                заинтересованы в деловых отношениях, то просим вас написать нам об этом.</p>
+                            <p v-html="translations[6].text"></p>
                         </div>
                     </div>
                 </div>
-                <div class="about-order">
-                    <div class="about-order__title">Заполните форму обратной связи для сотрудничества и мы свяжемся с
-                        вами
+                <div class="about-order" v-if="translationForm.length > 0">
+                    <div class="about-order__title">{{ translationForm[0].text }}
                     </div>
                     <form action="#" class="about-order__form form">
                         <div class="about-order__row">
@@ -118,34 +86,35 @@
                                 <div class="about-order__row">
                                     <div class="about-order__coll">
                                         <label class="form__label">
-                                            <input type="text" class="form__field field" placeholder="Ваше имя">
+                                            <input type="text" class="form__field field"
+                                                :placeholder="translationForm[1].text">
                                         </label>
                                     </div>
                                     <div class="about-order__coll">
                                         <label class="form__label">
-                                            <input type="text" class="form__field field" placeholder="Ваша фамилия">
+                                            <input type="text" class="form__field field"
+                                                :placeholder="translationForm[2].text">
                                         </label>
                                     </div>
                                 </div>
                                 <label class="form__label">
-                                    <input type="text" class="form__field field" placeholder="Ваша эл.почта">
+                                    <input type="text" class="form__field field" :placeholder="translationForm[3].text">
                                 </label>
                             </div>
                             <div class="about-order__coll">
                                 <label class="form__label">
-                                    <textarea class="form__field field" placeholder="Ваше сообщение"></textarea>
+                                    <textarea class="form__field field"
+                                        :placeholder="translationForm[4].text"></textarea>
                                 </label>
                             </div>
                         </div>
                         <div class="about-order__bottom">
-                            <button class="form__btn btn">Отправить</button>
+                            <button class="form__btn btn">{{ translationForm[5].text }}</button>
                             <div class="form__checbox">
                                 <label class="checbox">
                                     <input type="checkbox" name="value" value="active" checked>
                                     <div class="checbox__icon"></div>
-                                    <div class="checbox__caption">Соглашаюсь с <a href="#">Политикой Конфиденциальности
-                                            и
-                                            Обработкой Персональных данных</a></div>
+                                    <div class="checbox__caption" v-html="translationsSite[6].text"></div>
                                 </label>
                             </div>
                         </div>
@@ -158,9 +127,31 @@
 </template>
 <script>
 import WhyWe from '../components/reuse/WhyWe.vue'
+import BreadCrumpBtnHome from '../components/UI/breadCrumpBtnHome.vue'
 export default {
-    components: { WhyWe },
-
+    components: { WhyWe, BreadCrumpBtnHome },
+    computed: {
+        translations() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'about')
+            return topMenu
+        },
+        translationForm() {
+            let form = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'form')
+            return form
+        },
+        translationsSite() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
+            return topMenu
+        },
+    },
+    mounted() {
+        let titleHeads = [{ name: 'About Us', val: 'en' }, { name: 'Sobre nosotros', val: 'es' }, { name: 'О нас', val: 'ru' }, ''].filter(el => {
+            if (el.val === this.$cookies.get('i18n_redirected')) {
+                return el
+            }
+        })
+        document.title = titleHeads[0].name
+    }
 }
 </script>
 <style>

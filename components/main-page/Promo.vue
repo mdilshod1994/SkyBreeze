@@ -6,17 +6,24 @@
             <img class="img-mobile" src="@/assets/img/main/promo/bg-mobile.svg" alt="">
         </div>
         <div class="wrapper">
-            <div class="promo__wrap">
-                <div class="promo__title">Самые талантливые люди всегда находятся в движении</div>
-                <div class="promo__subtitle">Современный сервис для твоих переездов</div>
-                <choose-service-btn class="promo__btn"> Выбери услугу</choose-service-btn>
+            <div class="promo__wrap" v-if="translations.length > 0">
+                <div class="promo__title">{{ translations[0].text }}</div>
+                <div class="promo__subtitle">{{ translations[1].text }}</div>
+                <choose-service-btn class="promo__btn" v-if="translationsSite.length > 0"> {{ translationsSite[2].text
+                }}</choose-service-btn>
             </div>
         </div>
     </section>
 </template>
 <script>
 export default {
-
+    props: ['translations'],
+    computed: {
+        translationsSite() {
+            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
+            return topMenu
+        },
+    }
 }
 </script>
 <style >

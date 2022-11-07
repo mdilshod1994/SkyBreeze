@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Promo />
-    <MainServices />
-    <trust-swiper />
-    <our-services />
-    <why-we />
-    <service-packages />
-    <reviews />
-    <faq />
-    <order />
+    <Promo :translations="translations" />
+    <MainServices :translations="translations" />
+    <trust-swiper :translations="translations" />
+    <our-services :translations="translations" />
+    <why-we :translations="translations" />
+    <service-packages :translations="translations" />
+    <reviews :translations="translations" />
+    <faq :translations="translations" />
+    <order :translation="translations" />
   </div>
 </template>
 
@@ -35,6 +35,12 @@ export default {
     Faq,
     Order
   },
+  computed: {
+    translations() {
+      let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'home_page')
+      return topMenu
+    },
+  },
   mounted() {
     window.addEventListener('scroll', function () {
       var pageHeight = document.querySelector('.promo').offsetHeight;
@@ -50,6 +56,7 @@ export default {
         serviceSelection.style.top = '0';
       }
     });
+    document.title = 'SkyBreeze'
   }
 
 }

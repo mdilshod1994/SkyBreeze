@@ -1,7 +1,7 @@
 <template>
     <section class="scene we-trusted">
         <div class="wrapper">
-            <div class="we-trusted__title title h2">Нам доверяют</div>
+            <div class="we-trusted__title title h2"  v-if="translations.length > 0">{{ translations[3].text }}</div>
             <div class="we-trusted__body">
                 <div class="we-trusted__swiper swiper">
                     <div class="swiper-wrapper">
@@ -76,6 +76,7 @@ import { Swiper, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 
 export default {
+    props: ['translations'],
     computed: {
         partners() {
             return this.$store.getters['partners/PARTNERS']

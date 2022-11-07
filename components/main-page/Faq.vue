@@ -1,7 +1,7 @@
 <template>
     <section class="scene faq bg-white">
         <div class="wrapper">
-            <div class="faq__title title h2">Часто задаваемые вопросы</div>
+            <div class="faq__title title h2" v-if="translations.length > 0">{{ translations[8].text }}</div>
             <div class="faq__body">
                 <div v-for="(item, index) in faq" :key="item.id" :class="`accordion ${isActive ? 'active' : ''}`">
                     <div class="accordion__top" @click="showContent(index)" v-if="faq.length">
@@ -23,6 +23,7 @@
 </template>
 <script>
 export default {
+    props: ['translations'],
     data() {
         return {
             activeItem: null,
