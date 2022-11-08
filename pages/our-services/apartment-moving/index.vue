@@ -1,5 +1,5 @@
 <template>
-    <div v-if="service.length > 0">
+    <div v-if="service.length">
         <section class="main-top">
             <div class="wrapper">
                 <div class="breadcrumbs">
@@ -59,8 +59,9 @@ export default {
     methods: {
         async getService() {
             try {
+                this.$store.dispatch('loader/getLoading', true)
                 const langID = this.$cookies.get('langId')
-                const service = await this.$axios.get(`/services?search[alias]=${this.$route.path.split("/").pop()}`)
+                const service = await this.$axios.get(`front/services?search[alias]=${this.$route.path.split("/").pop()}`)
                     .then(res => {
                         return res.data.data
                     })
@@ -71,6 +72,7 @@ export default {
                             document.title = el.name
                         }
                     })
+                    this.$store.dispatch('loader/getLoading', false)
                 }
             } catch (error) {
                 console.error(error);

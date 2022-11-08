@@ -93,8 +93,9 @@ export default {
     methods: {
         async getBlog() {
             try {
+                this.$store.dispatch('loader/getLoading', true)
                 const langID = this.$cookies.get('langId')
-                const blogs = await this.$axios.get(`/articles?search[langs_id]=${langID}`)
+                const blogs = await this.$axios.get(`front/articles?search[langs_id]=${langID}`)
                     .then(res => {
                         return res.data.data
                     })
@@ -105,6 +106,7 @@ export default {
                             document.title = el.name
                         }
                     })
+                    this.$store.dispatch('loader/getLoading', false)
                 }
             } catch (error) {
                 console.error(error);

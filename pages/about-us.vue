@@ -1,5 +1,5 @@
 <template>
-    <div v-if="translations.length > 0">
+    <div v-if="translations.length">
         <section class="about-promo">
             <div class="about-promo__bg p-absolute img-cover">
                 <img class="img-desctop" src="@/assets/img/about/about-promo/bg.svg" alt="">
@@ -80,36 +80,37 @@
                 <div class="about-order" v-if="translationForm.length > 0">
                     <div class="about-order__title">{{ translationForm[0].text }}
                     </div>
-                    <form action="#" class="about-order__form form">
+                    <form action="#" class="about-order__form form" @submit.prevent="postMessage">
                         <div class="about-order__row">
                             <div class="about-order__coll">
                                 <div class="about-order__row">
                                     <div class="about-order__coll">
                                         <label class="form__label">
                                             <input type="text" class="form__field field"
-                                                :placeholder="translationForm[1].text">
+                                                :placeholder="translationForm[1].text" v-model="message.name">
                                         </label>
                                     </div>
                                     <div class="about-order__coll">
                                         <label class="form__label">
                                             <input type="text" class="form__field field"
-                                                :placeholder="translationForm[2].text">
+                                                :placeholder="translationForm[2].text" v-model="message.lastname">
                                         </label>
                                     </div>
                                 </div>
                                 <label class="form__label">
-                                    <input type="text" class="form__field field" :placeholder="translationForm[3].text">
+                                    <input type="text" class="form__field field" :placeholder="translationForm[3].text"
+                                        v-model="message.email">
                                 </label>
                             </div>
                             <div class="about-order__coll">
                                 <label class="form__label">
-                                    <textarea class="form__field field"
-                                        :placeholder="translationForm[4].text"></textarea>
+                                    <textarea class="form__field field" :placeholder="translationForm[4].text"
+                                        v-model="message.messages"></textarea>
                                 </label>
                             </div>
                         </div>
                         <div class="about-order__bottom">
-                            <button class="form__btn btn">{{ translationForm[5].text }}</button>
+                            <button class="form__btn btn" type="submit">{{ translationForm[5].text }}</button>
                             <div class="form__checbox">
                                 <label class="checbox">
                                     <input type="checkbox" name="value" value="active" checked>
@@ -130,6 +131,17 @@ import WhyWe from '../components/reuse/WhyWe.vue'
 import BreadCrumpBtnHome from '../components/UI/breadCrumpBtnHome.vue'
 export default {
     components: { WhyWe, BreadCrumpBtnHome },
+    data() {
+        return {
+            message: {
+                name: '',
+                lastname: '',
+                email: '',
+                messages: '',
+                phone: '0'
+            }
+        }
+    },
     computed: {
         translations() {
             let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'about')
@@ -143,6 +155,26 @@ export default {
             let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
             return topMenu
         },
+    },
+    methods: {
+        async postMessage() {
+            try {
+                const message = await this.$axios.post('/messagesEmails', this.message)
+                    .then(res => {
+                        return res.data
+                    })
+                this.message = {
+                    name: '',
+                    lastname: '',
+                    email: '',
+                    messages: '',
+                    phone: '0'
+                }
+            } catch (error) {
+                console.error(error);
+            }
+
+        }
     },
     mounted() {
         let titleHeads = [{ name: 'About Us', val: 'en' }, { name: 'Sobre nosotros', val: 'es' }, { name: 'О нас', val: 'ru' }, ''].filter(el => {

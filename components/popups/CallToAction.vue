@@ -1,6 +1,6 @@
 <template>
     <div :class="`call-to-action ${isActive ? 'active' : ''}`" @click="closePopup" v-if="translations.length > 0">
-        <div class="call-to-action__body" @click.stop="" v-if="show">
+        <div @click.stop="" :class="`call-to-action__body ${show ? 'active' : ''}`">
             <img src="@/assets/img/icons/close.png" alt="close" class="call-to-action__btn-close" @click="closePopup">
             <div class="call-to-action__title">
                 {{ translations[0].text }}
@@ -150,7 +150,7 @@
                 </button>
             </form>
         </div>
-        <div class="call-to-action__thanks" v-if="!show">
+        <div :class="`call-to-action__thanks ${showThanx ? 'active' : ''}`">
             <div class="call-to-action__thanks-title">
                 Спасибо за заказ!
             </div>
@@ -178,18 +178,19 @@ export default {
             },
             isOpen: false,
             statePost: [],
-            show: false,
+            show: true,
+            showThanx: false,
             name: '',
             email: '',
             phone: '',
             address_from: '',
             house_from: '',
-            city_from: 0,
-            zip_from: 0,
-            address_to: 0,
-            house_to: 0,
-            city_to: 0,
-            zip_to: 0,
+            city_from: "",
+            zip_from: "",
+            address_to: "",
+            house_to: "",
+            city_to: "",
+            zip_to: "",
         }
     },
     computed: {
@@ -229,9 +230,24 @@ export default {
                     })
                 if (order) {
                     this.show = false
+                    this.showThanx = true
                     setTimeout(() => {
                         this.closePopup()
+                        this.showThanx = false
                     }, 2000);
+                    this.name =  ""
+                        this.email =  ""
+                        this.phone =  ""
+                        this.address_from =  ""
+                        this.house_from =  ""
+                        this.city_from = ""
+                        this.zip_from = ""
+                        this.address_to = ""
+                        this.house_to = ""
+                        this.city_to = ""
+                        this.zip_to = ""
+                        this.stateValStart = ""
+                        this.stateValEnd = ""
                 }
             } catch (error) {
                 console.error(error);
@@ -255,7 +271,7 @@ export default {
         },
     },
     async mounted() {
-        await this.$axios.$get('/postal_codes').then(res => {
+        await this.$axios.$get('front/postal_codes').then(res => {
             this.statePost = res.data
         })
     },
@@ -286,18 +302,35 @@ export default {
     justify-content: center;
     align-items: center;
     visibility: hidden;
+    transform: translateY(-30px);
     opacity: 0;
+    z-index: -1;
+    transition: 0.3s ease-in-out;
 
     &.active {
         visibility: visible;
         opacity: 1;
+        z-index: 9999;
+        transform: translateY(0);
     }
 
     &__thanks {
+        position: fixed;
         background: #FAFAFA;
         padding: 35px;
         color: #000000;
         border-radius: 10px;
+        visibility: hidden;
+        transform: translateY(30px);
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+        transition-delay: 0.3s;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     &__thanks-title {
@@ -390,6 +423,17 @@ export default {
         height: 90%;
         overflow-y: scroll;
         position: relative;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-30px);
+        transition: 0.3s ease-in-out;
+        z-index: 9999;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         &::-webkit-scrollbar {
             width: 10px;

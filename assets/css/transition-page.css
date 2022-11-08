@@ -1,0 +1,9 @@
+.fade-layouts-enter-active,
+.fade-layouts-leave-active {
+    transition: 0.5s;
+}
+
+.fade-layouts-enter,
+.fade-layouts-leave-active {
+    opacity: 0;
+}

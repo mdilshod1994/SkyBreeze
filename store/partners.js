@@ -16,7 +16,7 @@ export const mutations = {
 
 export const actions = {
     async getPartners(ctx) {
-        const res = await this.$axios.$get('/partners').then(res => {
+        const res = await this.$axios.$get('front/partners').then(res => {
             return res.data
         })
         ctx.commit('setPartners', res)

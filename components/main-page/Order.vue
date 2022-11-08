@@ -87,7 +87,13 @@ export default {
                     .then(res => {
                         return res.data
                     })
-                console.log(message);
+                this.message = {
+                    name: '',
+                    lastname: '',
+                    email: '',
+                    messages: '',
+                    phone: '0'
+                }
             } catch (error) {
                 console.error(error);
             }

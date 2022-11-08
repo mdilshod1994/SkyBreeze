@@ -273,3 +273,24 @@ hr {
 		line-height: 120%;
 	}
 }
+
+// scrollbar style
+
+::-webkit-scrollbar {
+	width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}

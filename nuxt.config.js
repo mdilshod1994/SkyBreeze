@@ -1,6 +1,4 @@
 require('dotenv').config()
-import { langs } from './i18n'
-const messages = Object.assign(langs)
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -30,6 +28,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/css/main.scss',
+    '@/assets/css/transition-page.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -40,7 +39,7 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
+  loading: true,
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
@@ -70,7 +69,10 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.API_URL,
   },
-
+  transition: {
+    name: 'fade-layouts',
+    mode: 'out-in'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: null,
