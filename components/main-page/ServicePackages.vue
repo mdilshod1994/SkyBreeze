@@ -163,5 +163,9 @@ export default {
 }
 </script>
 <style>
-
+.service-packages {
+    background: url('@/assets/img/main/our-services/left.png'), url('@/assets/img/main/our-services/right.png'), #fff;
+    background-repeat: no-repeat;
+    background-position: 2% center , right bottom;
+}
 </style>

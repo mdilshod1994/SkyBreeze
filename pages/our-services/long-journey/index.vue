@@ -36,12 +36,9 @@
 </template>
 <script>
 import MainOrder from '../../../components/reuse/MainOrder.vue'
-import ServiceBenefits from '../../../components/reuse/ServiceBenefits.vue'
-import ServicePeculiarities from '../../../components/reuse/ServicePeculiarities.vue'
-import ServicePromo from '../../../components/reuse/ServicePromo.vue'
 import BreadCrumpBtnHome from '../../../components/UI/breadCrumpBtnHome.vue'
 export default {
-    components: { ServicePromo, ServicePeculiarities, ServiceBenefits, MainOrder, BreadCrumpBtnHome },
+    components: {  MainOrder, BreadCrumpBtnHome },
     data() {
         return {
             service: []

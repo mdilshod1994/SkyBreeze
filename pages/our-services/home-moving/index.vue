@@ -16,9 +16,6 @@
             <div class="wrapper">
                 <div class="service-promo__body">
                     <div class="service-promo__bg img-cover p-absolute" v-html="service[0].photos">
-                        <!-- <img class="img-desctop" src="@/assets/img/home-moving/service-promo/bg.jpg" alt="">
-                        <img class="img-table" src="@/assets/img/home-moving/service-promo/bg-table.jpg" alt="">
-                        <img class="img-mobile" src="@/assets/img/home-moving/service-promo/bg-mobile.jpg" alt=""> -->
                     </div>
                     <div class="service-promo__wrap">
                         <div class="service-promo__title h1">{{ service[0].name }}</div>

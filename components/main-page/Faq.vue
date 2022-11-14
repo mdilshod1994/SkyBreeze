@@ -13,7 +13,7 @@
                     </div>
                     <div class="accordion__hidden">
                         <div class="accordion__desc">
-                            <p>{{ item.answer }}</p>
+                            <p v-html="item.answer"></p>
                         </div>
                     </div>
                 </div>

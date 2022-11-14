@@ -5,13 +5,13 @@
             <div class="main-services__body" v-if="services.length > 0">
                 <div class="main-services__row">
                     <div class="main-services__coll"
-                        @click="$router.push(localePath({ path: `/our-services/${services[2].alias}` }))">
+                        @click="$router.push(localePath({ path: `/our-services/${services[1].alias}` }))">
                         <nuxt-link :to="switchLocalePath($i18n.locale)"
                             class="main-services__box main-services__box--blue">
-                            <div class="main-services__caption">{{ services[2].name }}</div>
+                            <div class="main-services__caption">{{ services[1].name }}</div>
                             <div class="main-services__icon">
-                                <img v-if="services[2].icon_home"
-                                    :src="`${services[2].icon_home.server}/${services[2].icon_home.path}`" alt="">
+                                <img v-if="services[1].icon_home"
+                                    :src="`${services[1].icon_home.server}/${services[1].icon_home.path}`" alt="">
                                 <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="56.5" cy="56.5" r="56" stroke="white" />
@@ -54,26 +54,24 @@
                                 </div>
                             </nuxt-link>
                         </div>
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[1].alias}` }))"
+                        <div @click="$router.push(localePath({ path: `/our-services/${services[4].alias}` }))"
                             class="main-services__box">
                             <nuxt-link :to="switchLocalePath($i18n.locale)">
-                                <div class="main-services__caption">{{ services[1].name }}</div>
+                                <div class="main-services__caption">{{ services[4].name }}</div>
                                 <div class="main-services__icon">
-                                    <img v-if="services[1].icon_home"
-                                        :src="`${services[1].icon_home.server}/${services[1].icon_home.path}`" alt="">
-                                    <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
+                                    <img v-if="services[4].icon_home"
+                                        :src="`${services[4].icon_home.server}/${services[4].icon_home.path}`" alt="">
+
+                                    <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
-                                        <path d="M53.5038 77.3023L50.5076 65.3175L44.5151 56.3288V38.3516"
+                                        <path
+                                            d="M54.0893 33.0151C54.8268 32.6055 55.6564 32.3906 56.4999 32.3906C57.3434 32.3906 58.1731 32.6055 58.9105 33.0151L77.5671 43.3773C77.9538 43.5924 78.2761 43.907 78.5005 44.2885C78.7248 44.67 78.8431 45.1045 78.8431 45.5471V65.9911C78.8429 66.8765 78.6059 67.7458 78.1568 68.5088C77.7076 69.2718 77.0626 69.9008 76.2885 70.3307L58.9105 79.9879C58.1731 80.3974 57.3434 80.6123 56.4999 80.6123C55.6564 80.6123 54.8268 80.3974 54.0893 79.9879L36.7113 70.3307C35.9376 69.901 35.2928 69.2724 34.8437 68.5098C34.3946 67.7473 34.1574 66.8786 34.1567 65.9936V45.5471C34.1567 45.1045 34.275 44.67 34.4994 44.2885C34.7237 43.907 35.046 43.5924 35.4328 43.3773L54.0918 33.0151H54.0893Z"
                                             stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                         <path
-                                            d="M35.5265 56.3288L32.5303 47.3402L44.5151 38.3516L53.5038 44.344L62.4924 45.8421"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M44.5153 34.1565C46.17 34.1565 47.5115 32.815 47.5115 31.1603C47.5115 29.5055 46.17 28.1641 44.5153 28.1641C42.8605 28.1641 41.519 29.5055 41.519 31.1603C41.519 32.815 42.8605 34.1565 44.5153 34.1565Z"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M41.5188 65.3171L35.5264 77.302M68.4847 77.302V51.8342C68.4847 50.6422 68.9582 49.499 69.8011 48.6562C70.6439 47.8134 71.7871 47.3398 72.979 47.3398C74.171 47.3398 75.3141 47.8134 76.157 48.6562C76.9998 49.499 77.4733 50.6422 77.4733 51.8342V53.3323"
+                                            d="M34.1567 44.0869L56.4999 56.4998M56.4999 56.4998L78.8431 44.0869M56.4999 56.4998V81.3255"
+                                            stroke="#28AECB" stroke-linejoin="round" />
+                                        <path d="M45.3284 50.2937L67.6715 37.8809M41.6045 57.3145L49.0522 61.4653"
                                             stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
@@ -163,22 +161,25 @@
                         </nuxt-link>
                     </div>
                     <div class="main-services__coll main-services__coll--big"
-                        @click="$router.push(localePath({ path: `/our-services/${services[4].alias}` }))">
+                        @click="$router.push(localePath({ path: `/our-services/${services[2].alias}` }))">
                         <nuxt-link :to="switchLocalePath($i18n.locale)" class="main-services__box main-services__box">
-                            <div class="main-services__caption">{{ services[4].name }}</div>
+                            <div class="main-services__caption">{{ services[2].name }}</div>
                             <div class="main-services__icon">
-                                <img v-if="services[4].icon_home"
-                                    :src="`${services[4].icon_home.server}/${services[4].icon_home.path}`" alt="">
-                                <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
+                                <img v-if="services[2].icon_home"
+                                    :src="`${services[2].icon_home.server}/${services[2].icon_home.path}`" alt="">
+                                <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
+                                    <path d="M53.5038 77.3023L50.5076 65.3175L44.5151 56.3288V38.3516" stroke="#28AECB"
+                                        stroke-linecap="round" stroke-linejoin="round" />
                                     <path
-                                        d="M54.0893 33.0151C54.8268 32.6055 55.6564 32.3906 56.4999 32.3906C57.3434 32.3906 58.1731 32.6055 58.9105 33.0151L77.5671 43.3773C77.9538 43.5924 78.2761 43.907 78.5005 44.2885C78.7248 44.67 78.8431 45.1045 78.8431 45.5471V65.9911C78.8429 66.8765 78.6059 67.7458 78.1568 68.5088C77.7076 69.2718 77.0626 69.9008 76.2885 70.3307L58.9105 79.9879C58.1731 80.3974 57.3434 80.6123 56.4999 80.6123C55.6564 80.6123 54.8268 80.3974 54.0893 79.9879L36.7113 70.3307C35.9376 69.901 35.2928 69.2724 34.8437 68.5098C34.3946 67.7473 34.1574 66.8786 34.1567 65.9936V45.5471C34.1567 45.1045 34.275 44.67 34.4994 44.2885C34.7237 43.907 35.046 43.5924 35.4328 43.3773L54.0918 33.0151H54.0893Z"
+                                        d="M35.5265 56.3288L32.5303 47.3402L44.5151 38.3516L53.5038 44.344L62.4924 45.8421"
                                         stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                     <path
-                                        d="M34.1567 44.0869L56.4999 56.4998M56.4999 56.4998L78.8431 44.0869M56.4999 56.4998V81.3255"
-                                        stroke="#28AECB" stroke-linejoin="round" />
-                                    <path d="M45.3284 50.2937L67.6715 37.8809M41.6045 57.3145L49.0522 61.4653"
+                                        d="M44.5153 34.1565C46.17 34.1565 47.5115 32.815 47.5115 31.1603C47.5115 29.5055 46.17 28.1641 44.5153 28.1641C42.8605 28.1641 41.519 29.5055 41.519 31.1603C41.519 32.815 42.8605 34.1565 44.5153 34.1565Z"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M41.5188 65.3171L35.5264 77.302M68.4847 77.302V51.8342C68.4847 50.6422 68.9582 49.499 69.8011 48.6562C70.6439 47.8134 71.7871 47.3398 72.979 47.3398C74.171 47.3398 75.3141 47.8134 76.157 48.6562C76.9998 49.499 77.4733 50.6422 77.4733 51.8342V53.3323"
                                         stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
@@ -212,7 +213,9 @@ export default {
 }
 </script>
 <style>
-.main-services__coll div {
-    /* width: 100%; */
+.main-services {
+    background: url('@/assets/img/main/moving/left.png'), url('@/assets/img/main/moving/right.png'), #fff;
+    background-repeat: no-repeat;
+    background-position: left bottom, right bottom;
 }
 </style>

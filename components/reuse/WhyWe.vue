@@ -19,7 +19,7 @@
                                     <img :src="`${item.files.server}/${item.files.path}`" alt="">
                                 </div>
                                 <div class="why-we__caption">{{ item.name }}</div>
-                                <div class="why-we__desc">{{ item.description }}</div>
+                                <div class="why-we__desc" v-html="item.description"></div>
                             </div>
                         </div>
                     </div>

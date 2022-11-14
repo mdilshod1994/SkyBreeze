@@ -35,11 +35,11 @@ export default {
   plugins: [
     '@/plugins/datepicker.js',
     '@/plugins/gl-components.js',
+    '@/plugins/keyshape.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-  loading: true,
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
@@ -69,6 +69,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.API_URL,
   },
+  loading: false,
   transition: {
     name: 'fade-layouts',
     mode: 'out-in'

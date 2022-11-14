@@ -86,26 +86,28 @@
                                 <div class="about-order__row">
                                     <div class="about-order__coll">
                                         <label class="form__label">
-                                            <input type="text" class="form__field field"
+                                            <input type="text"
+                                                :class="`form__field field ${this.errName ? 'errorValid' : ''}`"
                                                 :placeholder="translationForm[1].text" v-model="message.name">
                                         </label>
                                     </div>
                                     <div class="about-order__coll">
                                         <label class="form__label">
-                                            <input type="text" class="form__field field"
+                                            <input type="text"
+                                                :class="`form__field field ${this.errName ? 'errorValid' : ''}`"
                                                 :placeholder="translationForm[2].text" v-model="message.lastname">
                                         </label>
                                     </div>
                                 </div>
                                 <label class="form__label">
-                                    <input type="text" class="form__field field" :placeholder="translationForm[3].text"
-                                        v-model="message.email">
+                                    <input type="text" :class="`form__field field ${this.errEmail ? 'errorValid' : ''}`"
+                                        :placeholder="translationForm[3].text" v-model="message.email">
                                 </label>
                             </div>
                             <div class="about-order__coll">
                                 <label class="form__label">
-                                    <textarea class="form__field field" :placeholder="translationForm[4].text"
-                                        v-model="message.messages"></textarea>
+                                    <textarea :class="`form__field field ${this.errMessage ? 'errorValid' : ''}`"
+                                        :placeholder="translationForm[4].text" v-model="message.messages"></textarea>
                                 </label>
                             </div>
                         </div>
@@ -124,13 +126,15 @@
             </div>
         </section>
         <why-we />
+        <thanx-main :class="`main-thanx ${showThanx ? 'active-us' : ''}`" />
     </div>
 </template>
 <script>
+import ThanxMain from '../components/popups/ThanxMain.vue'
 import WhyWe from '../components/reuse/WhyWe.vue'
 import BreadCrumpBtnHome from '../components/UI/breadCrumpBtnHome.vue'
 export default {
-    components: { WhyWe, BreadCrumpBtnHome },
+    components: { WhyWe, BreadCrumpBtnHome, ThanxMain },
     data() {
         return {
             message: {
@@ -139,7 +143,11 @@ export default {
                 email: '',
                 messages: '',
                 phone: '0'
-            }
+            },
+            errEmail: false,
+            errName: false,
+            errMessage: false,
+            showThanx: false,
         }
     },
     computed: {
@@ -157,12 +165,23 @@ export default {
         },
     },
     methods: {
+        setDefault() {
+            this.errEmail = false
+            this.errName = false
+            this.errMessage = false
+        },
         async postMessage() {
             try {
                 const message = await this.$axios.post('/messagesEmails', this.message)
                     .then(res => {
                         return res.data
                     })
+                if (message) {
+                    this.showThanx = true
+                    setTimeout(() => {
+                        this.showThanx = false
+                    }, 2000);
+                }
                 this.message = {
                     name: '',
                     lastname: '',
@@ -171,7 +190,14 @@ export default {
                     phone: '0'
                 }
             } catch (error) {
-                console.error(error);
+                if (error?.response?.data) {
+                    this.errEmail = !!error?.response?.data.errors.email
+                    this.errName = !!error?.response?.data.errors.name
+                    this.errMessage = !!error?.response?.data.errors.messages
+                    setTimeout(() => {
+                        this.setDefault()
+                    }, 5000)
+                }
             }
 
         }

@@ -11,20 +11,22 @@
                         <span class="call-to-action__text">
                             {{ translations[1].text }}
                         </span>
-                        <input type="text" class="form__field field" :placeholder="translations[1].text" v-model="name">
+                        <input type="text" :class="`form__field field ${errors.name ? 'errorValid' : ''}`"
+                            :placeholder="translations[1].text" v-model="name">
                     </label>
                     <label class="form__label call-to-action__label call-to-action__label--width">
                         <span class="call-to-action__text">
                             {{ translations[2].text }}
                         </span>
-                        <input type="email" class="form__field field" :placeholder="translations[2].text"
-                            v-model="email">
+                        <input type="email" :class="`form__field field ${errors.email ? 'errorValid' : ''}`"
+                            :placeholder="translations[2].text" v-model="email">
                     </label>
                     <label class="form__label call-to-action__label">
                         <span class="call-to-action__text">
                             {{ translations[3].text }}
                         </span>
-                        <input type="tel" class="form__field field" :placeholder="translations[3].text" v-model="phone">
+                        <input type="tel" :class="`form__field field ${errors.phone ? 'errorValid' : ''}`"
+                            :placeholder="translations[3].text" v-model="phone">
                     </label>
                     <label
                         class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
@@ -50,21 +52,22 @@
                             <span class="call-to-action__text">
                                 {{ translations[7].text }}
                             </span>
-                            <input type="text" class="form__field field" :placeholder="translations[7].text"
-                                v-model="address_from">
+                            <input type="text" :class="`form__field field ${errors.address_from ? 'errorValid' : ''}`"
+                                :placeholder="translations[7].text" v-model="address_from">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
                                 {{ translations[8].text }}
                             </span>
-                            <input type="text" class="form__field field" placeholder="1А" v-model="house_from">
+                            <input type="text" :class="`form__field field ${errors.house_from ? 'errorValid' : ''}`"
+                                placeholder="1А" v-model="house_from">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
                                 {{ translations[9].text }}
                             </span>
-                            <input type="text" class="form__field field" :placeholder="translations[10].text"
-                                v-model="city_from">
+                            <input type="text" :class="`form__field field ${errors.city_from ? 'errorValid' : ''}`"
+                                :placeholder="translations[10].text" v-model="city_from">
                         </label>
                         <div class="call-to-action__state">
                             <label class="form__label  call-to-action__label call-to-action__label--first">
@@ -88,7 +91,8 @@
                                 <span class="call-to-action__text">
                                     {{ translations[12].text }}
                                 </span>
-                                <input type="text" class="form__field field" placeholder="" v-model="zip_from">
+                                <input type="text" :class="`form__field field ${errors.zip_from ? 'errorValid' : ''}`"
+                                    placeholder="" v-model="zip_from">
                             </label>
                         </div>
                     </div>
@@ -102,21 +106,22 @@
                             <span class="call-to-action__text">
                                 {{ translations[7].text }}
                             </span>
-                            <input type="text" class="form__field field" :placeholder="translations[7].text"
-                                v-model="address_to">
+                            <input type="text" :class="`form__field field ${errors.address_to ? 'errorValid' : ''}`"
+                                :placeholder="translations[7].text" v-model="address_to">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
                                 {{ translations[8].text }}
                             </span>
-                            <input type="text" class="form__field field" placeholder="1А" v-model="house_to">
+                            <input type="text" :class="`form__field field ${errors.house_to ? 'errorValid' : ''}`"
+                                placeholder="1А" v-model="house_to">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
                                 {{ translations[9].text }}
                             </span>
-                            <input type="text" class="form__field field" :placeholder="translations[10].text"
-                                v-model="city_to">
+                            <input type="text" :class="`form__field field ${errors.city_to ? 'errorValid' : ''}`"
+                                :placeholder="translations[10].text" v-model="city_to">
                         </label>
                         <div class="call-to-action__state">
                             <label class="form__label call-to-action__label call-to-action__label--first">
@@ -140,7 +145,8 @@
                                 <span class="call-to-action__text">
                                     {{ translations[12].text }}
                                 </span>
-                                <input type="text" class="form__field field" placeholder="" v-model="zip_to">
+                                <input type="text" :class="`form__field field ${errors.zip_to ? 'errorValid' : ''}`"
+                                    placeholder="" v-model="zip_to">
                             </label>
                         </div>
                     </div>
@@ -170,8 +176,8 @@ export default {
         return {
             isActiveZipStart: false,
             isActiveZipEnd: false,
-            stateValStart: 0,
-            stateValEnd: 0,
+            stateValStart: "NY",
+            stateValEnd: 'NY',
             range: {
                 start: new Date(),
                 end: new Date()
@@ -191,6 +197,19 @@ export default {
             house_to: "",
             city_to: "",
             zip_to: "",
+            errors: {
+                address_from: false,
+                address_to: false,
+                city_from: false,
+                city_to: false,
+                email: false,
+                house_from: false,
+                house_to: false,
+                name: false,
+                phone: false,
+                zip_from: false,
+                zip_to: false
+            }
         }
     },
     computed: {
@@ -203,6 +222,21 @@ export default {
         },
     },
     methods: {
+        setDefault() {
+            this.errors = {
+                address_from: false,
+                address_to: false,
+                city_from: false,
+                city_to: false,
+                email: false,
+                house_from: false,
+                house_to: false,
+                name: false,
+                phone: false,
+                zip_from: false,
+                zip_to: false
+            }
+        },
         closePopup() {
             this.$store.dispatch('choose-service-popup/closePopup')
         },
@@ -235,22 +269,36 @@ export default {
                         this.closePopup()
                         this.showThanx = false
                     }, 2000);
-                    this.name =  ""
-                        this.email =  ""
-                        this.phone =  ""
-                        this.address_from =  ""
-                        this.house_from =  ""
-                        this.city_from = ""
-                        this.zip_from = ""
-                        this.address_to = ""
-                        this.house_to = ""
-                        this.city_to = ""
-                        this.zip_to = ""
-                        this.stateValStart = ""
-                        this.stateValEnd = ""
+                    this.name = ""
+                    this.email = ""
+                    this.phone = ""
+                    this.address_from = ""
+                    this.house_from = ""
+                    this.city_from = ""
+                    this.zip_from = ""
+                    this.address_to = ""
+                    this.house_to = ""
+                    this.city_to = ""
+                    this.zip_to = ""
+                    this.stateValStart = ""
+                    this.stateValEnd = ""
                 }
             } catch (error) {
-                console.error(error);
+                console.error(error.response.data.errors);
+                this.errors.address_from = !!error.response.data.errors.address_from
+                this.errors.address_to = !!error.response.data.errors.address_to
+                this.errors.city_from = !!error.response.data.errors.city_from
+                this.errors.city_to = !!error.response.data.errors.city_to
+                this.errors.email = !!error.response.data.errors.email
+                this.errors.house_from = !!error.response.data.errors.house_from
+                this.errors.house_to = !!error.response.data.errors.house_to
+                this.errors.name = !!error.response.data.errors.name
+                this.errors.phone = !!error.response.data.errors.phone
+                this.errors.zip_from = !!error.response.data.errors.zip_from
+                this.errors.zip_to = !!error.response.data.errors.zip_to
+                setTimeout(() => {
+                    this.setDefault()
+                }, 5000)
             }
 
         },
@@ -726,6 +774,7 @@ export default {
             width: 100%;
             height: 100vh;
             border-radius: 0;
+            padding: 35px 25px 110px 35px;
         }
 
         &__btn-close {

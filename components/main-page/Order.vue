@@ -10,28 +10,30 @@
                             <div class="order__form-row">
                                 <div class="order__form-coll">
                                     <label class="form__label">
-                                        <input type="text" class="form__field field" :placeholder="translations[1].text"
-                                            v-model="message.name">
+                                        <input type="text"
+                                            :class="`form__field field ${this.errName ? 'errorValid' : ''}`"
+                                            :placeholder="translations[1].text" v-model="message.name">
                                     </label>
                                 </div>
                                 <div class="order__form-coll">
                                     <label class="form__label">
-                                        <input type="text" class="form__field field" :placeholder="translations[2].text"
-                                            v-model="message.lastname">
+                                        <input type="text"
+                                            :class="`form__field field ${this.errName ? 'errorValid' : ''}`"
+                                            :placeholder="translations[2].text" v-model="message.lastname">
                                     </label>
                                 </div>
                             </div>
                             <label class="form__label">
-                                <input type="email" class="form__field field" :placeholder="translations[3].text"
-                                    v-model="message.email">
+                                <input type="email" :class="`form__field field ${this.errEmail ? 'errorValid' : ''}`"
+                                    :placeholder="translations[3].text" v-model="message.email">
                             </label>
                             <!-- <label class="form__label">
                                 <input type="tel" class="form__field field" :placeholder="translations[3].text"
                                     v-model="message.phone">
                             </label> -->
                             <label class="form__label">
-                                <textarea class="form__field field" :placeholder="translations[4].text"
-                                    v-model="message.messages"></textarea>
+                                <textarea :class="`form__field field ${this.errMessage ? 'errorValid' : ''}`"
+                                    :placeholder="translations[4].text" v-model="message.messages"></textarea>
                             </label>
                         </div>
                         <div class="order__form-bottom">
@@ -48,15 +50,20 @@
                 </div>
                 <div class="order__right">
                     <div class="map">
+                        <img src="@/assets/img/main/map.png" alt="">
                         <!--iframe src="https://www.google.com/maps/d/u/0/embed?mid=1XJfXppO6cPHmLO35qZvbFvbGrSHAwuw&ehbc=2E312F" width="1300" height="480"></iframe-->
                     </div>
                 </div>
             </div>
         </div>
+        <thanx-main :class="`main-thanx ${showThanx ? 'active' : ''}`" />
     </section>
 </template>
 <script>
+import ThanxMain from '../popups/ThanxMain.vue'
+
 export default {
+    components: { ThanxMain },
     props: ['translation'],
     computed: {
         translations() {
@@ -76,17 +83,33 @@ export default {
                 email: '',
                 messages: '',
                 phone: '0'
-            }
-
+            },
+            errEmail: false,
+            errName: false,
+            errMessage: false,
+            showThanx: false,
         }
     },
     methods: {
+        setDefault() {
+            this.errEmail = false
+            this.errName = false
+            this.errMessage = false
+        },
         async postMessage() {
             try {
+
                 const message = await this.$axios.post('/messagesEmails', this.message)
                     .then(res => {
                         return res.data
                     })
+                if (message) {
+                    this.showThanx = true
+                    setTimeout(() => {
+                        this.showThanx = false
+                    }, 2000);
+                }
+
                 this.message = {
                     name: '',
                     lastname: '',
@@ -95,7 +118,14 @@ export default {
                     phone: '0'
                 }
             } catch (error) {
-                console.error(error);
+                if (error?.response?.data) {
+                    this.errEmail = !!error?.response?.data.errors.email
+                    this.errName = !!error?.response?.data.errors.name
+                    this.errMessage = !!error?.response?.data.errors.messages
+                    setTimeout(() => {
+                        this.setDefault()
+                    }, 5000)
+                }
             }
 
         }
@@ -103,5 +133,7 @@ export default {
 }
 </script>
 <style>
-
+.map img {
+    height: 100%;
+}
 </style>

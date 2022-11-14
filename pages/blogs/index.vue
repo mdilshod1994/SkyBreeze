@@ -17,8 +17,8 @@
                 <div class="blog__title title-big h1" v-if="translations.length > 0"> {{ translations[3].text }}</div>
                 <div class="blog__wrap">
                     <div v-for="blog in blogs" :key="blog.id"
-                        @click="$router.push(localePath(`/blogs/${blog.files_id}`))">
-                        <nuxt-link class="blog-card" :to="switchLocalePath($i18n.locale)">
+                        @click="$router.push(localePath(`/blogs/${blog.alias}`))" class="blog-card">
+                        <nuxt-link  :to="switchLocalePath($i18n.locale)">
                             <div class="blog-card__img img-cover">
                                 <img :src="`${blog.photo.server}/${blog.photo.path}`" alt="">
                             </div>

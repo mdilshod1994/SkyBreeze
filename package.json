@@ -16,6 +16,7 @@
     "core-js": "^3.25.3",
     "dayjs": "1.8.14",
     "jquery": "^3.6.1",
+    "keyshapejs": "^1.2.1",
     "nuxt": "^2.15.8",
     "swiper": "^7.2.0",
     "v-calendar": "^2.4.1",

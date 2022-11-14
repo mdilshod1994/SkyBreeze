@@ -132,14 +132,14 @@
                                         </nuxt-link>
                                     </div>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <div @click="$router.push(localePath('/blogs'))">
                                         <nuxt-link class="text-header-bold text-middle"
                                             :to="switchLocalePath($i18n.locale)">
                                             {{ translations[3].text }}
                                         </nuxt-link>
                                     </div>
-                                </li>
+                                </li> -->
                                 <!-- <li>
                                     <div @click="$router.push(localePath('/contact'))">
                                         <nuxt-link class="text-header-bold text-middle"

@@ -2,10 +2,11 @@
   <div>
     <Promo :translations="translations" />
     <MainServices :translations="translations" />
-    <trust-swiper :translations="translations" />
-    <our-services :translations="translations" />
-    <why-we :translations="translations" />
+    <!-- <trust-swiper :translations="translations" /> -->
+    <cities />
     <service-packages :translations="translations" />
+    <why-we :translations="translations" />
+    <our-services :translations="translations" />
     <reviews :translations="translations" />
     <faq :translations="translations" />
     <order :translation="translations" />
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import Cities from '../components/main-page/Cities.vue'
 import Faq from '../components/main-page/Faq.vue'
 import MainServices from '../components/main-page/MainServices.vue'
 import Order from '../components/main-page/Order.vue'
@@ -33,7 +35,8 @@ export default {
     ServicePackages,
     Reviews,
     Faq,
-    Order
+    Order,
+    Cities
   },
   computed: {
     translations() {

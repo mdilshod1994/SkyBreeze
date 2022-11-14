@@ -83,5 +83,9 @@ export default {
 }
 </script>
 <style>
-
+.our-services {
+    background: url('@/assets/img/main/complex/left.png'), url('@/assets/img/main/complex/right.png'), #fff;
+    background-repeat: no-repeat;
+    background-position: left bottom, right bottom;
+}
 </style>

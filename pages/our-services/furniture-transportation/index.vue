@@ -16,9 +16,6 @@
             <div class="wrapper">
                 <div class="service-promo__body">
                     <div class="service-promo__bg img-cover p-absolute" v-html="service[0].photos">
-                        <!-- <img class="img-desctop" src="img/furniture-transportation/service-promo/bg.jpg" alt="">
-                        <img class="img-table" src="img/furniture-transportation/service-promo/bg-table.jpg" alt="">
-                        <img class="img-mobile" src="img/furniture-transportation/service-promo/bg-mobile.jpg" alt=""> -->
                     </div>
                     <div class="service-promo__wrap">
                         <div class="service-promo__title h1">{{ service[0].name }}</div>
@@ -36,13 +33,10 @@
     </div>
 </template>
 <script>
-import TransportationPeculiarities from '../../../components/our-services/furniture/TransportationPeculiarities.vue'
 import MainOrder from '../../../components/reuse/MainOrder.vue'
-import ServicePromo from '../../../components/reuse/ServicePromo.vue'
-import WhyApply from '../../../components/reuse/WhyApply.vue'
 import BreadCrumpBtnHome from '../../../components/UI/breadCrumpBtnHome.vue'
 export default {
-    components: { ServicePromo, TransportationPeculiarities, WhyApply, MainOrder, BreadCrumpBtnHome },
+    components: {  MainOrder, BreadCrumpBtnHome },
     data() {
         return {
             service: []

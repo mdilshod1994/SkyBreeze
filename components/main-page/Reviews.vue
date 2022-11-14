@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <!-- <div class="swiper-pagination"></div> -->
                 </div>
                 <div class="reviews__arrows">
                     <div class="arrow arrow--prew">
@@ -99,14 +99,14 @@
     </section>
 </template>
 <script>
-import { Swiper, Pagination, Navigation } from 'swiper'
+import { Swiper,  Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 export default {
     props: ['translations'],
     mounted() {
-        Swiper.use([Pagination, Navigation])
+        Swiper.use([ Navigation])
         const swiper = new Swiper('.reviews__swiper', {
-            modules: [Pagination, Navigation],
+            modules: [ Navigation],
             slidesPerView: 3,
             spaceBetween: 30,
             slidesPerGroup: 1,
@@ -136,10 +136,10 @@ export default {
                     slidesPerGroup: 1,
                 }
             },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
+            // pagination: {
+            //     el: ".swiper-pagination",
+            //     clickable: true,
+            // },
             navigation: {
                 nextEl: ".reviews .arrow--next",
                 prevEl: ".reviews .arrow--prew",

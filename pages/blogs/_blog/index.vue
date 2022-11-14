@@ -95,17 +95,13 @@ export default {
             try {
                 this.$store.dispatch('loader/getLoading', true)
                 const langID = this.$cookies.get('langId')
-                const blogs = await this.$axios.get(`front/articles?search[langs_id]=${langID}`)
+                const blogs = await this.$axios.get(`front/articles?search[langs_id]=${langID}&search[alias]=${this.$route.params.blog}&limit=-1`)
                     .then(res => {
                         return res.data.data
                     })
                 if (blogs) {
-                    blogs.filter(el => {
-                        if (el.files_id == this.$route.params.blog) {
-                            this.blogItem.push(el)
-                            document.title = el.name
-                        }
-                    })
+                    this.blogItem = blogs
+                    document.title = blogs[0].name
                     this.$store.dispatch('loader/getLoading', false)
                 }
             } catch (error) {
@@ -115,7 +111,7 @@ export default {
     },
     async mounted() {
         await this.getBlog()
-
+        console.log(this.$route.params.blog);
     },
     watch: {
         blogs(newVal) {

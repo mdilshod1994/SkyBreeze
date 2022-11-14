@@ -5,6 +5,9 @@ export const state = () => ({
 export const getters = {
     LANGS(state) {
         return state.langs
+    },
+    dataLang(state) {
+        return !!state.langs
     }
 }
 
@@ -24,6 +27,7 @@ export const actions = {
     async getAllInfo(ctx, langID) {
         try {
             if (langID) {
+                ctx.dispatch('loader/getLoading', true, { root: true })
                 const translations = await this.$axios.$get(`front/translations?search[langs_id]=${langID}&limit=-1`)
                     .then(res => {
                         return res.data
@@ -50,7 +54,8 @@ export const actions = {
                         return res.data
                     })
                 ctx.dispatch('why-we/getWhyWe', whyWe, { root: true })
-
+                ctx.dispatch('loader/getLoading', false, { root: true })
+                return true
             }
         } catch (error) {
             console.error(error);
