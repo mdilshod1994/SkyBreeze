@@ -1,6 +1,7 @@
 <template>
     <div>
-        <loading-bar :style="[loaderIs ? { 'width': width + '%', 'transition': '1s', } : { 'width': width + '%', }]"
+        <loading-bar
+            :style="[loaderIs ? { 'width': width + '%', 'transition': '1s',  } : { 'width': width + '%', }]"
             v-if="toHideLoader" />
         <div :class="`main ${isLoaded ? 'show' : ''}`">
             <Header />
@@ -51,7 +52,7 @@ export default {
             if (newValue) {
                 setInterval(() => {
                     this.width++
-                }, 1000)
+                }, 950)
             } else {
                 this.width = +window.screen.width
                 setTimeout(() => {

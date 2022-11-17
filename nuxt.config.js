@@ -35,7 +35,6 @@ export default {
   plugins: [
     '@/plugins/datepicker.js',
     '@/plugins/gl-components.js',
-    '@/plugins/keyshape.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

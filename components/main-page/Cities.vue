@@ -1,16 +1,20 @@
-<template lang="">
-     <section class="scene cities">
+<template >
+    <section class="scene cities">
         <div class="wrapper">
             <!-- <div class="cities__title title h2"  v-if="translations.length > 0">{{ translations[3].text }}</div> -->
-            <div class="cities__title title h2" >Мы работаем в таких городах</div>
+            <div class="cities__title title h2">Мы работаем в таких городах</div>
             <div class="cities__body">
                 <div class="cities__map">
                     <img src="@/assets/img/main/cities/map.png" alt="">
                 </div>
-                <div class="swiper-wraps">
-                    <div class="cities__swiper swiper">
-                        <div class="swiper-wrapper">
-                            <div class="cities__slide swiper-slide" v-for="(item, index) in cities" :key="index">
+            </div>
+        </div>
+        <div class="cities__wraps">
+            <div class="marquee">
+                <div class="marquee__wrap">
+                    <div class="marquee__title marquee__title--top">
+                        <span v-for="iitem, i in 7" :key="i">
+                            <div class="cities__slide swiper-slide custom-slide" v-for="(item, i) in cities" :key="i">
                                 <div class="cities__name">
                                     <img src="@/assets/img/main/cities/location.svg" alt="">
                                     <p>
@@ -18,18 +22,27 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </span>
                     </div>
-                    <div class="cities__swiper-two swiper">
-                        <div class="swiper-wrapper">
-                            <div class="cities__slide swiper-slide" v-for="(item, index) in citiesTwo" :key="index">
-                                <div class="cities__name">
-                                    <img src="@/assets/img/main/cities/location.svg" alt="">
-                                    <p>
-                                        {{ item.name }}
-                                    </p>
+                </div>
+            </div>
+            <div class="cities__line">
+            </div>
+            <div class="cities__slider">
+                <div class="marquee">
+                    <div class="marquee__wrap">
+                        <div class="marquee__title">
+                            <span v-for="iitem, i in 7" :key="i">
+                                <div class="cities__slide swiper-slide custom-slide" v-for="(item, i) in citiesTwo"
+                                    :key="i">
+                                    <div class="cities__name">
+                                        <img src="@/assets/img/main/cities/location.svg" alt="">
+                                        <p>
+                                            {{ item.name }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -38,8 +51,6 @@
     </section>
 </template>
 <script>
-import { Swiper, Autoplay } from 'swiper'
-import 'swiper/swiper-bundle.min.css'
 
 export default {
     props: [''],
@@ -141,92 +152,138 @@ export default {
         }
     },
     mounted() {
-        Swiper.use([Autoplay])
-        const swiper = new Swiper('.cities__swiper', {
-            modules: [Autoplay],
-            slidesPerView: "auto",
-            spaceBetween: 60,
-            loop: true,
-            speed: 3000,
-            allowTouchMove: false,
-            autoplay: {
-                delay: 0,
-                disableOnInteraction: true,
-                reverseDirection: true,
-            },
-            breakpoints: {
-                220: {
-                    spaceBetween: 30,
-                },
-                680: {
-                    spaceBetween: 45,
-                },
-                760: {
-                    spaceBetween: 50,
-                },
-                1010: {
-                    spaceBetween: 55,
-                }
-            },
-        })
-        const swiperr = new Swiper('.cities__swiper-two', {
-            modules: [Autoplay],
-            slidesPerView: "auto",
-            spaceBetween: 60,
-            loop: true,
-            speed: 4000,
-            allowTouchMove: false,
-            autoplay: {
-                delay: 0,
-                disableOnInteraction: true,
-                reverseDirection: true,
-            },
-            breakpoints: {
-                220: {
-                    spaceBetween: 30,
-                },
-                680: {
-                    spaceBetween: 45,
-                },
-                760: {
-                    spaceBetween: 50,
-                },
-                1010: {
-                    spaceBetween: 55,
-                }
-            },
-        })
     }
 }
 </script>
 <style lang="scss">
-.cities {
+.marquee {
+    max-width: 100%;
+    overflow: hidden;
     position: relative;
+    padding: 18px 0;
+    color: #ffffff;
 
-    &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 300px;
-        height: 100%;
-        background: linear-gradient(to right, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
-        z-index: 2;
+    &__wrap {
+        max-width: 100%;
+        overflow: hidden;
     }
 
-    &::after {
-        content: '';
+    &__title {
+        white-space: nowrap;
+        display: flex;
+        flex-direction: row-reverse;
+        animation: marquee 90s linear infinite;
+        gap: 60px;
+
+        &--top {
+            animation: marquee 70s linear infinite;
+        }
+
+        @media screen and (max-width: 1010px) {
+            gap: 50px;
+        }
+
+        @media screen and (max-width: 768px) {
+            gap: 30px;
+        }
+    }
+
+    span {
+        line-height: 24px;
+        margin-left: 8px;
+        display: flex;
+        gap: 60px;
+
+        @media screen and (max-width: 1010px) {
+            gap: 50px;
+        }
+
+        @media screen and (max-width: 768px) {
+            gap: 30px;
+        }
+    }
+
+    a {
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    &__closed {
         position: absolute;
-        right: 0;
-        top: 0;
-        width: 300px;
-        height: 100%;
-        background: linear-gradient(to left, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
-        z-index: 2;
+        width: 24px;
+        height: 24px;
+        top: calc(50% - 12px);
+        right: 24px;
+        cursor: pointer;
+
+        svg {
+            & * {
+                transition: all 0.3s;
+            }
+        }
+    }
+}
+
+@keyframes marquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(500%, 0, 0);
+    }
+}
+
+.cities {
+
+    &__slider {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .slider-wrapper {
+        display: flex;
+        gap: 60px;
+        transition: 100s;
+        transition-timing-function: linear;
     }
 
     &__title {
         margin-bottom: 54px;
+    }
+
+    &__wraps {
+        position: relative;
+        margin-top: 60px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
+            z-index: 2;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(to left, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
+            z-index: 2;
+        }
+    }
+
+    &__line {
+        margin: 49px 0 48px;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, #28AECB 0%, rgba(40, 174, 203, 0) 51.51%, #28AECB 100%)
     }
 
     &__slide {
@@ -239,7 +296,7 @@ export default {
     }
 
     &__swiper {
-        margin: 81px 0 97px;
+        margin: 81px 0 0;
     }
 
     &__name {
@@ -255,7 +312,7 @@ export default {
     }
 
     .swiper-wrapper {
-        transition-timing-function: linear;
+        transition-timing-function: linear !important;
     }
 
     &__map,
@@ -267,69 +324,56 @@ export default {
 
 @media screen and (max-width: 992px) {
     .cities {
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 150px;
-            height: 100%;
-            background: linear-gradient(to right, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
-            z-index: 2;
-        }
-
-        &::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 150px;
-            height: 100%;
-            background: linear-gradient(to left, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
-            z-index: 2;
-        }
-
         &__swiper {
-            margin: 51px 0 64px;
+            margin: 51px 0 0;
+        }
+
+        &__line {
+            margin: 32px 0 32px;
         }
 
         &__name {
             font-size: 20px;
             line-height: 24px;
         }
+
+        &__wraps {
+
+            &::before {
+                width: 150px;
+            }
+
+            &::after {
+                width: 150px;
+            }
+        }
     }
 }
 
 @media screen and (max-width: 540px) {
     .cities {
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 60px;
-            height: 100%;
-            background: linear-gradient(to right, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
-            z-index: 2;
+        &__line {
+            margin: 25px 0 26px;
         }
 
-        &::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 60px;
-            height: 100%;
-            background: linear-gradient(to left, rgba(15, 29, 50, 1), rgba(15, 29, 50, 0.9), rgba(15, 29, 50, 0.5), rgba(15, 29, 50, 0));
-            z-index: 2;
+        &__wraps {
+
+            &::before {
+                width: 60px;
+            }
+
+            &::after {
+                width: 60px;
+            }
         }
 
         &__title {
             margin-bottom: 30px;
+            max-width: 245px;
         }
 
         &__swiper {
-            margin: 115px 0 51px;
+            margin: 90px 0 0;
         }
 
         &__name {

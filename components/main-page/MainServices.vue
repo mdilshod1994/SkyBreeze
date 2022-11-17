@@ -1,16 +1,14 @@
 <template>
-    <section class="scene main-services bg-white">
+    <section class="scene main-services bg-white" id="our-service-section">
         <div class="wrapper">
             <div class="main-services__title title h2" v-if="translations.length > 0">{{ translations[2].text }}</div>
             <div class="main-services__body" v-if="services.length > 0">
                 <div class="main-services__row">
-                    <div class="main-services__coll"
-                        @click="$router.push(localePath({ path: `/our-services/${services[1].alias}` }))">
-                        <nuxt-link :to="switchLocalePath($i18n.locale)"
-                            class="main-services__box main-services__box--blue">
+                    <div class="main-services__coll" @click="openServicesModal(services[1])">
+                        <div class="main-services__box ">
                             <div class="main-services__caption">{{ services[1].name }}</div>
                             <div class="main-services__icon">
-                                <img v-if="services[1].icon_home"
+                                <!-- <img v-if="services[1].icon_home"
                                     :src="`${services[1].icon_home.server}/${services[1].icon_home.path}`" alt="">
                                 <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -18,136 +16,128 @@
                                     <path
                                         d="M64.1214 62.6785V83.5646C64.121 83.9837 64.2032 84.3988 64.3633 84.7861C64.5235 85.1734 64.7583 85.5254 65.0545 85.8219C65.3507 86.1184 65.7025 86.3536 66.0897 86.5141C66.4768 86.6745 66.8918 86.7571 67.3109 86.7571H81.7293C82.1487 86.7575 82.564 86.6752 82.9516 86.5149C83.3391 86.3546 83.6912 86.1195 83.9877 85.823C84.2842 85.5264 84.5194 85.1743 84.6797 84.7868C84.84 84.3993 84.9223 83.984 84.9219 83.5646V57.5258H89.1052C90.0879 57.5254 91.0469 57.2236 91.8527 56.6612C92.6586 56.0988 93.2726 55.3028 93.6119 54.3805C93.9512 53.4582 93.9995 52.454 93.7503 51.5034C93.5011 50.5529 92.9664 49.7016 92.2183 49.0644L59.5039 21.2061C58.4407 20.3008 57.09 19.8037 55.6936 19.8037C54.2973 19.8037 52.9465 20.3008 51.8834 21.2061L19.169 49.0644C18.4191 49.7008 17.8828 50.5521 17.6326 51.5033C17.3824 52.4544 17.4303 53.4595 17.7699 54.3825C18.1095 55.3055 18.7243 56.102 19.5313 56.6642C20.3383 57.2263 21.2985 57.5271 22.282 57.5258H26.4654V83.5676C26.4662 84.4138 26.8029 85.2251 27.4015 85.8231C28.0001 86.4212 28.8117 86.7571 29.6579 86.7571H44.0733C44.9192 86.7571 45.7304 86.4211 46.3286 85.823C46.9267 85.2248 47.2627 84.4135 47.2627 83.5676V62.6816L64.1214 62.6785Z"
                                         stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg> -->
+                                <svg width="101" height="94" viewBox="0 0 101 94" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
+                                    <path
+                                        d="M64.1214 62.6788V83.5648C64.121 83.9839 64.2032 84.399 64.3633 84.7863C64.5234 85.1736 64.7583 85.5256 65.0545 85.8221C65.3507 86.1186 65.7025 86.3538 66.0896 86.5143C66.4768 86.6748 66.8918 86.7574 67.3109 86.7574H81.7293C82.1487 86.7578 82.564 86.6755 82.9515 86.5152C83.339 86.3549 83.6911 86.1197 83.9877 85.8232C84.2842 85.5267 84.5194 85.1746 84.6797 84.787C84.8399 84.3995 84.9222 83.9842 84.9218 83.5648V57.5261H89.1052C90.0879 57.5257 91.0468 57.2239 91.8527 56.6615C92.6586 56.099 93.2726 55.303 93.6119 54.3807C93.9512 53.4584 93.9995 52.4543 93.7503 51.5037C93.5011 50.5531 92.9664 49.7018 92.2182 49.0646L59.5038 21.2063C58.4407 20.3011 57.0899 19.804 55.6936 19.804C54.2972 19.804 52.9465 20.3011 51.8833 21.2063L19.169 49.0646C18.4191 49.701 17.8828 50.5524 17.6326 51.5035C17.3823 52.4547 17.4303 53.4597 17.7698 54.3827C18.1094 55.3057 18.7243 56.1022 19.5313 56.6644C20.3383 57.2266 21.2985 57.5274 22.282 57.5261H26.4653V83.5679C26.4661 84.4141 26.8028 85.2253 27.4015 85.8234C28.0001 86.4214 28.8117 86.7574 29.6579 86.7574H44.0732C44.9191 86.7574 45.7304 86.4213 46.3285 85.8232C46.9267 85.2251 47.2627 84.4138 47.2627 83.5679V62.6818L64.1214 62.6788Z"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                        </nuxt-link>
+                        </div>
                     </div>
                     <div class="main-services__coll main-services__coll--flex">
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[3].alias}` }))"
-                            class="main-services__box">
-                            <nuxt-link :to="switchLocalePath($i18n.locale)">
-                                <div class="main-services__caption">{{ services[3].name }}</div>
-                                <div class="main-services__icon">
-                                    <img v-if="services[3].icon_home"
-                                        :src="`${services[3].icon_home.server}/${services[3].icon_home.path}`" alt="">
-                                    <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M39.9849 64.3226V42.8564C39.9849 38.2457 45.2002 33.0303 55.631 33.0303C66.0618 33.0303 71.2772 38.2457 71.2772 42.8564V64.3226"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M35.769 74.753C35.2168 74.753 34.769 74.3053 34.769 73.753V65.3223C34.769 64.77 35.2168 64.3223 35.769 64.3223H75.4921C76.0444 64.3223 76.4921 64.77 76.4921 65.3223V73.753C76.4921 74.3053 76.0444 74.753 75.4921 74.753H35.769Z"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M48.6768 22.5996H62.5844" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path
-                                            d="M27.8154 43.4609V62.3225C27.8154 63.427 28.7109 64.3225 29.8154 64.3225H81.4462C82.5508 64.3225 83.4462 63.427 83.4462 62.3225V43.4609"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M43.4614 90.3994H67.7999" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M55.6309 74.7539V90.4001" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M55.6309 22.5996V33.0304" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
-                                    </svg>
-                                </div>
-                            </nuxt-link>
+                        <div @click="openServicesModal(services[3])" class="main-services__box">
+                            <div class="main-services__caption">{{ services[3].name }}</div>
+                            <div class="main-services__icon">
+                                <img v-if="services[3].icon_home"
+                                    :src="`${services[3].icon_home.server}/${services[3].icon_home.path}`" alt="">
+                                <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M39.9849 64.3226V42.8564C39.9849 38.2457 45.2002 33.0303 55.631 33.0303C66.0618 33.0303 71.2772 38.2457 71.2772 42.8564V64.3226"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M35.769 74.753C35.2168 74.753 34.769 74.3053 34.769 73.753V65.3223C34.769 64.77 35.2168 64.3223 35.769 64.3223H75.4921C76.0444 64.3223 76.4921 64.77 76.4921 65.3223V73.753C76.4921 74.3053 76.0444 74.753 75.4921 74.753H35.769Z"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M48.6768 22.5996H62.5844" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M27.8154 43.4609V62.3225C27.8154 63.427 28.7109 64.3225 29.8154 64.3225H81.4462C82.5508 64.3225 83.4462 63.427 83.4462 62.3225V43.4609"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M43.4614 90.3994H67.7999" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M55.6309 74.7539V90.4001" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M55.6309 22.5996V33.0304" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
+                                </svg>
+                            </div>
                         </div>
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[4].alias}` }))"
-                            class="main-services__box">
-                            <nuxt-link :to="switchLocalePath($i18n.locale)">
-                                <div class="main-services__caption">{{ services[4].name }}</div>
-                                <div class="main-services__icon">
-                                    <img v-if="services[4].icon_home"
-                                        :src="`${services[4].icon_home.server}/${services[4].icon_home.path}`" alt="">
+                        <div @click="openServicesModal(services[4])" class="main-services__box">
+                            <div class="main-services__caption">{{ services[4].name }}</div>
+                            <div class="main-services__icon">
+                                <img v-if="services[4].icon_home"
+                                    :src="`${services[4].icon_home.server}/${services[4].icon_home.path}`" alt="">
 
-                                    <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
-                                        <path
-                                            d="M54.0893 33.0151C54.8268 32.6055 55.6564 32.3906 56.4999 32.3906C57.3434 32.3906 58.1731 32.6055 58.9105 33.0151L77.5671 43.3773C77.9538 43.5924 78.2761 43.907 78.5005 44.2885C78.7248 44.67 78.8431 45.1045 78.8431 45.5471V65.9911C78.8429 66.8765 78.6059 67.7458 78.1568 68.5088C77.7076 69.2718 77.0626 69.9008 76.2885 70.3307L58.9105 79.9879C58.1731 80.3974 57.3434 80.6123 56.4999 80.6123C55.6564 80.6123 54.8268 80.3974 54.0893 79.9879L36.7113 70.3307C35.9376 69.901 35.2928 69.2724 34.8437 68.5098C34.3946 67.7473 34.1574 66.8786 34.1567 65.9936V45.5471C34.1567 45.1045 34.275 44.67 34.4994 44.2885C34.7237 43.907 35.046 43.5924 35.4328 43.3773L54.0918 33.0151H54.0893Z"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M34.1567 44.0869L56.4999 56.4998M56.4999 56.4998L78.8431 44.0869M56.4999 56.4998V81.3255"
-                                            stroke="#28AECB" stroke-linejoin="round" />
-                                        <path d="M45.3284 50.2937L67.6715 37.8809M41.6045 57.3145L49.0522 61.4653"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </div>
-                            </nuxt-link>
-                        </div>
-
-                    </div>
-                    <div class="main-services__coll main-services__coll--table">
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[3].alias}` }))"
-                            class="main-services__box">
-                            <nuxt-link :to="switchLocalePath($i18n.locale)">
-                                <div class="main-services__caption">{{ services[3].name }}</div>
-                                <div class="main-services__icon">
-                                    <img v-if="services[3].icon_home"
-                                        :src="`${services[3].icon_home.server}/${services[3].icon_home.path}`" alt="">
-                                    <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M39.9849 64.3226V42.8564C39.9849 38.2457 45.2002 33.0303 55.631 33.0303C66.0618 33.0303 71.2772 38.2457 71.2772 42.8564V64.3226"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M35.769 74.753C35.2168 74.753 34.769 74.3053 34.769 73.753V65.3223C34.769 64.77 35.2168 64.3223 35.769 64.3223H75.4921C76.0444 64.3223 76.4921 64.77 76.4921 65.3223V73.753C76.4921 74.3053 76.0444 74.753 75.4921 74.753H35.769Z"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M48.6768 22.5996H62.5844" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path
-                                            d="M27.8154 43.4609V62.3225C27.8154 63.427 28.7109 64.3225 29.8154 64.3225H81.4462C82.5508 64.3225 83.4462 63.427 83.4462 62.3225V43.4609"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M43.4614 90.3994H67.7999" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M55.6309 74.7539V90.4001" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M55.6309 22.5996V33.0304" stroke="#28AECB" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
-                                    </svg>
-                                </div>
-                            </nuxt-link>
+                                <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
+                                    <path
+                                        d="M54.0893 33.0151C54.8268 32.6055 55.6564 32.3906 56.4999 32.3906C57.3434 32.3906 58.1731 32.6055 58.9105 33.0151L77.5671 43.3773C77.9538 43.5924 78.2761 43.907 78.5005 44.2885C78.7248 44.67 78.8431 45.1045 78.8431 45.5471V65.9911C78.8429 66.8765 78.6059 67.7458 78.1568 68.5088C77.7076 69.2718 77.0626 69.9008 76.2885 70.3307L58.9105 79.9879C58.1731 80.3974 57.3434 80.6123 56.4999 80.6123C55.6564 80.6123 54.8268 80.3974 54.0893 79.9879L36.7113 70.3307C35.9376 69.901 35.2928 69.2724 34.8437 68.5098C34.3946 67.7473 34.1574 66.8786 34.1567 65.9936V45.5471C34.1567 45.1045 34.275 44.67 34.4994 44.2885C34.7237 43.907 35.046 43.5924 35.4328 43.3773L54.0918 33.0151H54.0893Z"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M34.1567 44.0869L56.4999 56.4998M56.4999 56.4998L78.8431 44.0869M56.4999 56.4998V81.3255"
+                                        stroke="#28AECB" stroke-linejoin="round" />
+                                    <path d="M45.3284 50.2937L67.6715 37.8809M41.6045 57.3145L49.0522 61.4653"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <div class="main-services__coll main-services__coll--table">
-                        <div @click="$router.push(localePath({ path: `/our-services/${services[1].alias}` }))"
-                            class="main-services__box">
-                            <nuxt-link :to="switchLocalePath($i18n.locale)">
-                                <div class="main-services__caption">{{ services[1].name }}</div>
-                                <div class="main-services__icon">
-                                    <img v-if="services[1].icon_home"
-                                        :src="`${services[1].icon_home.server}/${services[1].icon_home.path}`" alt="">
-                                    <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
-                                        <path d="M53.5038 77.3023L50.5076 65.3175L44.5151 56.3288V38.3516"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M35.5265 56.3288L32.5303 47.3402L44.5151 38.3516L53.5038 44.344L62.4924 45.8421"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M44.5153 34.1565C46.17 34.1565 47.5115 32.815 47.5115 31.1603C47.5115 29.5055 46.17 28.1641 44.5153 28.1641C42.8605 28.1641 41.519 29.5055 41.519 31.1603C41.519 32.815 42.8605 34.1565 44.5153 34.1565Z"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path
-                                            d="M41.5188 65.3171L35.5264 77.302M68.4847 77.302V51.8342C68.4847 50.6422 68.9582 49.499 69.8011 48.6562C70.6439 47.8134 71.7871 47.3398 72.979 47.3398C74.171 47.3398 75.3141 47.8134 76.157 48.6562C76.9998 49.499 77.4733 50.6422 77.4733 51.8342V53.3323"
-                                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </div>
-                            </nuxt-link>
+                        <div @click="openServicesModal(services[3])" class="main-services__box">
+                            <div class="main-services__caption">{{ services[3].name }}</div>
+                            <div class="main-services__icon">
+                                <img v-if="services[3].icon_home"
+                                    :src="`${services[3].icon_home.server}/${services[3].icon_home.path}`" alt="">
+                                <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M39.9849 64.3226V42.8564C39.9849 38.2457 45.2002 33.0303 55.631 33.0303C66.0618 33.0303 71.2772 38.2457 71.2772 42.8564V64.3226"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M35.769 74.753C35.2168 74.753 34.769 74.3053 34.769 73.753V65.3223C34.769 64.77 35.2168 64.3223 35.769 64.3223H75.4921C76.0444 64.3223 76.4921 64.77 76.4921 65.3223V73.753C76.4921 74.3053 76.0444 74.753 75.4921 74.753H35.769Z"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M48.6768 22.5996H62.5844" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M27.8154 43.4609V62.3225C27.8154 63.427 28.7109 64.3225 29.8154 64.3225H81.4462C82.5508 64.3225 83.4462 63.427 83.4462 62.3225V43.4609"
+                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M43.4614 90.3994H67.7999" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M55.6309 74.7539V90.4001" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M55.6309 22.5996V33.0304" stroke="#28AECB" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
+                                </svg>
+                            </div>
                         </div>
-
                     </div>
-                    <div class="main-services__coll"
-                        @click="$router.push(localePath({ path: `/our-services/${services[0].alias}` }))">
-                        <nuxt-link :to="switchLocalePath($i18n.locale)" class="main-services__box main-services__box">
+                    <div class="main-services__coll main-services__coll--table">
+                        <div @click="openServicesModal(services[4])" class="main-services__box">
+                            <div class="main-services__caption">{{ services[4].name }}</div>
+                            <div class="main-services__icon">
+                                <img v-if="services[4].icon_home"
+                                    :src="`${services[4].icon_home.server}/${services[4].icon_home.path}`" alt="">
+                                <svg width="98" height="101" viewBox="0 0 98 101" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M65.0415 39.3329L65.0415 39.3328C65.0448 36.6304 66.142 34.0374 68.096 32.1233C70.0502 30.209 72.7018 29.1303 75.4698 29.127C78.2377 29.1303 80.8893 30.209 82.8435 32.1233C84.7975 34.0374 85.8948 36.6304 85.898 39.3328V39.3329C85.9012 41.5391 85.1656 43.6867 83.8022 45.4461L83.751 45.5122L83.7503 45.5142L83.648 45.6449C83.6081 45.6959 83.5671 45.748 83.5336 45.7903L83.4908 45.8441L83.477 45.8613C83.475 45.8638 83.4737 45.8653 83.4729 45.8662C83.4726 45.8666 83.4724 45.8669 83.4723 45.867C83.4721 45.8672 83.4721 45.8672 83.4723 45.8671L75.4698 55.1126L67.4678 45.868L67.4656 45.8654C67.4668 45.8668 67.4625 45.8618 67.4495 45.8457C67.4382 45.8317 67.4236 45.8136 67.4067 45.7923C67.373 45.7498 67.332 45.6976 67.292 45.6464L67.1851 45.5093L67.1509 45.4653L67.1415 45.4532L67.139 45.45L67.1384 45.4492L67.1383 45.449C67.1383 45.449 67.1382 45.449 67.1382 45.449C65.7741 43.6887 65.0382 41.5402 65.0415 39.3329ZM79.9437 39.3328V39.3322C79.9437 38.461 79.6799 37.6103 79.187 36.8877C78.6942 36.1652 77.9948 35.6036 77.1785 35.2724C76.3623 34.9412 75.4647 34.8547 74.5989 35.0234C73.733 35.1921 72.9362 35.6088 72.3099 36.2224C71.6835 36.836 71.2556 37.6191 71.0822 38.4732C70.9088 39.3274 70.9979 40.2127 71.3378 41.0166C71.6777 41.8204 72.2526 42.5058 72.9881 42.9873C73.7236 43.4687 74.5872 43.725 75.4698 43.725V43.225L75.4704 43.725C76.653 43.7235 77.7888 43.2628 78.6282 42.4406C79.4679 41.618 79.9422 40.5006 79.9437 39.3328Z"
+                                        stroke="#28AECB" />
+                                    <path
+                                        d="M75.4696 54.9039V54.9039C75.4696 58.2789 72.0151 60.5517 68.9157 59.2157L65.9797 57.9502C61.535 56.0344 56.5687 59.2447 56.4906 64.084L56.4588 66.0555C56.3873 70.4879 52.7739 74.0435 48.341 74.0435H46.9224"
+                                        stroke="#28AECB" stroke-linecap="round" />
+                                    <path
+                                        d="M26.1133 70.4755L26.1133 70.4754C26.1165 67.7729 27.2138 65.18 29.1678 63.2659C31.122 61.3516 33.7736 60.2729 36.5415 60.2695C39.3095 60.2729 41.9611 61.3516 43.9153 63.2659C45.8693 65.18 46.9665 67.7729 46.9698 70.4754V70.4755C46.973 72.6817 46.2374 74.8293 44.874 76.5887L44.8228 76.6548L44.8221 76.6568L44.7198 76.7875C44.6798 76.8385 44.6389 76.8906 44.6054 76.9329L44.5626 76.9867L44.5487 77.0039C44.5468 77.0063 44.5455 77.0079 44.5447 77.0088C44.5444 77.0092 44.5442 77.0094 44.5441 77.0096C44.5439 77.0098 44.5439 77.0098 44.544 77.0096L36.5415 86.2552L28.5396 77.0105L28.5374 77.008C28.5386 77.0094 28.5343 77.0044 28.5213 76.9883C28.5099 76.9743 28.4954 76.9561 28.4785 76.9348C28.4448 76.8923 28.4038 76.8401 28.3638 76.789L28.2569 76.6519L28.2227 76.6079L28.2132 76.5957L28.2108 76.5926L28.2102 76.5918L28.2101 76.5916C28.21 76.5916 28.21 76.5916 28.21 76.5915C26.8459 74.8313 26.11 72.6828 26.1133 70.4755ZM41.0154 70.4754V70.4748C41.0154 69.6036 40.7517 68.7529 40.2588 68.0303C39.766 67.3078 39.0666 66.7462 38.2503 66.415C37.4341 66.0838 36.5365 65.9973 35.6706 66.166C34.8048 66.3347 34.008 66.7514 33.3817 67.3649C32.7552 67.9786 32.3274 68.7617 32.154 69.6158C31.9805 70.47 32.0697 71.3552 32.4096 72.1592C32.7495 72.963 33.3244 73.6484 34.0599 74.1299C34.7954 74.6112 35.6589 74.8676 36.5415 74.8676V74.3676L36.5421 74.8676C37.7248 74.8661 38.8606 74.4053 39.7 73.5831C40.5396 72.7606 41.014 71.6432 41.0154 70.4754Z"
+                                        stroke="#28AECB" />
+                                    <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
+                                </svg>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-services__coll" @click="openServicesModal(services[0])">
+                        <div class="main-services__box main-services__box">
                             <div class="main-services__caption">{{ services[0].name }}</div>
                             <div class="main-services__icon">
-                                <img v-if="services[0].icon_home"
-                                    :src="`${services[0].icon_home.server}/${services[0].icon_home.path}`" alt="">
-                                <svg v-else width="101" height="94" viewBox="0 0 101 94" fill="none"
+                                <!-- <img v-if="services[0].icon_home"
+                                    :src="`${services[0].icon_home.server}/${services[0].icon_home.path}`" alt=""> -->
+                                <svg width="101" height="94" viewBox="0 0 101 94" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
                                     <path
@@ -158,36 +148,34 @@
                                         stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                        </nuxt-link>
+                        </div>
                     </div>
-                    <div class="main-services__coll main-services__coll--big"
-                        @click="$router.push(localePath({ path: `/our-services/${services[2].alias}` }))">
-                        <nuxt-link :to="switchLocalePath($i18n.locale)" class="main-services__box main-services__box">
+                    <div class="main-services__coll main-services__coll--big" @click="openServicesModal(services[2])">
+                        <div class="main-services__box main-services__box">
                             <div class="main-services__caption">{{ services[2].name }}</div>
                             <div class="main-services__icon">
-                                <img v-if="services[2].icon_home"
-                                    :src="`${services[2].icon_home.server}/${services[2].icon_home.path}`" alt="">
-                                <svg v-else width="100" height="94" viewBox="0 0 100 94" fill="none"
+                                <!-- <img v-if="services[2].icon_home"
+                                    :src="`${services[2].icon_home.server}/${services[2].icon_home.path}`" alt=""> -->
+                                <svg width="95" height="93" viewBox="0 0 95 93" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M65.0415 39.3329L65.0415 39.3328C65.0448 36.6304 66.142 34.0374 68.096 32.1233C70.0502 30.209 72.7018 29.1303 75.4698 29.127C78.2377 29.1303 80.8893 30.209 82.8435 32.1233C84.7975 34.0374 85.8948 36.6304 85.898 39.3328V39.3329C85.9012 41.5391 85.1656 43.6867 83.8022 45.4461L83.751 45.5122L83.7503 45.5142L83.648 45.6449C83.6081 45.6959 83.5671 45.748 83.5336 45.7903L83.4908 45.8441L83.477 45.8613C83.475 45.8638 83.4737 45.8653 83.4729 45.8662C83.4726 45.8666 83.4724 45.8669 83.4723 45.867C83.4721 45.8672 83.4721 45.8672 83.4723 45.8671L75.4698 55.1126L67.4678 45.868L67.4656 45.8654C67.4668 45.8668 67.4625 45.8618 67.4495 45.8457C67.4382 45.8317 67.4236 45.8136 67.4067 45.7923C67.373 45.7498 67.332 45.6976 67.292 45.6464L67.1851 45.5093L67.1509 45.4653L67.1415 45.4532L67.139 45.45L67.1384 45.4492L67.1383 45.449C67.1383 45.449 67.1382 45.449 67.1382 45.449C65.7741 43.6887 65.0382 41.5402 65.0415 39.3329ZM79.9437 39.3328V39.3322C79.9437 38.461 79.6799 37.6103 79.187 36.8877C78.6942 36.1652 77.9948 35.6036 77.1785 35.2724C76.3623 34.9412 75.4647 34.8547 74.5989 35.0234C73.733 35.1921 72.9362 35.6088 72.3099 36.2224C71.6835 36.836 71.2556 37.6191 71.0822 38.4732C70.9088 39.3274 70.9979 40.2127 71.3378 41.0166C71.6777 41.8204 72.2526 42.5058 72.9881 42.9873C73.7236 43.4687 74.5872 43.725 75.4698 43.725V43.225L75.4704 43.725C76.653 43.7235 77.7888 43.2628 78.6282 42.4406C79.4679 41.618 79.9422 40.5006 79.9437 39.3328Z"
+                                        stroke="#28AECB" />
+                                    <path
+                                        d="M75.4696 54.9039V54.9039C75.4696 58.2789 72.0151 60.5517 68.9157 59.2157L65.9797 57.9502C61.535 56.0344 56.5687 59.2447 56.4906 64.084L56.4588 66.0555C56.3873 70.4879 52.7739 74.0435 48.341 74.0435H46.9224"
+                                        stroke="#28AECB" stroke-linecap="round" />
+                                    <path
+                                        d="M26.1133 70.4755L26.1133 70.4754C26.1165 67.7729 27.2138 65.18 29.1678 63.2659C31.122 61.3516 33.7736 60.2729 36.5415 60.2695C39.3095 60.2729 41.9611 61.3516 43.9153 63.2659C45.8693 65.18 46.9665 67.7729 46.9698 70.4754V70.4755C46.973 72.6817 46.2374 74.8293 44.874 76.5887L44.8228 76.6548L44.8221 76.6568L44.7198 76.7875C44.6798 76.8385 44.6389 76.8906 44.6054 76.9329L44.5626 76.9867L44.5487 77.0039C44.5468 77.0063 44.5455 77.0079 44.5447 77.0088C44.5444 77.0092 44.5442 77.0094 44.5441 77.0096C44.5439 77.0098 44.5439 77.0098 44.544 77.0096L36.5415 86.2552L28.5396 77.0105L28.5374 77.008C28.5386 77.0094 28.5343 77.0044 28.5213 76.9883C28.5099 76.9743 28.4954 76.9561 28.4785 76.9348C28.4448 76.8923 28.4038 76.8401 28.3638 76.789L28.2569 76.6519L28.2227 76.6079L28.2132 76.5957L28.2108 76.5926L28.2102 76.5918L28.2101 76.5916C28.21 76.5916 28.21 76.5916 28.21 76.5915C26.8459 74.8313 26.11 72.6828 26.1133 70.4755ZM41.0154 70.4754V70.4748C41.0154 69.6036 40.7517 68.7529 40.2588 68.0303C39.766 67.3078 39.0666 66.7462 38.2503 66.415C37.4341 66.0838 36.5365 65.9973 35.6706 66.166C34.8048 66.3347 34.008 66.7514 33.3817 67.3649C32.7552 67.9786 32.3274 68.7617 32.154 69.6158C31.9805 70.47 32.0697 71.3552 32.4096 72.1592C32.7495 72.963 33.3244 73.6484 34.0599 74.1299C34.7954 74.6112 35.6589 74.8676 36.5415 74.8676V74.3676L36.5421 74.8676C37.7248 74.8661 38.8606 74.4053 39.7 73.5831C40.5396 72.7606 41.014 71.6432 41.0154 70.4754Z"
+                                        stroke="#28AECB" />
                                     <circle cx="56.5" cy="56.5" r="56" stroke="#28AECB" />
-                                    <path d="M53.5038 77.3023L50.5076 65.3175L44.5151 56.3288V38.3516" stroke="#28AECB"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M35.5265 56.3288L32.5303 47.3402L44.5151 38.3516L53.5038 44.344L62.4924 45.8421"
-                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M44.5153 34.1565C46.17 34.1565 47.5115 32.815 47.5115 31.1603C47.5115 29.5055 46.17 28.1641 44.5153 28.1641C42.8605 28.1641 41.519 29.5055 41.519 31.1603C41.519 32.815 42.8605 34.1565 44.5153 34.1565Z"
-                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M41.5188 65.3171L35.5264 77.302M68.4847 77.302V51.8342C68.4847 50.6422 68.9582 49.499 69.8011 48.6562C70.6439 47.8134 71.7871 47.3398 72.979 47.3398C74.171 47.3398 75.3141 47.8134 76.157 48.6562C76.9998 49.499 77.4733 50.6422 77.4733 51.8342V53.3323"
-                                        stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                        </nuxt-link>
+                        </div>
                     </div>
                 </div>
                 <div class="service-selection" v-if="translationsSite.length > 0">
-                    <choose-service-btn> {{ translationsSite[2].text }}
+                    <choose-service-btn>
+                        {{ translationsSite[5].text }}
                     </choose-service-btn>
                 </div>
             </div>
@@ -209,6 +197,11 @@ export default {
             let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
             return topMenu
         },
+    },
+    methods: {
+        openServicesModal(e) {
+            this.$store.dispatch('choose-service-popup/openPopup', { type: 'services', info: { e } })
+        }
     }
 }
 </script>

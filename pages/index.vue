@@ -1,10 +1,12 @@
 <template>
   <div>
+    <div class="elfsight-app-8c6542de-dfa4-4f51-a333-b11356fdcd59"></div>
     <Promo :translations="translations" />
     <MainServices :translations="translations" />
     <!-- <trust-swiper :translations="translations" /> -->
     <cities />
     <service-packages :translations="translations" />
+    <solve-problem :translations="translations" />
     <why-we :translations="translations" />
     <our-services :translations="translations" />
     <reviews :translations="translations" />
@@ -22,9 +24,20 @@ import OurServices from '../components/main-page/OurServices.vue'
 import Promo from '../components/main-page/Promo.vue'
 import Reviews from '../components/main-page/Reviews.vue'
 import ServicePackages from '../components/main-page/ServicePackages.vue'
+import SolveProblem from '../components/main-page/SolveProblem.vue'
 import TrustSwiper from '../components/main-page/TrustSwiper.vue'
 import WhyWe from '../components/reuse/WhyWe.vue'
 export default {
+  head() {
+    return {
+      script: [
+        {
+          src: 'https://apps.elfsight.com/p/platform.js',
+          defer: true
+        }
+      ],
+    }
+  },
   name: 'IndexPage',
   components: {
     Promo,
@@ -36,7 +49,8 @@ export default {
     Reviews,
     Faq,
     Order,
-    Cities
+    Cities,
+    SolveProblem
   },
   computed: {
     translations() {

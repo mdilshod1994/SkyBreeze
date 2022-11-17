@@ -20,9 +20,10 @@
                     <div class="service-promo__wrap">
                         <div class="service-promo__title h1">{{ service[0].name }}</div>
                         <div class="service-promo__desc desc"> {{ service[0].description }} </div>
-                        <choose-service-btn class="promo__btn" v-if="translationsSite.length > 0"> {{
-                                translationsSite[5].text
-                        }}</choose-service-btn>
+                        <div class="promo__btn btn" v-if="translationsSite.length > 0"
+                            @click="openServicesModal(service[0])"> {{
+                                    translationsSite[5].text
+                            }}</div>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,8 @@
 import MainOrder from '../../../components/reuse/MainOrder.vue'
 import BreadCrumpBtnHome from '../../../components/UI/breadCrumpBtnHome.vue'
 export default {
-    components: { MainOrder,
+    components: {
+        MainOrder,
         BreadCrumpBtnHome
     },
     data() {
@@ -54,6 +56,9 @@ export default {
         },
     },
     methods: {
+        openServicesModal(e) {
+            this.$store.dispatch('choose-service-popup/openPopup', { type: 'services', info: { e } })
+        },
         async getService() {
             try {
                 this.$store.dispatch('loader/getLoading', true)

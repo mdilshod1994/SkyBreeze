@@ -3,105 +3,83 @@
         <div class="wrapper">
             <div class="service-packages__title title h2" v-if="translations.length > 0">{{ translations[6].text }}
             </div>
-            <div class="service-packages__row swiper">
+            <div class="service-packages__row swiper ">
                 <div class="swiper-wrapper">
-                    <div class="service-packages__slide swiper-slide">
-                        <div class="service-packages__coll service-packages__coll--1">
+                    <div v-for="(item, index) in packages" :key="index"
+                        :class="`service-packages__slide swiper-slide ${index === 0 ? 'first' : ''} ${index === 1 ? 'second' : ''} ${index === 2 ? 'service-packages__slide--table-full  third' : ''}`">
+                        <div :class="`service-packages__coll service-packages__coll--${index + 1}`">
                             <div class="service-packages__top">
                                 <div class="service-packages__top-box">
-                                    <div class="service-packages__top-caption">Пакет 1</div>
-                                    <div class="service-packages__top-price">137$</div>
+                                    <div class="service-packages__top-caption">{{ item.name }}</div>
+                                    <div class="service-packages__top-price">{{ item.price }}$</div>
                                 </div>
                             </div>
                             <div class="service-packages__content">
                                 <div class="service-packages__box">
                                     <div class="service-packages__items">
-                                        <div class="service-packages__item">Грузовик + 2 грузчика</div>
-                                        <div class="service-packages__item">Упаковочная пленка и упаковочные коробки
+                                        <div class="service-packages__item" v-for="t, i in  item.packages" :key="i">
+                                            {{
+                                                    t.text
+                                            }}
                                         </div>
-                                        <div class="service-packages__item">Упаковочная лента </div>
-                                        <div class="service-packages__item">Упаковочное одеяло </div>
-                                        <div class="service-packages__item">Упаковочный материал для телевизора</div>
                                     </div>
                                 </div>
                                 <div class="service-packages__box">
-                                    <div class="service-packages__caption">Опционально:</div>
+                                    <div class="service-packages__caption">{{ item.optionalTitle }}:</div>
                                     <div class="service-packages__items">
-                                        <div class="service-packages__item">+1 грузчик - 50$/час</div>
-                                        <div class="service-packages__item">Дополнительная промежуточная остановка -
-                                            50$/час</div>
+                                        <div class="service-packages__item" v-for="e, ind in item.optionalPackage"
+                                            :key="ind">
+                                            {{ e.text }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="service-packages__bottom">
-                                <a href="#" class="service-packages__btn btn">Заказать услугу</a>
+                                <div class="service-packages__btn btn" @click="openServicesModal(item.name)">
+                                    {{
+                                            item.btnText
+                                    }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="service-packages__slide swiper-slide">
-                        <div class="service-packages__coll service-packages__coll--2">
-                            <div class="service-packages__top">
-                                <div class="service-packages__top-box">
-                                    <div class="service-packages__top-caption">Пакет 2</div>
-                                    <div class="service-packages__top-price">137$</div>
-                                </div>
-                            </div>
-                            <div class="service-packages__content">
-                                <div class="service-packages__box">
-                                    <div class="service-packages__items">
-                                        <div class="service-packages__item">Грузовик + 2 грузчика</div>
-                                        <div class="service-packages__item">Упаковочная пленка и упаковочные коробки
-                                        </div>
-                                        <div class="service-packages__item">Упаковочная лента </div>
-                                        <div class="service-packages__item">Упаковочное одеяло </div>
-                                        <div class="service-packages__item">Упаковочный материал для телевизора</div>
-                                    </div>
-                                </div>
-                                <div class="service-packages__box">
-                                    <div class="service-packages__caption">Опционально:</div>
-                                    <div class="service-packages__items">
-                                        <div class="service-packages__item">+1 грузчик - 50$/час</div>
-                                        <div class="service-packages__item">Дополнительная промежуточная остановка -
-                                            50$/час</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="service-packages__bottom">
-                                <a href="#" class="service-packages__btn btn">Заказать услугу</a>
+                </div>
+            </div>
+            <div class="service-packages__row--desctop">
+                <div v-for="(item, index) in packages" :key="index"
+                    :class="`service-packages__slide swiper-slide ${index === 0 ? 'first' : ''} ${index === 1 ? 'second' : ''} ${index === 2 ? 'service-packages__slide--table-full  third' : ''}`">
+                    <div :class="`service-packages__coll service-packages__coll--${index + 1}`">
+                        <div class="service-packages__top">
+                            <div class="service-packages__top-box">
+                                <div class="service-packages__top-caption">{{ item.name }}</div>
+                                <div class="service-packages__top-price">{{ item.price }}$</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="service-packages__slide service-packages__slide--table-full swiper-slide">
-                        <div
-                            class="service-packages__coll service-packages__coll--3 service-packages__coll--table-full">
-                            <div class="service-packages__top">
-                                <div class="service-packages__top-box">
-                                    <div class="service-packages__top-caption">Пакет 3</div>
-                                    <div class="service-packages__top-price">137$</div>
-                                </div>
-                            </div>
-                            <div class="service-packages__content">
-                                <div class="service-packages__box">
-                                    <div class="service-packages__items">
-                                        <div class="service-packages__item">Грузовик + 2 грузчика</div>
-                                        <div class="service-packages__item">Упаковочная пленка и упаковочные коробки
-                                        </div>
-                                        <div class="service-packages__item">Упаковочная лента </div>
-                                        <div class="service-packages__item">Упаковочное одеяло </div>
-                                        <div class="service-packages__item">Упаковочный материал для телевизора </div>
-                                    </div>
-                                </div>
-                                <div class="service-packages__box">
-                                    <div class="service-packages__caption">Опционально:</div>
-                                    <div class="service-packages__items">
-                                        <div class="service-packages__item">+1 грузчик - 50$/час</div>
-                                        <div class="service-packages__item">Дополнительная промежуточная остановка -
-                                            50$/час</div>
+                        <div class="service-packages__content">
+                            <div class="service-packages__box">
+                                <div class="service-packages__items">
+                                    <div class="service-packages__item" v-for="t, i in  item.packages" :key="i">
+                                        {{
+                                                t.text
+                                        }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="service-packages__bottom">
-                                <a href="#" class="service-packages__btn btn">Заказать услугу</a>
+                            <div class="service-packages__box">
+                                <div class="service-packages__caption">{{ item.optionalTitle }}:</div>
+                                <div class="service-packages__items">
+                                    <div class="service-packages__item" v-for="e, ind in item.optionalPackage"
+                                        :key="ind">
+                                        {{ e.text }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-packages__bottom">
+                            <div class="service-packages__btn btn" @click="openServicesModal(item.name)">
+                                {{
+        item.btnText
+                                }}
                             </div>
                         </div>
                     </div>
@@ -129,36 +107,631 @@
     </section>
 </template>
 <script>
-import { Swiper } from 'swiper'
+import { Swiper, Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 
 export default {
     props: ['translations'],
-
-    mounted() {
-        let $windowWidth = window.innerWidth;
-        if ($windowWidth <= 760) {
-            const swiper = new Swiper('.service-packages__row', {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                slidesPerGroup: 1,
-                loop: false,
-                loopFillGroupWithBlank: false,
-                speed: 300,
-                iOSEdgeSwipeDetection: true,
-                breakpoints: {
-                    220: {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 15,
-                    }
+    computed: {
+        packages() {
+            const arr = [
+                {
+                    lang: 'ru',
+                    name: 'Dynamic Amigos',
+                    price: 145,
+                    packages: [
+                        {
+                            text: 'Грузовик + 2 грузчика'
+                        },
+                        {
+                            text: 'Бесплатно - гардеробная коробка'
+                        },
+                        {
+                            text: 'Бесплатно - скочь и защитная плёнка'
+                        },
+                        {
+                            text: 'Бесплатно - использование упаковочного одьяла'
+                        },
+                        {
+                            text: 'Бесплатно - упаковка телевизоров и компьютеров'
+                        },
+                        {
+                            text: 'Бесплатно - жгуты, ремни, натяжители'
+                        },
+                        {
+                            text: 'Бесплатно - использование инструментов'
+                        },
+                        {
+                            text: 'Бесплатно - разборка и сборка перевозимой мебели'
+                        },
+                        {
+                            text: 'Бесплатно - распаковка'
+                        },
+                        {
+                            text: 'Бесплатно - защита половых покрытий (паркет, кавролин)'
+                        },
+                        {
+                            text: 'Бесплатно - защита дверей, поручней'
+                        },
+                        {
+                            text: 'Бесплатно - демонтаж (снятие со стен) телевизоры'
+                        },
+                        {
+                            text: 'Бесплатно - минимальная страховка мебели и вещей'
+                        },
+                        {
+                            text: 'Бесплатно - использование мини- тележки (dolly) и ручной грузовой тележки'
+                        },
+                    ],
+                    optionalTitle: 'Опционально',
+                    optionalPackage: [
+                        {
+                            text: '+1 грузчик - 55$/час'
+                        },
+                        {
+                            text: 'Дополнительная промежуточная остановка - 55$/час'
+                        },
+                        {
+                            text: 'Опция “Full Packing”, если требуется 289$ (Оплата отдельно)'
+                        },
+                        {
+                            text: 'Коробки S,L, и другие (оплата по прайс листу)'
+                        }
+                    ],
+                    btnText: 'Заказать услугу'
                 },
-                navigation: {
-                    nextEl: ".service-packages .arrow--next",
-                    prevEl: ".service-packages .arrow--prew",
+                {
+                    lang: 'ru',
+                    name: 'The Supremes',
+                    price: 200,
+                    packages: [
+                        {
+                            text: 'Грузовик + 3 грузчика'
+                        },
+                        {
+                            text: 'Бесплатно - гардеробная коробка'
+                        },
+                        {
+                            text: 'Бесплатно - скочь и защитная плёнка'
+                        },
+                        {
+                            text: 'Бесплатно - использование упаковочного одьяла'
+                        },
+                        {
+                            text: 'Бесплатно - упаковка телевизоров и компьютеров'
+                        },
+                        {
+                            text: 'Бесплатно - жгуты, ремни, натяжители'
+                        },
+                        {
+                            text: 'Бесплатно - использование инструментов'
+                        },
+                        {
+                            text: 'Бесплатно - разборка и сборка перевозимой мебели'
+                        },
+                        {
+                            text: 'Бесплатно - распаковка'
+                        },
+                        {
+                            text: 'Бесплатно - защита половых покрытий (паркет, кавролин)'
+                        },
+                        {
+                            text: 'Бесплатно - защита дверей, поручней'
+                        },
+                        {
+                            text: 'Бесплатно - демонтаж (снятие со стен) телевизоры'
+                        },
+                        {
+                            text: 'Бесплатно - минимальная страховка мебели и вещей'
+                        },
+                        {
+                            text: 'Бесплатно - использование мини- тележки (dolly) и ручной грузовой тележки'
+                        },
+                    ],
+                    optionalTitle: 'Опционально',
+                    optionalPackage: [
+                        {
+                            text: '+1 грузчик - 55$/час'
+                        },
+                        {
+                            text: 'Дополнительная промежуточная остановка - 55$/час'
+                        },
+                        {
+                            text: 'Опция “Full Packing”, если требуется 289$ (Оплата отдельно)'
+                        },
+                        {
+                            text: 'Коробки S,L, и другие (оплата по прайс листу)'
+                        }
+                    ],
+                    btnText: 'Заказать услугу'
                 },
+                {
+                    lang: 'ru',
+                    name: 'SkyBreeze Gang',
+                    price: 255,
+                    packages: [
+                        {
+                            text: 'Грузовик + 4 грузчика'
+                        },
+                        {
+                            text: 'Бесплатно - гардеробная коробка'
+                        },
+                        {
+                            text: 'Бесплатно - скочь и защитная плёнка'
+                        },
+                        {
+                            text: 'Бесплатно - использование упаковочного одьяла'
+                        },
+                        {
+                            text: 'Бесплатно - упаковка телевизоров и компьютеров'
+                        },
+                        {
+                            text: 'Бесплатно - жгуты, ремни, натяжители'
+                        },
+                        {
+                            text: 'Бесплатно - использование инструментов'
+                        },
+                        {
+                            text: 'Бесплатно - разборка и сборка перевозимой мебели'
+                        },
+                        {
+                            text: 'Бесплатно - распаковка'
+                        },
+                        {
+                            text: 'Бесплатно - защита половых покрытий (паркет, кавролин)'
+                        },
+                        {
+                            text: 'Бесплатно - защита дверей, поручней'
+                        },
+                        {
+                            text: 'Бесплатно - демонтаж (снятие со стен) телевизоры'
+                        },
+                        {
+                            text: 'Бесплатно - минимальная страховка мебели и вещей'
+                        },
+                        {
+                            text: 'Бесплатно - использование мини- тележки (dolly) и ручной грузовой тележки'
+                        },
+                    ],
+                    optionalTitle: 'Опционально',
+                    optionalPackage: [
+                        {
+                            text: '+1 грузчик - 55$/час'
+                        },
+                        {
+                            text: 'Дополнительная промежуточная остановка - 55$/час'
+                        },
+                        {
+                            text: 'Опция “Full Packing”, если требуется 289$ (Оплата отдельно)'
+                        },
+                        {
+                            text: 'Коробки S,L, и другие (оплата по прайс листу)'
+                        }
+                    ],
+                    btnText: 'Заказать услугу'
+                },
+                {
+                    lang: 'en',
+                    name: 'Dynamic Amigos',
+                    price: 145,
+                    packages: [
+                        {
+                            text: 'Truck + 2 movers'
+                        },
+                        {
+                            text: 'Free - wardrobe box'
+                        },
+                        {
+                            text: 'Free - slip and protective film'
+                        },
+                        {
+                            text: 'Free - use of a packing blanket'
+                        },
+                        {
+                            text: 'Free - packaging of TVs and computers'
+                        },
+                        {
+                            text: 'Free - harnesses, belts, tensioners'
+                        },
+                        {
+                            text: 'Free - use of tools'
+                        },
+                        {
+                            text: 'Free - disassembly and assembly of transported furniture'
+                        },
+                        {
+                            text: 'Free - unpacking'
+                        },
+                        {
+                            text: 'Free - protection of floor coverings (parquet, carpet)'
+                        },
+                        {
+                            text: 'Free - protection of doors, handrails'
+                        },
+                        {
+                            text: 'Free - dismantling (removing from the walls) TVs'
+                        },
+                        {
+                            text: 'Free - minimum insurance for furniture and things'
+                        },
+                        {
+                            text: 'Free - use of mini dolly and hand pallet truck'
+                        },
+                    ],
+                    optionalTitle: 'Optional',
+                    optionalPackage: [
+                        {
+                            text: '+1 loader - 55$/hour'
+                        },
+                        {
+                            text: 'Additional intermediate stop - 55$/hour'
+                        },
+                        {
+                            text: '“Full Packing” option if required $289 (Paid separately)'
+                        },
+                        {
+                            text: 'Boxes S, L, and others (payment according to the price list)'
+                        }
+                    ],
+                    btnText: 'Order package'
+                },
+                {
+                    lang: 'en',
+                    name: 'The Supremes',
+                    price: 200,
+                    packages: [
+                        {
+                            text: 'Truck + 3 movers'
+                        },
+                        {
+                            text: 'Free - wardrobe box'
+                        },
+                        {
+                            text: 'Free - slip and protective film'
+                        },
+                        {
+                            text: 'Free - use of a packing blanket'
+                        },
+                        {
+                            text: 'Free - packaging of TVs and computers'
+                        },
+                        {
+                            text: 'Free - harnesses, belts, tensioners'
+                        },
+                        {
+                            text: 'Free - use of tools'
+                        },
+                        {
+                            text: 'Free - disassembly and assembly of transported furniture'
+                        },
+                        {
+                            text: 'Free - unpacking'
+                        },
+                        {
+                            text: 'Free - protection of floor coverings (parquet, carpet)'
+                        },
+                        {
+                            text: 'Free - protection of doors, handrails'
+                        },
+                        {
+                            text: 'Free - dismantling (removing from the walls) TVs'
+                        },
+                        {
+                            text: 'Free - minimum insurance for furniture and things'
+                        },
+                        {
+                            text: 'Free - use of mini dolly and hand pallet truck'
+                        },
+                    ],
+                    optionalTitle: 'Optional',
+                    optionalPackage: [
+                        {
+                            text: '+1 loader - 55$/hour'
+                        },
+                        {
+                            text: 'Additional intermediate stop - 55$/hour'
+                        },
+                        {
+                            text: '“Full Packing” option if required $289 (Paid separately)'
+                        },
+                        {
+                            text: 'Boxes S, L, and others (payment according to the price list)'
+                        }
+                    ],
+                    btnText: 'Order package'
+                },
+                {
+                    lang: 'en',
+                    name: 'SkyBreeze Gang',
+                    price: 255,
+                    packages: [
+                        {
+                            text: 'Truck + 4 movers'
+                        },
+                        {
+                            text: 'Free - wardrobe box'
+                        },
+                        {
+                            text: 'Free - slip and protective film'
+                        },
+                        {
+                            text: 'Free - use of a packing blanket'
+                        },
+                        {
+                            text: 'Free - packaging of TVs and computers'
+                        },
+                        {
+                            text: 'Free - harnesses, belts, tensioners'
+                        },
+                        {
+                            text: 'Free - use of tools'
+                        },
+                        {
+                            text: 'Free - disassembly and assembly of transported furniture'
+                        },
+                        {
+                            text: 'Free - unpacking'
+                        },
+                        {
+                            text: 'Free - protection of floor coverings (parquet, carpet)'
+                        },
+                        {
+                            text: 'Free - protection of doors, handrails'
+                        },
+                        {
+                            text: 'Free - dismantling (removing from the walls) TVs'
+                        },
+                        {
+                            text: 'Free - minimum insurance for furniture and things'
+                        },
+                        {
+                            text: 'Free - use of mini dolly and hand pallet truck'
+                        },
+                    ],
+                    optionalTitle: 'Optional',
+                    optionalPackage: [
+                        {
+                            text: '+1 loader - 55$/hour'
+                        },
+                        {
+                            text: 'Additional intermediate stop - 55$/hour'
+                        },
+                        {
+                            text: '“Full Packing” option if required $289 (Paid separately)'
+                        },
+                        {
+                            text: 'Boxes S, L, and others (payment according to the price list)'
+                        }
+                    ],
+                    btnText: 'Order package'
+                },
+                {
+                    lang: 'es',
+                    name: 'Dynamic Amigos',
+                    price: 145,
+                    packages: [
+                        {
+                            text: 'Camión + 2 mudanzas'
+                        },
+                        {
+                            text: 'Libre - Caja de Armario'
+                        },
+                        {
+                            text: 'Libre - deslizamiento y película protectora'
+                        },
+                        {
+                            text: 'Libre - uso de una manta de embalaje'
+                        },
+                        {
+                            text: 'Libre - embalaje de televisores y ordenadores'
+                        },
+                        {
+                            text: 'Libre - arneses, cinturones, tensores'
+                        },
+                        {
+                            text: 'Libre - uso de herramientas'
+                        },
+                        {
+                            text: 'Libre - desmontaje y montaje de muebles transportados'
+                        },
+                        {
+                            text: 'Gratis - desembalaje'
+                        },
+                        {
+                            text: 'Libre - protección de revestimientos de suelos (parquet, moqueta)'
+                        },
+                        {
+                            text: 'Libre - protección de puertas, pasamanos'
+                        },
+                        {
+                            text: 'Libre - desmontar (retirar de las paredes) televisores'
+                        },
+                        {
+                            text: 'Libre - seguro mínimo para muebles y cosas'
+                        },
+                        {
+                            text: 'Libre - uso de mini carro y transpaleta manual'
+                        },
+                    ],
+                    optionalTitle: 'Opcional',
+                    optionalPackage: [
+                        {
+                            text: '+1 cargador - 55$/hora'
+                        },
+                        {
+                            text: 'Parada intermedia adicional - 55$/hora'
+                        },
+                        {
+                            text: 'Opción de "Embalaje completo" si se requiere $289 (Pagado por separado)'
+                        },
+                        {
+                            text: 'Cajas S, L y otras (pago según lista de precios)'
+                        }
+                    ],
+                    btnText: 'Ordenar paquete'
+                },
+                {
+                    lang: 'es',
+                    name: 'The Supremes',
+                    price: 200,
+                    packages: [
+                        {
+                            text: 'Camión + 3 mudanzas'
+                        },
+                        {
+                            text: 'Libre - Caja de Armario'
+                        },
+                        {
+                            text: 'Libre - deslizamiento y película protectora'
+                        },
+                        {
+                            text: 'Libre - uso de una manta de embalaje'
+                        },
+                        {
+                            text: 'Libre - embalaje de televisores y ordenadores'
+                        },
+                        {
+                            text: 'Libre - arneses, cinturones, tensores'
+                        },
+                        {
+                            text: 'Libre - uso de herramientas'
+                        },
+                        {
+                            text: 'Libre - desmontaje y montaje de muebles transportados'
+                        },
+                        {
+                            text: 'Gratis - desembalaje'
+                        },
+                        {
+                            text: 'Libre - protección de revestimientos de suelos (parquet, moqueta)'
+                        },
+                        {
+                            text: 'Libre - protección de puertas, pasamanos'
+                        },
+                        {
+                            text: 'Libre - desmontar (retirar de las paredes) televisores'
+                        },
+                        {
+                            text: 'Libre - seguro mínimo para muebles y cosas'
+                        },
+                        {
+                            text: 'Libre - uso de mini carro y transpaleta manual'
+                        },
+                    ],
+                    optionalTitle: 'Opcional',
+                    optionalPackage: [
+                        {
+                            text: '+1 cargador - 55$/hora'
+                        },
+                        {
+                            text: 'Parada intermedia adicional - 55$/hora'
+                        },
+                        {
+                            text: 'Opción de "Embalaje completo" si se requiere $289 (Pagado por separado)'
+                        },
+                        {
+                            text: 'Cajas S, L y otras (pago según lista de precios)'
+                        }
+                    ],
+                    btnText: 'Ordenar paquete'
+                },
+                {
+                    lang: 'es',
+                    name: 'SkyBreeze Gang',
+                    price: 255,
+                    packages: [
+                        {
+                            text: 'Camión + 4 mudanzas'
+                        },
+                        {
+                            text: 'Libre - Caja de Armario'
+                        },
+                        {
+                            text: 'Libre - deslizamiento y película protectora'
+                        },
+                        {
+                            text: 'Libre - uso de una manta de embalaje'
+                        },
+                        {
+                            text: 'Libre - embalaje de televisores y ordenadores'
+                        },
+                        {
+                            text: 'Libre - arneses, cinturones, tensores'
+                        },
+                        {
+                            text: 'Libre - uso de herramientas'
+                        },
+                        {
+                            text: 'Libre - desmontaje y montaje de muebles transportados'
+                        },
+                        {
+                            text: 'Gratis - desembalaje'
+                        },
+                        {
+                            text: 'Libre - protección de revestimientos de suelos (parquet, moqueta)'
+                        },
+                        {
+                            text: 'Libre - protección de puertas, pasamanos'
+                        },
+                        {
+                            text: 'Libre - desmontar (retirar de las paredes) televisores'
+                        },
+                        {
+                            text: 'Libre - seguro mínimo para muebles y cosas'
+                        },
+                        {
+                            text: 'Libre - uso de mini carro y transpaleta manual'
+                        },
+                    ],
+                    optionalTitle: 'Opcional',
+                    optionalPackage: [
+                        {
+                            text: '+1 cargador - 55$/hora'
+                        },
+                        {
+                            text: 'Parada intermedia adicional - 55$/hora'
+                        },
+                        {
+                            text: 'Opción de "Embalaje completo" si se requiere $289 (Pagado por separado)'
+                        },
+                        {
+                            text: 'Cajas S, L y otras (pago según lista de precios)'
+                        }
+                    ],
+                    btnText: 'Ordenar paquete'
+                },
+            ]
+            return arr.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
             })
         }
+    },
+    methods: {
+        openServicesModal(e) {
+            this.$store.dispatch('choose-service-popup/openPopup', { type: 'packages', info: {}, package: e })
+        }
+    },
+    mounted() {
+        const swiper = new Swiper('.service-packages__row', {
+            modules: [Navigation],
+            slidesPerView: 'auto',
+            spaceBetween: 15,
+            iOSEdgeSwipeDetection: true,
+            navigation: {
+                nextEl: ".service-packages .arrow--next",
+                prevEl: ".service-packages .arrow--prew",
+            },
+            breakpoints: {
+                220: {
+                    slidesPerView: 1,
+                },
+                680: {
+                    slidesPerView: 1,
+                },
+            }
+        })
     }
 }
 </script>
@@ -166,6 +739,61 @@ export default {
 .service-packages {
     background: url('@/assets/img/main/our-services/left.png'), url('@/assets/img/main/our-services/right.png'), #fff;
     background-repeat: no-repeat;
-    background-position: 2% center , right bottom;
+    background-position: 2% center, right bottom;
+}
+
+.service-packages__row {
+    display: none;
+}
+
+.service-packages__row--desctop {
+    display: grid;
+    grid-template-areas: 'first second third';
+    grid-gap: 30px;
+    margin-top: 70px;
+}
+
+.first {
+    grid-area: first;
+    width: 100% !important;
+}
+
+.second {
+    grid-area: second;
+    width: 100% !important;
+}
+
+.third {
+    grid-area: third;
+    width: 100% !important;
+}
+
+@media screen and (max-width: 1010px) {
+    .service-packages__row--desctop {
+        grid-template-areas: 'first second'
+            'third third';
+        grid-gap: 20px;
+    }
+
+    .second .service-packages__coll,
+    .first .service-packages__coll {
+        margin-bottom: 0;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .service-packages__row {
+        display: block;
+    }
+
+    .service-packages__row--desctop {
+        display: none;
+    }
+
+    .service-packages__coll {
+        width: 335px !important;
+    }
 }
 </style>

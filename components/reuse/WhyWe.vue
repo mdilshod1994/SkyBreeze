@@ -47,7 +47,7 @@
     </section>
 </template>
 <script>
-import { Swiper } from 'swiper'
+import { Swiper, Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 
 export default {
@@ -66,6 +66,7 @@ export default {
     },
     mounted() {
         const swiper = new Swiper('.why-we__swiper', {
+            modules: [Navigation],
             slidesPerView: 3,
             spaceBetween: 30,
             slidesPerGroup: 1,

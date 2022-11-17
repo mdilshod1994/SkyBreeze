@@ -21,6 +21,39 @@
                         <input type="email" :class="`form__field field ${errors.email ? 'errorValid' : ''}`"
                             :placeholder="translations[2].text" v-model="email">
                     </label>
+                    <label class="form__label call-to-action__label call-to-action__label--width">
+                        <span class="call-to-action__text">
+                            <!-- {{ translations[2].text }} -->
+                            {{ promoCodeTranslation[0].textPromoCode }}
+                        </span>
+                        <!-- <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`"
+                            :placeholder="translations[2].text" v-model="email"> -->
+                        <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`" placeholder="428BP"
+                            v-model="promoCode">
+                    </label>
+                    <label
+                        class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
+                        v-if="types.length" v-show="toShowTypes">
+                        <span class="call-to-action__text">
+                            <!-- {{ translations[2].text }} -->
+                            {{ promoCodeTranslation[0].typeService }}
+                        </span>
+                        <input type="text" v-for="item in types" :key="item.id"
+                            :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
+                            v-show="item.alias === currType" :value="`${item.alias === currType ? item.name : ''}`"
+                            @click="openTypes">
+                        <img src="@/assets/img/icons/arrow-d.svg" alt="" :class="`${isActiveType ? 'active' : ''}`">
+                        <div :class="`call-to-action__select-types-overlay ${isActiveType ? 'active' : ''}`">
+                        </div>
+                        <div :class="`call-to-action__select-types ${isActiveType ? 'active' : ''}`" @click.stop="">
+                            <ul class="call-to-action__select-list" @click.stop="">
+                                <li v-for="t in types" :key="t.id" @click="setTypes(t)"
+                                    :class="`call-to-action__select-item ${t.alias === currType ? 'active' : ''}`">
+                                    {{ t.name }}
+                                </li>
+                            </ul>
+                        </div>
+                    </label>
                     <label class="form__label call-to-action__label">
                         <span class="call-to-action__text">
                             {{ translations[3].text }}
@@ -42,6 +75,30 @@
                         :class="{ active: isOpen }" :locale="$i18n.locale" />
                     <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }" @click="isOpen = false">
                     </div>
+                    <label
+                        class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
+                        v-if="showPacages">
+                        <span class="call-to-action__text">
+                            <!-- {{ translations[2].text }} -->
+                            {{ promoCodeTranslation[0].typePackage }}
+
+                        </span>
+                        <input type="text"
+                            :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
+                            :value="`${currPackage === '' ? 'Выбрать пакет' : currPackage}`" @click="openPackages">
+                        <img src="@/assets/img/icons/arrow-d.svg" alt="" :class="`${isActivePackages ? 'active' : ''}`">
+                        <div :class="`call-to-action__select-types-overlay ${isActivePackages ? 'active' : ''}`">
+                        </div>
+                        <div :class="`call-to-action__select-types-package ${isActivePackages ? 'active' : ''}`"
+                            @click.stop="">
+                            <ul class="call-to-action__select-list" @click.stop="">
+                                <li v-for="t in packages" :key="t.id" @click="setPackage(t)"
+                                    :class="`call-to-action__select-item ${t.name === currPackage ? 'active' : ''}`">
+                                    {{ t.name }}
+                                </li>
+                            </ul>
+                        </div>
+                    </label>
                 </div>
                 <div class="call-to-action__bottom">
                     <div class="call-to-action__sides">
@@ -174,6 +231,30 @@ export default {
     },
     data() {
         return {
+            toShowTypes: true,
+            currPackage: '',
+            packages: [
+                {
+                    name: 'Dynamic Amigos'
+                },
+                {
+                    name: 'The Supremes'
+                },
+                {
+                    name: 'SkyBreeze Gang'
+                },
+            ],
+            isActivePackages: false,
+            showPacages: false,
+            isActiveType: false,
+            currType: "apartment-moving",
+            valueType: "",
+            typesMoving: [
+                {
+                    name: '',
+                    value: '',
+                }
+            ],
             isActiveZipStart: false,
             isActiveZipEnd: false,
             stateValStart: "NY",
@@ -197,6 +278,7 @@ export default {
             house_to: "",
             city_to: "",
             zip_to: "",
+            promoCode: '',
             errors: {
                 address_from: false,
                 address_to: false,
@@ -213,15 +295,85 @@ export default {
         }
     },
     computed: {
+        promoCodeTranslation() {
+            const arr = [
+                {
+                    textPromoCode: 'Promocode',
+                    typeService: 'Type of move',
+                    typePackage: 'Package type',
+                    lang: 'en'
+                },
+                {
+                    textPromoCode: 'Промо-код',
+                    typeService: 'Тип переезда',
+                    typePackage: 'Тип пакета',
+                    lang: 'ru'
+                },
+                {
+                    textPromoCode: 'Código Promocional',
+                    typeService: 'Tipo de movimiento',
+                    typePackage: 'Tipo de paquete',
+                    lang: 'es'
+                },
+            ]
+            return arr.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
+            })
+        },
         isActive() {
             return this.$store.getters['choose-service-popup/IS_ACTIVE']
         },
+        typeFromPage() {
+            return this.$store.getters['choose-service-popup/VALUE_TYPE']
+        },
         translations() {
-            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'form_order')
-            return topMenu
+            let formOrder = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'form_order')
+            return formOrder
+        },
+        types() {
+            return this.$store.getters['services/SERVICES']
         },
     },
     methods: {
+        setPackage(e) {
+            this.currPackage = e.name
+        },
+        openPackages() {
+            this.isActivePackages = !this.isActivePackages
+        },
+        openTypes() {
+            this.isActiveType = !this.isActiveType
+        },
+        setTypes(e) {
+            let test = {}
+            if (e.type === 'empty') {
+                this.types.filter(el => {
+                    if (el.alias === this.currType) {
+                        this.valueType = el.name
+                    }
+                })
+                this.toShowTypes = true
+                this.showPacages = false
+            } else if (e.type === 'services') {
+                test = e.info.e
+                if (Object.keys(test).length) {
+                    this.currType = test.alias
+                    this.valueType = test.name
+                }
+                this.toShowTypes = true
+                this.showPacages = false
+            } else {
+                if (e.type === 'packages') {
+                    this.showPacages = true
+                    this.currPackage = e.package
+                    this.toShowTypes = false
+                } else {
+                    this.showPacages = false
+                }
+            }
+        },
         setDefault() {
             this.errors = {
                 address_from: false,
@@ -239,14 +391,19 @@ export default {
         },
         closePopup() {
             this.$store.dispatch('choose-service-popup/closePopup')
+            this.isActivePackages = false
+            this.isActiveType = false
+            this.currPackage = ''
         },
         async postOrder() {
             try {
+                let options = { weekday: 'long', day: 'numeric', month: 'numeric', year: 'numeric' }
+
                 const orderMessage = {
                     name: this.name,
                     email: this.email,
                     phone: this.phone,
-                    range_date: `${this.range.start} / ${this.range.end}`,
+                    range_date: `${new Date(this.range.start).toLocaleDateString(`${this.$i18n.locale}-${(this.$i18n.locale).toUpperCase()}`, options)} - ${new Date(this.range.end).toLocaleDateString(`${this.$i18n.locale}-${(this.$i18n.locale).toUpperCase()}`, options)}`,
                     address_from: this.address_from,
                     house_from: this.house_from,
                     city_from: this.city_from,
@@ -257,6 +414,9 @@ export default {
                     city_to: this.city_to,
                     state_to: this.stateValEnd,
                     zip_to: this.zip_to,
+                    package: this.currPackage,
+                    promocode: this.promoCode,
+                    type_service: this.valueType
                 }
                 const order = await this.$axios.post('/orders', orderMessage)
                     .then(res => {
@@ -282,6 +442,8 @@ export default {
                     this.zip_to = ""
                     this.stateValStart = ""
                     this.stateValEnd = ""
+                    this.currPackage = ''
+                    this.promoCode = ''
                 }
             } catch (error) {
                 console.error(error.response.data.errors);
@@ -324,6 +486,11 @@ export default {
         })
     },
     watch: {
+        typeFromPage(e) {
+            if (e) {
+                this.setTypes(e)
+            }
+        },
         range(newVal) {
             if (newVal.end) {
                 this.isOpen = false
@@ -396,6 +563,66 @@ export default {
         font-size: 16px;
     }
 
+    &__types {
+        cursor: pointer;
+        caret-color: transparent;
+        position: relative;
+    }
+
+    &__select-types-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    &__select-types {
+        position: absolute;
+        background: #FAFAFA;
+        border: 1px solid #0f1d32;
+        border-radius: 15px;
+        z-index: 9;
+        width: 100%;
+        overflow: hidden;
+        opacity: 0;
+        height: 0;
+        visibility: hidden;
+        transition: 0.3s ease-in;
+
+        &.active {
+            height: 177px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .call-to-action__select-types-package {
+        position: absolute;
+        background: #FAFAFA;
+        border: 1px solid #0f1d32;
+        border-radius: 15px;
+        z-index: 9;
+        width: 100%;
+        overflow: hidden;
+        opacity: 0;
+        height: 0;
+        visibility: hidden;
+        transition: 0.3s ease-in;
+
+        &.active {
+            height: 105px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
     &__select {
         position: absolute;
         right: -85px;
@@ -449,7 +676,8 @@ export default {
     &__select-item {
         color: #000;
         width: 100%;
-        height: 35px;
+        padding: 3.9px 2px;
+        text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -591,6 +819,20 @@ export default {
             }
         }
 
+        &--type {
+            img {
+                position: absolute;
+                right: 20px;
+                top: 49px;
+                transform: rotate(-90deg);
+                transition: 0.3s ease-in-out;
+
+                &.active {
+                    transform: rotate(0);
+                }
+            }
+        }
+
         &--second {
             width: 205px;
         }
@@ -688,14 +930,7 @@ export default {
 
         div {
             &:nth-child(3) {
-                width: 100%;
-                display: flex !important;
-                justify-content: center;
-                gap: 30px;
-
-                .vc-time-picker {
-                    width: 50%;
-                }
+                display: none;
             }
         }
     }
@@ -754,15 +989,6 @@ export default {
 
     .vc-header {
         margin-bottom: 10px;
-    }
-
-    .vc-container .vc-pane-container div:nth-child(3) {
-        flex-direction: column;
-    }
-
-    .vc-container .vc-pane-container div:nth-child(3) .vc-time-picker {
-        width: 100%;
-        justify-content: center;
     }
 }
 

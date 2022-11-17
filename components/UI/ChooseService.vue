@@ -6,10 +6,10 @@
 <script>
 export default {
     name: 'choose-service-btn',
-    
+
     methods: {
         openServicesModal() {
-            this.$store.dispatch('choose-service-popup/openPopup')
+            this.$store.dispatch('choose-service-popup/openPopup', { type: 'empty', info: {} })
         }
     }
 }
