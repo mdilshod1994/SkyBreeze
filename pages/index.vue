@@ -1,12 +1,11 @@
 <template>
   <div>
-    <div class="elfsight-app-8c6542de-dfa4-4f51-a333-b11356fdcd59"></div>
     <Promo :translations="translations" />
     <MainServices :translations="translations" />
     <!-- <trust-swiper :translations="translations" /> -->
     <cities />
     <service-packages :translations="translations" />
-    <solve-problem :translations="translations" />
+    <!-- <solve-problem :translations="translations" /> -->
     <why-we :translations="translations" />
     <our-services :translations="translations" />
     <reviews :translations="translations" />
@@ -28,16 +27,7 @@ import SolveProblem from '../components/main-page/SolveProblem.vue'
 import TrustSwiper from '../components/main-page/TrustSwiper.vue'
 import WhyWe from '../components/reuse/WhyWe.vue'
 export default {
-  head() {
-    return {
-      script: [
-        {
-          src: 'https://apps.elfsight.com/p/platform.js',
-          defer: true
-        }
-      ],
-    }
-  },
+  
   name: 'IndexPage',
   components: {
     Promo,

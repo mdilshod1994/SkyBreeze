@@ -56,25 +56,29 @@
                     <div class="footer__last-box">
                         <div class="footer__caption">{{ translations[9].text }}</div>
                         <div class="footer__social">
-                            <a href="#" class="footer__social-link">
+                            <a href="https://www.instagram.com/skybreeze_us" target="_blank"
+                                class="footer__social-link">
                                 <img src="@/assets/img/footer/instagram.svg" alt="">
                             </a>
-                            <a href="#" class="footer__social-link">
+                            <a href="https://www.snapchat.com/add/14086393202" class="footer__social-link"
+                                target="_blank">
                                 <img src="@/assets/img/footer/snapchat.svg" alt="">
                             </a>
-                            <a href="#" class="footer__social-link">
+                            <a href="https://www.facebook.com/SkyBreezeGO" target="_blank" class="footer__social-link">
                                 <img src="@/assets/img/footer/fb.svg" alt="">
                             </a>
-                            <a href="#" class="footer__social-link">
+                            <a href="https://t.me/skybreezego" class="footer__social-link" target="_blank">
                                 <img src="@/assets/img/footer/telegram.svg" alt="">
                             </a>
-                            <a href="#" class="footer__social-link">
+                            <a href="https://www.linkedin.com/company/sky-breeze-go" class="footer__social-link"
+                                target="_blank">
                                 <img src="@/assets/img/footer/linkedin.svg" alt="">
                             </a>
-                            <a href="#" class="footer__social-link">
+                            <a href="https://twitter.com/SkybreezeUS" class="footer__social-link" target="_blank">
                                 <img src="@/assets/img/footer/twitter.svg" alt="">
                             </a>
-                            <a href="#" class="footer__social-link">
+                            <a href="https://m.yelp.com/biz/sky-breeze-santa-clara-3" class="footer__social-link"
+                                target="_blank">
                                 <img src="@/assets/img/footer/icon-1.svg" alt="">
                             </a>
                         </div>
@@ -90,7 +94,7 @@
                         <nuxt-link :to="switchLocalePath($i18n.locale)" class="bottom__link">{{ translations[12].text }}
                         </nuxt-link>
                     </div>
-                    <div @click="$router.push(localePath(`/personal-data`))">
+                    <div @click="$router.push(localePath(`/terms-and-conditions`))">
                         <nuxt-link :to="switchLocalePath($i18n.locale)" class="bottom__link">{{ translations[11].text }}
                         </nuxt-link>
                     </div>

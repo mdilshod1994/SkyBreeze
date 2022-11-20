@@ -21,15 +21,12 @@
                         <input type="email" :class="`form__field field ${errors.email ? 'errorValid' : ''}`"
                             :placeholder="translations[2].text" v-model="email">
                     </label>
-                    <label class="form__label call-to-action__label call-to-action__label--width">
+                    <label class="form__label call-to-action__label">
                         <span class="call-to-action__text">
-                            <!-- {{ translations[2].text }} -->
-                            {{ promoCodeTranslation[0].textPromoCode }}
+                            {{ translations[3].text }}
                         </span>
-                        <!-- <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`"
-                            :placeholder="translations[2].text" v-model="email"> -->
-                        <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`" placeholder="428BP"
-                            v-model="promoCode">
+                        <input type="tel" :class="`form__field field ${errors.phone ? 'errorValid' : ''}`"
+                            :placeholder="translations[3].text" v-model="phone">
                     </label>
                     <label
                         class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
@@ -54,27 +51,6 @@
                             </ul>
                         </div>
                     </label>
-                    <label class="form__label call-to-action__label">
-                        <span class="call-to-action__text">
-                            {{ translations[3].text }}
-                        </span>
-                        <input type="tel" :class="`form__field field ${errors.phone ? 'errorValid' : ''}`"
-                            :placeholder="translations[3].text" v-model="phone">
-                    </label>
-                    <label
-                        class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
-                        <span class="call-to-action__text">
-                            {{ translations[4].text }}
-                        </span>
-                        <input type="text" class="form__field field call-to-action__input"
-                            :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
-                            placeholder="Выбрать диапазон дат" @click="datePick">
-                        <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
-                    </label>
-                    <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
-                        :class="{ active: isOpen }" :locale="$i18n.locale" />
-                    <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }" @click="isOpen = false">
-                    </div>
                     <label
                         class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
                         v-if="showPacages">
@@ -99,6 +75,31 @@
                             </ul>
                         </div>
                     </label>
+                    <label class="form__label call-to-action__label call-to-action__label--width">
+                        <span class="call-to-action__text">
+                            <!-- {{ translations[2].text }} -->
+                            {{ promoCodeTranslation[0].textPromoCode }}
+                        </span>
+                        <!-- <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`"
+                            :placeholder="translations[2].text" v-model="email"> -->
+                        <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`" placeholder="428BP"
+                            v-model="promoCode">
+                    </label>
+                    <label
+                        class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
+                        <span class="call-to-action__text">
+                            {{ translations[4].text }}
+                        </span>
+                        <input type="text" class="form__field field call-to-action__input"
+                            :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
+                            placeholder="Выбрать диапазон дат" @click="datePick">
+                        <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
+                    </label>
+                    <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
+                        :class="{ active: isOpen }" :locale="$i18n.locale" />
+                    <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }" @click="isOpen = false">
+                    </div>
+
                 </div>
                 <div class="call-to-action__bottom">
                     <div class="call-to-action__sides">
@@ -215,10 +216,10 @@
         </div>
         <div :class="`call-to-action__thanks ${showThanx ? 'active' : ''}`">
             <div class="call-to-action__thanks-title">
-                Спасибо за заказ!
+                {{ translateThanx[0].title }}
             </div>
             <p class="call-to-action__thanks-text">
-                В скором времени мы свяжемся с Вами
+                {{ translateThanx[0].text }}
             </p>
             <!-- <nuxt-link to=""></nuxt-link> -->
         </div>
@@ -231,6 +232,23 @@ export default {
     },
     data() {
         return {
+            translate: [
+                {
+                    lang: 'ru',
+                    text: 'В скором времени мы свяжемся с Вами',
+                    title: 'Спасибо за заказ!'
+                },
+                {
+                    lang: 'es',
+                    text: 'Nos pondremos en contacto con usted en breve',
+                    title: '¡Gracias por tu orden!'
+                },
+                {
+                    lang: 'en',
+                    text: 'We will contact you shortly',
+                    title: 'Thanks for your order!'
+                },
+            ],
             toShowTypes: true,
             currPackage: '',
             packages: [
@@ -257,8 +275,8 @@ export default {
             ],
             isActiveZipStart: false,
             isActiveZipEnd: false,
-            stateValStart: "NY",
-            stateValEnd: 'NY',
+            stateValStart: "CA",
+            stateValEnd: 'CA',
             range: {
                 start: new Date(),
                 end: new Date()
@@ -295,6 +313,13 @@ export default {
         }
     },
     computed: {
+        translateThanx() {
+            return this.translate.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
+            })
+        },
         promoCodeTranslation() {
             const arr = [
                 {
@@ -868,6 +893,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 30px;
+        justify-content: flex-end;
     }
 
     &__btn {

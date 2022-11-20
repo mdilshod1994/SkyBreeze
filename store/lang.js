@@ -38,18 +38,18 @@ export const actions = {
                         return res.data
                     })
                 ctx.dispatch('services/getServices', services, { root: true })
-                const blog = await this.$axios.$get(`front/articles?search[langs_id]=${langID}`)
+                const blog = await this.$axios.$get(`front/articles?search[langs_id]=${langID}&limit=-1`)
                     .then(res => {
                         return res.data
                     })
                 ctx.dispatch('blog/getBlogs', blog, { root: true })
 
-                const faq = await this.$axios.$get(`front/faq?search[langs_id]=${langID}`)
+                const faq = await this.$axios.$get(`front/faq?search[langs_id]=${langID}&limit=-1`)
                     .then(res => {
                         return res.data
                     })
                 ctx.dispatch('faq/getFaq', faq, { root: true })
-                const whyWe = await this.$axios.$get(`front/whyWe?search[langs_id]=${langID}`)
+                const whyWe = await this.$axios.$get(`front/whyWe?search[langs_id]=${langID}&limit=-1`)
                     .then(res => {
                         return res.data
                     })

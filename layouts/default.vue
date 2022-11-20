@@ -1,7 +1,6 @@
 <template>
     <div>
-        <loading-bar
-            :style="[loaderIs ? { 'width': width + '%', 'transition': '1s',  } : { 'width': width + '%', }]"
+        <loading-bar :style="[loaderIs ? { 'width': width + '%', 'transition': '1s', } : { 'width': width + '%', }]"
             v-if="toHideLoader" />
         <div :class="`main ${isLoaded ? 'show' : ''}`">
             <Header />
@@ -9,6 +8,7 @@
             <Footer :class="` ${loaderIs ? 'loading' : ''}`" />
             <call-to-action />
         </div>
+        <div class="elfsight-app-8c6542de-dfa4-4f51-a333-b11356fdcd59"></div>
     </div>
 </template>
 <script>
@@ -17,6 +17,16 @@ import Header from '../components/headers/Header.vue'
 import CallToAction from '../components/popups/CallToAction.vue'
 import LoadingBar from '../components/UI/LoadingBar.vue'
 export default {
+    head() {
+        return {
+            script: [
+                {
+                    src: 'https://apps.elfsight.com/p/platform.js',
+                    defer: true
+                }
+            ],
+        }
+    },
     components: { Header, Footer, CallToAction, LoadingBar },
     data() {
         return {

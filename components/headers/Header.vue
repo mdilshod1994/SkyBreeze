@@ -183,12 +183,17 @@
 				<a href="#" class="header__btn btn btn--item">Вход</a>
 				<a href="#" class="header__link link">Регистрация</a>
 			</div-->
-                <a href="tel:+17073759273" class="header__phone">
-                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8.53415 5.26936L6.09449 2.45325C5.81324 2.12873 5.29761 2.13017 4.97093 2.45758L2.96468 4.46743C2.36757 5.06527 2.19665 5.95301 2.54208 6.66479C4.60575 10.9376 8.05173 14.3884 12.3217 16.4581C13.0327 16.8035 13.9197 16.6326 14.5168 16.0347L16.5418 14.0061C16.87 13.678 16.8707 13.1595 16.5433 12.8783L13.7164 10.4516C13.4207 10.1977 12.9613 10.2309 12.6649 10.528L11.6813 11.5131C11.6309 11.5659 11.5646 11.6007 11.4926 11.6121C11.4205 11.6236 11.3467 11.6111 11.2825 11.5766C9.67462 10.6507 8.34088 9.3152 7.41708 7.70614C7.38249 7.64177 7.36996 7.56784 7.38143 7.49567C7.39289 7.4235 7.42771 7.35709 7.48055 7.30662L8.46132 6.32513C8.75843 6.02657 8.79088 5.56503 8.53415 5.26864V5.26936Z"
-                            stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                <a id="phoneNumber" class="header__phone" @click="togglePhoneNumber">
+                    <div class="header__phone-icon">
+                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.53415 5.26936L6.09449 2.45325C5.81324 2.12873 5.29761 2.13017 4.97093 2.45758L2.96468 4.46743C2.36757 5.06527 2.19665 5.95301 2.54208 6.66479C4.60575 10.9376 8.05173 14.3884 12.3217 16.4581C13.0327 16.8035 13.9197 16.6326 14.5168 16.0347L16.5418 14.0061C16.87 13.678 16.8707 13.1595 16.5433 12.8783L13.7164 10.4516C13.4207 10.1977 12.9613 10.2309 12.6649 10.528L11.6813 11.5131C11.6309 11.5659 11.5646 11.6007 11.4926 11.6121C11.4205 11.6236 11.3467 11.6111 11.2825 11.5766C9.67462 10.6507 8.34088 9.3152 7.41708 7.70614C7.38249 7.64177 7.36996 7.56784 7.38143 7.49567C7.39289 7.4235 7.42771 7.35709 7.48055 7.30662L8.46132 6.32513C8.75843 6.02657 8.79088 5.56503 8.53415 5.26864V5.26936Z"
+                                stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <p>
+                        +1-707-3{{ `${togglePhone === true ? 'SkyBre' : '75-9273'}` }}
+                    </p>
                 </a>
             </div>
         </div>
@@ -202,7 +207,8 @@ export default {
     name: 'Header',
     data() {
         return {
-            currLang: 'RU'
+            currLang: 'RU',
+            togglePhone: true
         }
     },
     computed: {
@@ -218,6 +224,15 @@ export default {
         }
     },
     methods: {
+        togglePhoneNumber() {
+            let phone = document.getElementById('phoneNumber')
+            this.togglePhone = false
+            if (this.togglePhone === false) {
+                setTimeout(() => {
+                    phone.setAttribute('href', 'tel:+17073759273')
+                }, 300)
+            }
+        },
         async langSwitch() {
             await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
             this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()

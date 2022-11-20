@@ -2,10 +2,10 @@
     <div class="main-thank">
         <div class="main-thank-body">
             <div class="main-thank-thanks-title">
-                Спасибо за заказ!
+                {{ translateThanx[0].title }}
             </div>
             <p class="main-thank-thanks-text">
-                В скором времени мы свяжемся с Вами
+                {{ translateThanx[0].text }}
             </p>
             <!-- <nuxt-link to=""></nuxt-link> -->
         </div>
@@ -13,7 +13,37 @@
 </template>
 <script>
 export default {
+    data() {
+        return {
+            translate: [
+                {
+                    lang: 'ru',
+                    text: 'В скором времени мы свяжемся с Вами',
+                    title: 'Спасибо за заказ!'
+                },
+                {
+                    lang: 'es',
+                    text: 'Nos pondremos en contacto con usted en breve',
+                    title: '¡Gracias por tu orden!'
+                },
+                {
+                    lang: 'en',
+                    text: 'We will contact you shortly',
+                    title: 'Thanks for your order!'
+                },
+            ],
+        }
+    },
+    computed: {
+        translateThanx() {
+            return this.translate.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
+            })
+        },
 
+    }
 }
 </script>
 <style>

@@ -173,11 +173,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="service-selection" v-if="translationsSite.length > 0">
+                <!-- <div class="service-selection" v-if="translationsSite.length > 0">
                     <choose-service-btn>
                         {{ translationsSite[5].text }}
                     </choose-service-btn>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -210,5 +210,21 @@ export default {
     background: url('@/assets/img/main/moving/left.png'), url('@/assets/img/main/moving/right.png'), #fff;
     background-repeat: no-repeat;
     background-position: left bottom, right bottom;
+}
+
+@media screen and (max-width: 992px) {
+    .main-services {
+        background: url('@/assets/img/main/moving/left-t.png'), url('@/assets/img/main/moving/right-t.png'), #fff;
+        background-repeat: no-repeat;
+        background-position: left top, right top;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-services {
+        background: url('@/assets/img/main/moving/left-m.png'), url('@/assets/img/main/moving/right-m.png'), #fff;
+        background-repeat: no-repeat;
+        background-position: left top, right top;
+    }
 }
 </style>

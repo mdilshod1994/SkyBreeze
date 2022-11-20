@@ -88,4 +88,20 @@ export default {
     background-repeat: no-repeat;
     background-position: left bottom, right bottom;
 }
+
+@media screen and (max-width: 992px) {
+    .our-services {
+        background: url('@/assets/img/main/complex/left-t.png'), url('@/assets/img/main/complex/right-t.png'), #fff;
+        background-repeat: no-repeat;
+        background-position: left top, right top;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .our-services {
+        background: url('@/assets/img/main/complex/left-m.png'), url('@/assets/img/main/complex/right-m.png'), #fff;
+        background-repeat: no-repeat;
+        background-position: left top, right bottom;
+    }
+}
 </style>

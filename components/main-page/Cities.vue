@@ -2,7 +2,7 @@
     <section class="scene cities">
         <div class="wrapper">
             <!-- <div class="cities__title title h2"  v-if="translations.length > 0">{{ translations[3].text }}</div> -->
-            <div class="cities__title title h2">Мы работаем в таких городах</div>
+            <div class="cities__title title h2">{{ translateTitle[0].title }}</div>
             <div class="cities__body">
                 <div class="cities__map">
                     <img src="@/assets/img/main/cities/map.png" alt="">
@@ -148,7 +148,30 @@ export default {
                 {
                     name: 'San Rafael'
                 },
+            ],
+            titles: [
+                {
+                    lang: 'ru',
+                    title: 'Мы работаем в таких городах'
+                },
+                {
+                    lang: 'en',
+                    title: 'We work in such cities'
+                },
+                {
+                    lang: 'es',
+                    title: 'Trabajamos en tales ciudades.'
+                },
             ]
+        }
+    },
+    computed: {
+        translateTitle() {
+            return this.titles.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
+            })
         }
     },
     mounted() {

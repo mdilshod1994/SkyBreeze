@@ -25,10 +25,16 @@
                 <div class="article__text">
                     <div class="article__top">
                         <h1>{{ blogItem[0].name }}</h1>
-                        <div class="article__images">
+                        <div class="article__images"
+                            v-if="blogItem[0].id === '1' || blogItem[0].id === '2' || blogItem[0].id === '3'">
                             <img class="img-desctop" src="@/assets/img/article/img.jpg" alt="">
                             <img class="img-table" src="@/assets/img/article/img-table.jpg" alt="">
                             <img class="img-mobile" src="@/assets/img/article/img-mobile.jpg" alt="">
+                        </div>
+                        <div class="article__images" v-else>
+                            <img class="img-desctop" src="@/assets/img/article/img1.jpg" alt="">
+                            <img class="img-table" src="@/assets/img/article/img-table1.jpg" alt="">
+                            <img class="img-mobile" src="@/assets/img/article/img-mobile1.jpg" alt="">
                         </div>
                     </div>
                     <div v-html="blogItem[0].content"></div>

@@ -193,6 +193,32 @@
 	&__phone {
 		display: flex;
 		align-items: center;
+		font-size: 18px;
+		font-weight: bold;
+		gap: 5px;
+		transition: all 0.3s;
+		color: #5bd0eb;
+		cursor: pointer;
+		p {
+			user-select: none;
+		}
+		&:hover {
+			color: #fff;
+			.header__phone-icon {
+				border-color: #ffffff;
+				transition: all 0.3s;
+				svg {
+					& * {
+						stroke: #ffffff;
+						transition: all 0.3s;
+					}
+				}
+			}
+		}
+	}
+	&__phone-icon {
+		display: flex;
+		align-items: center;
 		justify-content: center;
 		width: 30px;
 		height: 30px;
@@ -202,16 +228,6 @@
 		svg {
 			& * {
 				transition: all 0.3s;
-			}
-		}
-		&:hover {
-			border-color: #ffffff;
-			transition: all 0.3s;
-			svg {
-				& * {
-					stroke: #ffffff;
-					transition: all 0.3s;
-				}
 			}
 		}
 	}

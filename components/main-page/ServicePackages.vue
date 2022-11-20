@@ -17,7 +17,8 @@
                             <div class="service-packages__content">
                                 <div class="service-packages__box">
                                     <div class="service-packages__items">
-                                        <div class="service-packages__item" v-for="t, i in  item.packages" :key="i">
+                                        <div class="service-packages__item item-bold" v-for="t, i in  item.packages"
+                                            :key="i">
                                             {{
                                                     t.text
                                             }}
@@ -58,7 +59,8 @@
                         <div class="service-packages__content">
                             <div class="service-packages__box">
                                 <div class="service-packages__items">
-                                    <div class="service-packages__item" v-for="t, i in  item.packages" :key="i">
+                                    <div class="service-packages__item item-bold" v-for="t, i in  item.packages"
+                                        :key="i">
                                         {{
                                                 t.text
                                         }}
@@ -135,33 +137,20 @@ export default {
                         {
                             text: 'Бесплатно - упаковка телевизоров и компьютеров'
                         },
-                        {
-                            text: 'Бесплатно - жгуты, ремни, натяжители'
-                        },
-                        {
-                            text: 'Бесплатно - использование инструментов'
-                        },
+
+
                         {
                             text: 'Бесплатно - разборка и сборка перевозимой мебели'
                         },
-                        {
-                            text: 'Бесплатно - распаковка'
-                        },
+
                         {
                             text: 'Бесплатно - защита половых покрытий (паркет, кавролин)'
                         },
-                        {
-                            text: 'Бесплатно - защита дверей, поручней'
-                        },
-                        {
-                            text: 'Бесплатно - демонтаж (снятие со стен) телевизоры'
-                        },
+
                         {
                             text: 'Бесплатно - минимальная страховка мебели и вещей'
                         },
-                        {
-                            text: 'Бесплатно - использование мини- тележки (dolly) и ручной грузовой тележки'
-                        },
+
                     ],
                     optionalTitle: 'Опционально',
                     optionalPackage: [
@@ -172,10 +161,10 @@ export default {
                             text: 'Дополнительная промежуточная остановка - 55$/час'
                         },
                         {
-                            text: 'Опция “Full Packing”, если требуется 289$ (Оплата отдельно)'
+                            text: 'Опция “Full Packing”, если требуется  (Оплата отдельно)'
                         },
                         {
-                            text: 'Коробки S,L, и другие (оплата по прайс листу)'
+                            text: 'Коробки  (оплата по прайс листу)'
                         }
                     ],
                     btnText: 'Заказать услугу'
@@ -200,33 +189,20 @@ export default {
                         {
                             text: 'Бесплатно - упаковка телевизоров и компьютеров'
                         },
-                        {
-                            text: 'Бесплатно - жгуты, ремни, натяжители'
-                        },
-                        {
-                            text: 'Бесплатно - использование инструментов'
-                        },
+
+
                         {
                             text: 'Бесплатно - разборка и сборка перевозимой мебели'
                         },
-                        {
-                            text: 'Бесплатно - распаковка'
-                        },
+
                         {
                             text: 'Бесплатно - защита половых покрытий (паркет, кавролин)'
                         },
-                        {
-                            text: 'Бесплатно - защита дверей, поручней'
-                        },
-                        {
-                            text: 'Бесплатно - демонтаж (снятие со стен) телевизоры'
-                        },
+
                         {
                             text: 'Бесплатно - минимальная страховка мебели и вещей'
                         },
-                        {
-                            text: 'Бесплатно - использование мини- тележки (dolly) и ручной грузовой тележки'
-                        },
+
                     ],
                     optionalTitle: 'Опционально',
                     optionalPackage: [
@@ -237,10 +213,10 @@ export default {
                             text: 'Дополнительная промежуточная остановка - 55$/час'
                         },
                         {
-                            text: 'Опция “Full Packing”, если требуется 289$ (Оплата отдельно)'
+                            text: 'Опция “Full Packing”, если требуется  (Оплата отдельно)'
                         },
                         {
-                            text: 'Коробки S,L, и другие (оплата по прайс листу)'
+                            text: 'Коробки  (оплата по прайс листу)'
                         }
                     ],
                     btnText: 'Заказать услугу'
@@ -265,33 +241,20 @@ export default {
                         {
                             text: 'Бесплатно - упаковка телевизоров и компьютеров'
                         },
-                        {
-                            text: 'Бесплатно - жгуты, ремни, натяжители'
-                        },
-                        {
-                            text: 'Бесплатно - использование инструментов'
-                        },
+
+
                         {
                             text: 'Бесплатно - разборка и сборка перевозимой мебели'
                         },
-                        {
-                            text: 'Бесплатно - распаковка'
-                        },
+
                         {
                             text: 'Бесплатно - защита половых покрытий (паркет, кавролин)'
                         },
-                        {
-                            text: 'Бесплатно - защита дверей, поручней'
-                        },
-                        {
-                            text: 'Бесплатно - демонтаж (снятие со стен) телевизоры'
-                        },
+
                         {
                             text: 'Бесплатно - минимальная страховка мебели и вещей'
                         },
-                        {
-                            text: 'Бесплатно - использование мини- тележки (dolly) и ручной грузовой тележки'
-                        },
+
                     ],
                     optionalTitle: 'Опционально',
                     optionalPackage: [
@@ -302,10 +265,10 @@ export default {
                             text: 'Дополнительная промежуточная остановка - 55$/час'
                         },
                         {
-                            text: 'Опция “Full Packing”, если требуется 289$ (Оплата отдельно)'
+                            text: 'Опция “Full Packing”, если требуется  (Оплата отдельно)'
                         },
                         {
-                            text: 'Коробки S,L, и другие (оплата по прайс листу)'
+                            text: 'Коробки  (оплата по прайс листу)'
                         }
                     ],
                     btnText: 'Заказать услугу'
@@ -330,33 +293,21 @@ export default {
                         {
                             text: 'Free - packaging of TVs and computers'
                         },
-                        {
-                            text: 'Free - harnesses, belts, tensioners'
-                        },
-                        {
-                            text: 'Free - use of tools'
-                        },
+
+
                         {
                             text: 'Free - disassembly and assembly of transported furniture'
                         },
-                        {
-                            text: 'Free - unpacking'
-                        },
+
                         {
                             text: 'Free - protection of floor coverings (parquet, carpet)'
                         },
-                        {
-                            text: 'Free - protection of doors, handrails'
-                        },
-                        {
-                            text: 'Free - dismantling (removing from the walls) TVs'
-                        },
+
+
                         {
                             text: 'Free - minimum insurance for furniture and things'
                         },
-                        {
-                            text: 'Free - use of mini dolly and hand pallet truck'
-                        },
+
                     ],
                     optionalTitle: 'Optional',
                     optionalPackage: [
@@ -367,10 +318,10 @@ export default {
                             text: 'Additional intermediate stop - 55$/hour'
                         },
                         {
-                            text: '“Full Packing” option if required $289 (Paid separately)'
+                            text: '“Full Packing” option if required  (Paid separately)'
                         },
                         {
-                            text: 'Boxes S, L, and others (payment according to the price list)'
+                            text: 'Boxes  (payment according to the price list)'
                         }
                     ],
                     btnText: 'Order package'
@@ -395,33 +346,21 @@ export default {
                         {
                             text: 'Free - packaging of TVs and computers'
                         },
-                        {
-                            text: 'Free - harnesses, belts, tensioners'
-                        },
-                        {
-                            text: 'Free - use of tools'
-                        },
+
+
                         {
                             text: 'Free - disassembly and assembly of transported furniture'
                         },
-                        {
-                            text: 'Free - unpacking'
-                        },
+
                         {
                             text: 'Free - protection of floor coverings (parquet, carpet)'
                         },
-                        {
-                            text: 'Free - protection of doors, handrails'
-                        },
-                        {
-                            text: 'Free - dismantling (removing from the walls) TVs'
-                        },
+
+
                         {
                             text: 'Free - minimum insurance for furniture and things'
                         },
-                        {
-                            text: 'Free - use of mini dolly and hand pallet truck'
-                        },
+
                     ],
                     optionalTitle: 'Optional',
                     optionalPackage: [
@@ -432,10 +371,10 @@ export default {
                             text: 'Additional intermediate stop - 55$/hour'
                         },
                         {
-                            text: '“Full Packing” option if required $289 (Paid separately)'
+                            text: '“Full Packing” option if required  (Paid separately)'
                         },
                         {
-                            text: 'Boxes S, L, and others (payment according to the price list)'
+                            text: 'Boxes  (payment according to the price list)'
                         }
                     ],
                     btnText: 'Order package'
@@ -460,33 +399,21 @@ export default {
                         {
                             text: 'Free - packaging of TVs and computers'
                         },
-                        {
-                            text: 'Free - harnesses, belts, tensioners'
-                        },
-                        {
-                            text: 'Free - use of tools'
-                        },
+
+
                         {
                             text: 'Free - disassembly and assembly of transported furniture'
                         },
-                        {
-                            text: 'Free - unpacking'
-                        },
+
                         {
                             text: 'Free - protection of floor coverings (parquet, carpet)'
                         },
-                        {
-                            text: 'Free - protection of doors, handrails'
-                        },
-                        {
-                            text: 'Free - dismantling (removing from the walls) TVs'
-                        },
+
+
                         {
                             text: 'Free - minimum insurance for furniture and things'
                         },
-                        {
-                            text: 'Free - use of mini dolly and hand pallet truck'
-                        },
+
                     ],
                     optionalTitle: 'Optional',
                     optionalPackage: [
@@ -497,10 +424,10 @@ export default {
                             text: 'Additional intermediate stop - 55$/hour'
                         },
                         {
-                            text: '“Full Packing” option if required $289 (Paid separately)'
+                            text: '“Full Packing” option if required  (Paid separately)'
                         },
                         {
-                            text: 'Boxes S, L, and others (payment according to the price list)'
+                            text: 'Boxes  (payment according to the price list)'
                         }
                     ],
                     btnText: 'Order package'
@@ -525,33 +452,21 @@ export default {
                         {
                             text: 'Libre - embalaje de televisores y ordenadores'
                         },
-                        {
-                            text: 'Libre - arneses, cinturones, tensores'
-                        },
-                        {
-                            text: 'Libre - uso de herramientas'
-                        },
+
+
                         {
                             text: 'Libre - desmontaje y montaje de muebles transportados'
                         },
-                        {
-                            text: 'Gratis - desembalaje'
-                        },
+
                         {
                             text: 'Libre - protección de revestimientos de suelos (parquet, moqueta)'
                         },
-                        {
-                            text: 'Libre - protección de puertas, pasamanos'
-                        },
-                        {
-                            text: 'Libre - desmontar (retirar de las paredes) televisores'
-                        },
+
+
                         {
                             text: 'Libre - seguro mínimo para muebles y cosas'
                         },
-                        {
-                            text: 'Libre - uso de mini carro y transpaleta manual'
-                        },
+
                     ],
                     optionalTitle: 'Opcional',
                     optionalPackage: [
@@ -562,10 +477,10 @@ export default {
                             text: 'Parada intermedia adicional - 55$/hora'
                         },
                         {
-                            text: 'Opción de "Embalaje completo" si se requiere $289 (Pagado por separado)'
+                            text: 'Opción de "Embalaje completo" si se requiere  (Pagado por separado)'
                         },
                         {
-                            text: 'Cajas S, L y otras (pago según lista de precios)'
+                            text: 'Cajas  (pago según lista de precios)'
                         }
                     ],
                     btnText: 'Ordenar paquete'
@@ -590,33 +505,21 @@ export default {
                         {
                             text: 'Libre - embalaje de televisores y ordenadores'
                         },
-                        {
-                            text: 'Libre - arneses, cinturones, tensores'
-                        },
-                        {
-                            text: 'Libre - uso de herramientas'
-                        },
+
+
                         {
                             text: 'Libre - desmontaje y montaje de muebles transportados'
                         },
-                        {
-                            text: 'Gratis - desembalaje'
-                        },
+
                         {
                             text: 'Libre - protección de revestimientos de suelos (parquet, moqueta)'
                         },
-                        {
-                            text: 'Libre - protección de puertas, pasamanos'
-                        },
-                        {
-                            text: 'Libre - desmontar (retirar de las paredes) televisores'
-                        },
+
+
                         {
                             text: 'Libre - seguro mínimo para muebles y cosas'
                         },
-                        {
-                            text: 'Libre - uso de mini carro y transpaleta manual'
-                        },
+
                     ],
                     optionalTitle: 'Opcional',
                     optionalPackage: [
@@ -627,10 +530,10 @@ export default {
                             text: 'Parada intermedia adicional - 55$/hora'
                         },
                         {
-                            text: 'Opción de "Embalaje completo" si se requiere $289 (Pagado por separado)'
+                            text: 'Opción de "Embalaje completo" si se requiere  (Pagado por separado)'
                         },
                         {
-                            text: 'Cajas S, L y otras (pago según lista de precios)'
+                            text: 'Cajas  (pago según lista de precios)'
                         }
                     ],
                     btnText: 'Ordenar paquete'
@@ -655,33 +558,21 @@ export default {
                         {
                             text: 'Libre - embalaje de televisores y ordenadores'
                         },
-                        {
-                            text: 'Libre - arneses, cinturones, tensores'
-                        },
-                        {
-                            text: 'Libre - uso de herramientas'
-                        },
+
+
                         {
                             text: 'Libre - desmontaje y montaje de muebles transportados'
                         },
-                        {
-                            text: 'Gratis - desembalaje'
-                        },
+
                         {
                             text: 'Libre - protección de revestimientos de suelos (parquet, moqueta)'
                         },
-                        {
-                            text: 'Libre - protección de puertas, pasamanos'
-                        },
-                        {
-                            text: 'Libre - desmontar (retirar de las paredes) televisores'
-                        },
+
+
                         {
                             text: 'Libre - seguro mínimo para muebles y cosas'
                         },
-                        {
-                            text: 'Libre - uso de mini carro y transpaleta manual'
-                        },
+
                     ],
                     optionalTitle: 'Opcional',
                     optionalPackage: [
@@ -692,10 +583,10 @@ export default {
                             text: 'Parada intermedia adicional - 55$/hora'
                         },
                         {
-                            text: 'Opción de "Embalaje completo" si se requiere $289 (Pagado por separado)'
+                            text: 'Opción de "Embalaje completo" si se requiere  (Pagado por separado)'
                         },
                         {
-                            text: 'Cajas S, L y otras (pago según lista de precios)'
+                            text: 'Cajas  (pago según lista de precios)'
                         }
                     ],
                     btnText: 'Ordenar paquete'
@@ -768,6 +659,10 @@ export default {
     width: 100% !important;
 }
 
+.item-bold:nth-child(1) {
+    font-weight: bold;
+}
+
 @media screen and (max-width: 1010px) {
     .service-packages__row--desctop {
         grid-template-areas: 'first second'
@@ -782,7 +677,20 @@ export default {
 
 }
 
+@media screen and (max-width: 992px) {
+    .service-packages {
+        background: url('@/assets/img/main/our-services/left-t.png'), url('@/assets/img/main/our-services/right-t.png'), #fff;
+        background-repeat: no-repeat;
+        background-position: 2% top, right top;
+    }
+}
+
 @media screen and (max-width: 768px) {
+    .service-packages {
+        background: url('@/assets/img/main/our-services/left-m.png'), url('@/assets/img/main/our-services/right-m.png'), #fff;
+        background-repeat: no-repeat;
+        background-position: 2% top, right bottom;
+    }
 
     .service-packages__row {
         display: block;

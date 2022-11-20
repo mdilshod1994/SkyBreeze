@@ -16,11 +16,14 @@
             <div class="wrapper">
                 <div class="blog__title title-big h1" v-if="translations.length > 0"> {{ translations[3].text }}</div>
                 <div class="blog__wrap">
-                    <div v-for="blog in blogs" :key="blog.id"
+                    <div v-for="blog, index in blogs" :key="blog.id"
                         @click="$router.push(localePath(`/blogs/${blog.alias}`))" class="blog-card">
-                        <nuxt-link  :to="switchLocalePath($i18n.locale)">
-                            <div class="blog-card__img img-cover">
+                        <nuxt-link :to="switchLocalePath($i18n.locale)">
+                            <div class="blog-card__img img-cover" v-if="index !== 1">
                                 <img :src="`${blog.photo.server}/${blog.photo.path}`" alt="">
+                            </div>
+                            <div class="blog-card__img img-cover" v-else>
+                                <img src="@/assets/img/article/img-mobile1.jpg" alt="">
                             </div>
                             <div class="blog-card__bottom">
                                 <div class="blog-card__caption">{{ blog.name }}</div>
