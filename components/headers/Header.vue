@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <div class="language__hide">
-                        <div v-for="lang  in langs" :key="lang.id" @click="langSwitch(lang)">
+                        <div v-for="lang  in langs" :key="lang.id" @click="langSwitch(lang)" style="padding: 5px 0">
                             <router-link :to="switchLocalePath(`${lang.alias}`)" class="language__item">
                                 {{ lang.name }}
                             </router-link>
@@ -183,7 +183,7 @@
 				<a href="#" class="header__btn btn btn--item">Вход</a>
 				<a href="#" class="header__link link">Регистрация</a>
 			</div-->
-                <a id="phoneNumber" class="header__phone" @click="togglePhoneNumber">
+                <a href="tel:+17073759273" class="header__phone">
                     <div class="header__phone-icon">
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -191,8 +191,8 @@
                                 stroke="#28AECB" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <p>
-                        +1-707-3{{ `${togglePhone === true ? 'SkyBre' : '75-9273'}` }}
+                    <p class="header__phone-text">
+                        +1-707-3-SkyBre
                     </p>
                 </a>
             </div>
@@ -208,7 +208,6 @@ export default {
     data() {
         return {
             currLang: 'RU',
-            togglePhone: true
         }
     },
     computed: {
@@ -224,15 +223,7 @@ export default {
         }
     },
     methods: {
-        togglePhoneNumber() {
-            let phone = document.getElementById('phoneNumber')
-            this.togglePhone = false
-            if (this.togglePhone === false) {
-                setTimeout(() => {
-                    phone.setAttribute('href', 'tel:+17073759273')
-                }, 300)
-            }
-        },
+
         async langSwitch() {
             await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
             this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()
@@ -316,6 +307,12 @@ export default {
     }
 }
 </script>
-<style>
-
+<style lang="scss">
+@media screen and (max-width: 540px) {
+    .header {
+        &__phone-text {
+            display: none;
+        }
+    }
+}
 </style>

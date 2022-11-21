@@ -156,7 +156,7 @@ export default {
                 },
                 {
                     lang: 'en',
-                    title: 'We work in such cities'
+                    title: 'Our locations'
                 },
                 {
                     lang: 'es',

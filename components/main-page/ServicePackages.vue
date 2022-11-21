@@ -279,43 +279,43 @@ export default {
                     price: 145,
                     packages: [
                         {
-                            text: 'Truck + 2 movers'
+                            text: '1 truck 2 movers'
                         },
                         {
-                            text: 'Free - wardrobe box'
+                            text: 'Free wardrobe box as shrink wrap & tape'
                         },
                         {
-                            text: 'Free - slip and protective film'
+                            text: 'Free slip and protective film'
                         },
                         {
-                            text: 'Free - use of a packing blanket'
+                            text: 'Free use of moving blankets'
                         },
                         {
-                            text: 'Free - packaging of TVs and computers'
-                        },
-
-
-                        {
-                            text: 'Free - disassembly and assembly of transported furniture'
-                        },
-
-                        {
-                            text: 'Free - protection of floor coverings (parquet, carpet)'
+                            text: 'Free tv crating and computers'
                         },
 
 
                         {
-                            text: 'Free - minimum insurance for furniture and things'
+                            text: 'Free disassembly and reassembly of transported furniture'
+                        },
+
+                        {
+                            text: 'Free protection of floor coverings (parquet, carpet)'
+                        },
+
+
+                        {
+                            text: 'Free basic insurance for furniture and things'
                         },
 
                     ],
                     optionalTitle: 'Optional',
                     optionalPackage: [
                         {
-                            text: '+1 loader - 55$/hour'
+                            text: 'Every additional mover - 55$/hour'
                         },
                         {
-                            text: 'Additional intermediate stop - 55$/hour'
+                            text: 'Extra stop - 55$/hour'
                         },
                         {
                             text: '“Full Packing” option if required  (Paid separately)'
@@ -332,43 +332,43 @@ export default {
                     price: 200,
                     packages: [
                         {
-                            text: 'Truck + 3 movers'
+                            text: '1 truck 3 movers'
                         },
                         {
-                            text: 'Free - wardrobe box'
+                            text: 'Free wardrobe box as shrink wrap & tape '
                         },
                         {
-                            text: 'Free - slip and protective film'
+                            text: 'Free slip and protective film'
                         },
                         {
-                            text: 'Free - use of a packing blanket'
+                            text: 'Free use of moving blankets'
                         },
                         {
-                            text: 'Free - packaging of TVs and computers'
-                        },
-
-
-                        {
-                            text: 'Free - disassembly and assembly of transported furniture'
-                        },
-
-                        {
-                            text: 'Free - protection of floor coverings (parquet, carpet)'
+                            text: 'Free tv crating and computers'
                         },
 
 
                         {
-                            text: 'Free - minimum insurance for furniture and things'
+                            text: 'Free disassembly and reassembly of transported furniture'
+                        },
+
+                        {
+                            text: 'Free protection of floor coverings (parquet, carpet)'
+                        },
+
+
+                        {
+                            text: 'Free basic insurance for furniture and things'
                         },
 
                     ],
                     optionalTitle: 'Optional',
                     optionalPackage: [
                         {
-                            text: '+1 loader - 55$/hour'
+                            text: 'Every additional mover - 55$/hour'
                         },
                         {
-                            text: 'Additional intermediate stop - 55$/hour'
+                            text: 'Extra stop - 55$/hour'
                         },
                         {
                             text: '“Full Packing” option if required  (Paid separately)'
@@ -385,43 +385,43 @@ export default {
                     price: 255,
                     packages: [
                         {
-                            text: 'Truck + 4 movers'
+                            text: '1 truck 4 movers'
                         },
                         {
-                            text: 'Free - wardrobe box'
+                            text: 'Free wardrobe box as shrink wrap & tape '
                         },
                         {
-                            text: 'Free - slip and protective film'
+                            text: 'Free slip and protective film'
                         },
                         {
-                            text: 'Free - use of a packing blanket'
+                            text: 'Free use of moving blankets'
                         },
                         {
-                            text: 'Free - packaging of TVs and computers'
-                        },
-
-
-                        {
-                            text: 'Free - disassembly and assembly of transported furniture'
-                        },
-
-                        {
-                            text: 'Free - protection of floor coverings (parquet, carpet)'
+                            text: 'Free tv crating and computers'
                         },
 
 
                         {
-                            text: 'Free - minimum insurance for furniture and things'
+                            text: 'Free disassembly and reassembly of transported furniture'
+                        },
+
+                        {
+                            text: 'Free protection of floor coverings (parquet, carpet)'
+                        },
+
+
+                        {
+                            text: 'Free basic insurance for furniture and things'
                         },
 
                     ],
                     optionalTitle: 'Optional',
                     optionalPackage: [
                         {
-                            text: '+1 loader - 55$/hour'
+                            text: 'Every additional mover - 55$/hour'
                         },
                         {
-                            text: 'Additional intermediate stop - 55$/hour'
+                            text: 'Extra stop - 55$/hour'
                         },
                         {
                             text: '“Full Packing” option if required  (Paid separately)'

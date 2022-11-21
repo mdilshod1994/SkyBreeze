@@ -142,7 +142,8 @@ export default {
                 lastname: '',
                 email: '',
                 messages: '',
-                phone: '0'
+                phone: '0',
+                type: 2
             },
             errEmail: false,
             errName: false,
@@ -187,7 +188,8 @@ export default {
                     lastname: '',
                     email: '',
                     messages: '',
-                    phone: '0'
+                    phone: '0',
+                    type: 2
                 }
             } catch (error) {
                 if (error?.response?.data) {

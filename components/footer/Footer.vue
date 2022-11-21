@@ -3,9 +3,14 @@
         <footer class="footer">
             <div class="wrapper footer__wrap">
                 <div class="footer__first" v-if="translations.length > 0">
-                    <a href="#" class="footer__logo">
-                        <img src="@/assets/img/icons/logo-footer.svg" alt="">
-                    </a>
+                    <!-- <a href="/" >
+
+                    </a> -->
+                    <div @click="$router.push(localePath(`/`))" class="footer__logo">
+                        <nuxt-link :to="switchLocalePath($i18n.locale)">
+                            <img src="@/assets/img/icons/logo-footer.svg" alt="">
+                        </nuxt-link>
+                    </div>
                     <div class="footer__first-items">
                         <div class="footer__first-item">
                             <div class="footer__caption">{{ translations[0].text }}</div>
