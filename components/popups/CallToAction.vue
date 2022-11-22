@@ -108,7 +108,7 @@
                         </div>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
-                                {{ translations[7].text }}
+                                {{ translations[15].text }}
                             </span>
                             <input type="text" :class="`form__field field ${errors.address_from ? 'errorValid' : ''}`"
                                 :placeholder="translations[7].text" v-model="address_from">
@@ -118,7 +118,7 @@
                                 {{ translations[8].text }}
                             </span>
                             <input type="text" :class="`form__field field ${errors.house_from ? 'errorValid' : ''}`"
-                                placeholder="1А" v-model="house_from">
+                                :placeholder="`${$i18n.locale === 'en' ? 'Ex. 1А' : '1A'}`" v-model="house_from">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
@@ -150,7 +150,7 @@
                                     {{ translations[12].text }}
                                 </span>
                                 <input type="text" :class="`form__field field ${errors.zip_from ? 'errorValid' : ''}`"
-                                    placeholder="" v-model="zip_from">
+                                    :placeholder="`${$i18n.locale === 'en' ? 'Ex. 95050' : '95050'}`" v-model="zip_from">
                             </label>
                         </div>
                     </div>
@@ -162,17 +162,17 @@
                         </div>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
-                                {{ translations[7].text }}
+                                {{ translations[15].text }}
                             </span>
                             <input type="text" :class="`form__field field ${errors.address_to ? 'errorValid' : ''}`"
-                                :placeholder="translations[7].text" v-model="address_to">
+                                :placeholder="translations[14].text" v-model="address_to">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
                                 {{ translations[8].text }}
                             </span>
                             <input type="text" :class="`form__field field ${errors.house_to ? 'errorValid' : ''}`"
-                                placeholder="1А" v-model="house_to">
+                                :placeholder="`${$i18n.locale === 'en' ? 'Ex. 1А' : '1A'}`" v-model="house_to">
                         </label>
                         <label class="form__label call-to-action__label">
                             <span class="call-to-action__text">
@@ -186,7 +186,7 @@
                                 <span class="call-to-action__text">
                                     {{ translations[11].text }}
                                 </span>
-                                <input type="text" class="form__field field" placeholder="NY" v-model="stateValEnd"
+                                <input type="text" class="form__field field" placeholder="" v-model="stateValEnd"
                                     @click="openZipListEnd">
                                 <img src="@/assets/img/icons/arrow-d.svg" alt=""
                                     :class="`${isActiveZipEnd ? 'active' : ''}`">
@@ -204,7 +204,7 @@
                                     {{ translations[12].text }}
                                 </span>
                                 <input type="text" :class="`form__field field ${errors.zip_to ? 'errorValid' : ''}`"
-                                    placeholder="" v-model="zip_to">
+                                :placeholder="`${$i18n.locale === 'en' ? 'Ex. 95050' : '95050'}`" v-model="zip_to">
                             </label>
                         </div>
                     </div>

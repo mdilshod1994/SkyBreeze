@@ -8,7 +8,7 @@
             <Footer :class="` ${loaderIs ? 'loading' : ''}`" />
             <call-to-action />
         </div>
-        <div>
+        <div v-if="elfsight">
             <div class="elfsight-app-8c6542de-dfa4-4f51-a333-b11356fdcd59"></div>
             <div class="elfsight-app-53d7e99d-d3fa-4107-aee7-71e403442970"></div>
 
@@ -27,7 +27,8 @@ export default {
         return {
             isLoaded: false,
             width: 0,
-            toHideLoader: true
+            toHideLoader: true,
+            elfsight: false
         }
     },
     computed: {
@@ -50,6 +51,9 @@ export default {
             this.$cookies.set('langId', 3)
         }
         this.isLoaded = await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
+        setTimeout(() => {
+            this.elfsight = true
+        }, 5000);
     },
     watch: {
         loaderIs(newValue) {

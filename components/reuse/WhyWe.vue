@@ -3,7 +3,8 @@
         <div class="wrapper">
             <div class="why-we__top" v-if="translations.length > 0">
                 <div class="why-we__title title h2">{{ translations[5].text }}</div>
-                <div @click="$router.push(localePath('/about-us'))" class="why-we__link">
+                <div @click="$router.push(localePath('/about-us'))" class="why-we__link"
+                    v-if="$route.path !== '/about-us'">
                     <nuxt-link :to="switchLocalePath($i18n.locale)" class="why-we__link"
                         v-if="translationsSite.length > 0">
                         {{ translationsSite[0].text }}
