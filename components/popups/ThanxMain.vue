@@ -19,17 +19,17 @@ export default {
                 {
                     lang: 'ru',
                     text: 'В скором времени мы свяжемся с Вами',
-                    title: 'Спасибо за заказ!'
+                    title: 'Спасибо за сообщение!'
                 },
                 {
                     lang: 'es',
                     text: 'Nos pondremos en contacto con usted en breve',
-                    title: '¡Gracias por tu orden!'
+                    title: 'Gracias por tu mensaje'
                 },
                 {
                     lang: 'en',
                     text: 'We will contact you shortly',
-                    title: 'Thanks for your order!'
+                    title: 'Thanks for your message!'
                 },
             ],
         }

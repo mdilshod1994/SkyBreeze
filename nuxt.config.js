@@ -53,15 +53,16 @@ export default {
   ],
   i18n: {
     locales: [
+      'es',
       'ru',
       'en',
-      'es',
     ],
-    // defaultLocale: 'ru',
-    // vueI18n: {
-    //   fallbackLocale: 'ru',
-    //   messages
-    // }
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    vueI18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+    }
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

@@ -117,7 +117,19 @@
                                 <label class="checbox">
                                     <input type="checkbox" name="value" value="active" checked>
                                     <div class="checbox__icon"></div>
-                                    <div class="checbox__caption" v-html="translationsSite[6].text"></div>
+                                    <div class="checbox__caption">
+                                        {{ translatedForm[0].text1 }}
+                                        <div @click="$router.push(localePath(`/privacy-notice`))">
+                                            <nuxt-link :to="switchLocalePath($i18n.locale)">{{ translatedForm[0].text2
+                                            }}</nuxt-link>
+                                        </div>
+                                        {{ translatedForm[0].text3 }}
+                                        <div @click="$router.push(localePath(`/terms-and-conditions`))">
+                                            <nuxt-link :to="switchLocalePath($i18n.locale)">
+                                                {{ translatedForm[0].text4 }}
+                                            </nuxt-link>
+                                        </div>
+                                    </div>
                                 </label>
                             </div>
                         </div>
@@ -149,9 +161,39 @@ export default {
             errName: false,
             errMessage: false,
             showThanx: false,
+            translationFormAbout: [
+                {
+                    text1: 'Соглашаюсь с',
+                    text2: 'Политикой Конфиденциальности',
+                    text3: 'и',
+                    text4: 'Условия и Положения',
+                    lang: 'ru',
+                },
+                {
+                    text1: 'I agree with',
+                    text2: 'Privacy Policy',
+                    text3: 'and',
+                    text4: 'Terms and conditions',
+                    lang: 'en',
+                },
+                {
+                    text1: 'Acepto la',
+                    text2: 'Política de Privacidad',
+                    text3: 'y los',
+                    text4: 'Términos y condiciones',
+                    lang: 'es',
+                },
+            ],
         }
     },
     computed: {
+        translatedForm() {
+            return this.translationFormAbout.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
+            })
+        },
         translations() {
             let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'about')
             return topMenu
@@ -159,10 +201,6 @@ export default {
         translationForm() {
             let form = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'form')
             return form
-        },
-        translationsSite() {
-            let topMenu = this.$store.getters['translations/TRANSLATIONS'].filter(el => el.type === 'site')
-            return topMenu
         },
     },
     methods: {

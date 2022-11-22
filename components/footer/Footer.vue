@@ -95,7 +95,7 @@
             <div class="wrapper bottom__wrap flex" v-if="translations.length > 0">
                 <div class="bottom__copiright">{{ translations[10].text }} </div>
                 <div class="bottom__buttons flex">
-                    <div @click="$router.push(localePath(`/privacy-policy`))">
+                    <div @click="$router.push(localePath(`/privacy-notice`))">
                         <nuxt-link :to="switchLocalePath($i18n.locale)" class="bottom__link">{{ translations[12].text }}
                         </nuxt-link>
                     </div>

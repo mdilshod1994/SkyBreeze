@@ -22,16 +22,6 @@ import Header from '../components/headers/Header.vue'
 import CallToAction from '../components/popups/CallToAction.vue'
 import LoadingBar from '../components/UI/LoadingBar.vue'
 export default {
-    // head() {
-    //     return {
-    //         script: [
-    //             {
-    //                 src: 'https://apps.elfsight.com/p/platform.js',
-    //                 defer: true
-    //             }
-    //         ],
-    //     }
-    // },
     components: { Header, Footer, CallToAction, LoadingBar },
     data() {
         return {
@@ -52,10 +42,10 @@ export default {
     },
     async mounted() {
         const langVal = this.$cookies.get('i18n_redirected')
-        if (langVal == 'ru') {
-            this.$cookies.set('langId', 1)
-        } else if (langVal == 'en') {
+        if (langVal == 'en') {
             this.$cookies.set('langId', 2)
+        } else if (langVal == 'ru') {
+            this.$cookies.set('langId', 1)
         } else {
             this.$cookies.set('langId', 3)
         }

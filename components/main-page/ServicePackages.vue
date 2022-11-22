@@ -10,8 +10,8 @@
                         <div :class="`service-packages__coll service-packages__coll--${index + 1}`">
                             <div class="service-packages__top">
                                 <div class="service-packages__top-box">
-                                    <div class="service-packages__top-caption">{{ item.name }}</div>
-                                    <div class="service-packages__top-price">{{ item.price }}$</div>
+                                    <div class="service-packages__top-caption" style="font-size:20px">{{ item.name }}</div>
+                                    <div class="service-packages__top-price" style="font-size:20px">{{ item.price }}$/{{ item.time }}</div>
                                 </div>
                             </div>
                             <div class="service-packages__content">
@@ -52,8 +52,9 @@
                     <div :class="`service-packages__coll service-packages__coll--${index + 1}`">
                         <div class="service-packages__top">
                             <div class="service-packages__top-box">
-                                <div class="service-packages__top-caption">{{ item.name }}</div>
-                                <div class="service-packages__top-price">{{ item.price }}$</div>
+                                <div class="service-packages__top-caption" style="font-size:20px">{{ item.name }}</div>
+                                <div class="service-packages__top-price" style="font-size:20px">{{ item.price
+                                }}$/{{ item.time }}</div>
                             </div>
                         </div>
                         <div class="service-packages__content">
@@ -121,6 +122,7 @@ export default {
                     lang: 'ru',
                     name: 'Dynamic Amigos',
                     price: 145,
+                    time: 'ч',
                     packages: [
                         {
                             text: 'Грузовик + 2 грузчика'
@@ -173,6 +175,7 @@ export default {
                     lang: 'ru',
                     name: 'The Supremes',
                     price: 200,
+                    time: 'ч',
                     packages: [
                         {
                             text: 'Грузовик + 3 грузчика'
@@ -225,6 +228,7 @@ export default {
                     lang: 'ru',
                     name: 'SkyBreeze Gang',
                     price: 255,
+                    time: 'ч',
                     packages: [
                         {
                             text: 'Грузовик + 4 грузчика'
@@ -277,12 +281,16 @@ export default {
                     lang: 'en',
                     name: 'Dynamic Amigos',
                     price: 145,
+                    time: 'hr',
                     packages: [
                         {
                             text: '1 truck 2 movers'
                         },
                         {
-                            text: 'Free wardrobe box as shrink wrap & tape'
+                            text: 'Free wardrobe boxes'
+                        },
+                        {
+                            text: 'Free shrink wrap & tape'
                         },
                         {
                             text: 'Free slip and protective film'
@@ -293,8 +301,6 @@ export default {
                         {
                             text: 'Free tv crating and computers'
                         },
-
-
                         {
                             text: 'Free disassembly and reassembly of transported furniture'
                         },
@@ -330,12 +336,16 @@ export default {
                     lang: 'en',
                     name: 'The Supremes',
                     price: 200,
+                    time: 'hr',
                     packages: [
                         {
                             text: '1 truck 3 movers'
                         },
                         {
-                            text: 'Free wardrobe box as shrink wrap & tape '
+                            text: 'Free wardrobe boxes'
+                        },
+                        {
+                            text: 'Free shrink wrap & tape'
                         },
                         {
                             text: 'Free slip and protective film'
@@ -383,12 +393,16 @@ export default {
                     lang: 'en',
                     name: 'SkyBreeze Gang',
                     price: 255,
+                    time: 'hr',
                     packages: [
                         {
                             text: '1 truck 4 movers'
                         },
                         {
-                            text: 'Free wardrobe box as shrink wrap & tape '
+                            text: 'Free wardrobe boxes'
+                        },
+                        {
+                            text: 'Free shrink wrap & tape'
                         },
                         {
                             text: 'Free slip and protective film'
@@ -436,6 +450,7 @@ export default {
                     lang: 'es',
                     name: 'Dynamic Amigos',
                     price: 145,
+                    time: 'hora',
                     packages: [
                         {
                             text: 'Camión + 2 mudanzas'
@@ -489,6 +504,7 @@ export default {
                     lang: 'es',
                     name: 'The Supremes',
                     price: 200,
+                    time: 'hora',
                     packages: [
                         {
                             text: 'Camión + 3 mudanzas'
@@ -542,6 +558,7 @@ export default {
                     lang: 'es',
                     name: 'SkyBreeze Gang',
                     price: 255,
+                    time: 'hora',
                     packages: [
                         {
                             text: 'Camión + 4 mudanzas'

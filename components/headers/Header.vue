@@ -207,7 +207,7 @@ export default {
     name: 'Header',
     data() {
         return {
-            currLang: 'RU',
+            currLang: 'EN',
         }
     },
     computed: {

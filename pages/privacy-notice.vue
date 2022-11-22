@@ -1569,7 +1569,7 @@
                                                                                                     commercial purpose
                                                                                                     in the preceding
                                                                                                     twelve (12) months:
-                                                                                                    
+
                                                                                                     <div>
                                                                                                         <p><br></p>
                                                                                                         <p><br></p>
@@ -2641,7 +2641,9 @@
     </div>
 </template>
 <script>
+import BreadCrumpBtnHome from '../components/UI/breadCrumpBtnHome.vue'
 export default {
+    components: { BreadCrumpBtnHome },
     data() {
         return {
 
@@ -2650,10 +2652,11 @@ export default {
 }
 </script>
 <style scoped>
-a{
+a {
     color: aqua;
 }
-td{
+
+td {
     border: 1px solid aqua;
 }
 </style>
