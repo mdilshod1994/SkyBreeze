@@ -10,8 +10,11 @@
                         <div :class="`service-packages__coll service-packages__coll--${index + 1}`">
                             <div class="service-packages__top">
                                 <div class="service-packages__top-box">
-                                    <div class="service-packages__top-caption" style="font-size:20px">{{ item.name }}</div>
-                                    <div class="service-packages__top-price" style="font-size:20px">{{ item.price }}$/{{ item.time }}</div>
+                                    <div class="service-packages__top-caption" style="font-size:20px">{{ item.name }}
+                                    </div>
+                                    <div class="service-packages__top-price" style="font-size:20px">{{ item.price }}$/{{
+                                            item.time
+                                    }}</div>
                                 </div>
                             </div>
                             <div class="service-packages__content">
@@ -299,7 +302,7 @@ export default {
                             text: 'Free use of moving blankets'
                         },
                         {
-                            text: 'Free tv crating and computers'
+                            text: 'Free computers/TV crating'
                         },
                         {
                             text: 'Free disassembly and reassembly of transported furniture'
@@ -354,7 +357,7 @@ export default {
                             text: 'Free use of moving blankets'
                         },
                         {
-                            text: 'Free tv crating and computers'
+                            text: 'Free computers/TV crating'
                         },
 
 
@@ -411,7 +414,7 @@ export default {
                             text: 'Free use of moving blankets'
                         },
                         {
-                            text: 'Free tv crating and computers'
+                            text: 'Free computers/TV crating'
                         },
 
 
@@ -618,7 +621,7 @@ export default {
     },
     methods: {
         openServicesModal(e) {
-            this.$store.dispatch('choose-service-popup/openPopup', { type: 'packages', info: {}, package: e })
+            this.$store.dispatch('choose-service-popup/openPopup', { type: 'packages', package: e })
         }
     },
     mounted() {

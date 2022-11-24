@@ -27,7 +27,7 @@ import SolveProblem from '../components/main-page/SolveProblem.vue'
 import TrustSwiper from '../components/main-page/TrustSwiper.vue'
 import WhyWe from '../components/reuse/WhyWe.vue'
 export default {
-  
+
   name: 'IndexPage',
   components: {
     Promo,
@@ -63,7 +63,7 @@ export default {
         serviceSelection.style.top = '0';
       }
     });
-    document.title = 'SkyBreeze'
+    document.title = 'Professional Moving company – Sky Breeze GO'
   }
 
 }

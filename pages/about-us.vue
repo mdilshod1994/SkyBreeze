@@ -112,7 +112,16 @@
                             </div>
                         </div>
                         <div class="about-order__bottom">
-                            <button class="form__btn btn" type="submit">{{ translationForm[5].text }}</button>
+                            <!-- <button class="form__btn btn" type="submit">{{ translationForm[5].text }}</button> -->
+                            <button type="submit" :disabled='sending'
+                                :class="`form__btn btn ${sending ? 'change-bg-btn' : ''}`">
+                                <div v-if="!sending">
+                                    {{ translationForm[5].text }}
+                                </div>
+                                <div v-else class="loading-dots">
+                                    {{ translatedForm[0].btnText }}
+                                </div>
+                            </button>
                             <div class="form__checbox">
                                 <label class="checbox">
                                     <input type="checkbox" name="value" value="active" checked>
@@ -149,6 +158,7 @@ export default {
     components: { WhyWe, BreadCrumpBtnHome, ThanxMain },
     data() {
         return {
+            sending: false,
             message: {
                 name: '',
                 lastname: '',
@@ -168,6 +178,7 @@ export default {
                     text3: 'и',
                     text4: 'Условия и Положения',
                     lang: 'ru',
+                    btnText: 'Отправляем'
                 },
                 {
                     text1: 'I agree with',
@@ -175,6 +186,7 @@ export default {
                     text3: 'and',
                     text4: 'Terms and conditions',
                     lang: 'en',
+                    btnText: 'Sending'
                 },
                 {
                     text1: 'Acepto la',
@@ -182,6 +194,7 @@ export default {
                     text3: 'y los',
                     text4: 'Términos y condiciones',
                     lang: 'es',
+                    btnText: 'Enviando'
                 },
             ],
         }
@@ -211,12 +224,14 @@ export default {
         },
         async postMessage() {
             try {
+                this.sending = true
                 const message = await this.$axios.post('/messagesEmails', this.message)
                     .then(res => {
                         return res.data
                     })
                 if (message) {
                     this.showThanx = true
+                    this.sending = false
                     setTimeout(() => {
                         this.showThanx = false
                     }, 2000);
@@ -230,6 +245,7 @@ export default {
                     type: 2
                 }
             } catch (error) {
+                this.sending = false
                 if (error?.response?.data) {
                     this.errEmail = !!error?.response?.data.errors.email
                     this.errName = !!error?.response?.data.errors.name
@@ -253,5 +269,47 @@ export default {
 }
 </script>
 <style>
+.form__btn.change-bg-btn {
+    background-color: #273e60 !important;
+}
 
+.loading-dots {
+    flex-shrink: 0;
+}
+
+.loading-dots:after {
+    content: ' .';
+    animation: dots 1s steps(5, end) infinite;
+}
+
+@keyframes dots {
+
+    0%,
+    20% {
+        color: rgba(0, 0, 0, 0);
+        text-shadow:
+            .25em 0 0 rgba(0, 0, 0, 0),
+            .5em 0 0 rgba(0, 0, 0, 0);
+    }
+
+    40% {
+        color: white;
+        text-shadow:
+            .25em 0 0 rgba(0, 0, 0, 0),
+            .5em 0 0 rgba(0, 0, 0, 0);
+    }
+
+    60% {
+        text-shadow:
+            .25em 0 0 white,
+            .5em 0 0 rgba(0, 0, 0, 0);
+    }
+
+    80%,
+    100% {
+        text-shadow:
+            .25em 0 0 white,
+            .5em 0 0 white;
+    }
+}
 </style>

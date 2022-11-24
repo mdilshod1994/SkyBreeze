@@ -200,7 +200,7 @@ export default {
     },
     methods: {
         openServicesModal(e) {
-            this.$store.dispatch('choose-service-popup/openPopup', { type: 'services', info: { e } })
+            this.$store.dispatch('choose-service-popup/openPopup', { type: 'services', e })
         }
     }
 }

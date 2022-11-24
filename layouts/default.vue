@@ -11,8 +11,6 @@
         <div v-if="elfsight">
             <div class="elfsight-app-8c6542de-dfa4-4f51-a333-b11356fdcd59"></div>
             <div class="elfsight-app-53d7e99d-d3fa-4107-aee7-71e403442970"></div>
-
-            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
         </div>
     </div>
 </template>
@@ -42,14 +40,6 @@ export default {
         }
     },
     async mounted() {
-        const langVal = this.$cookies.get('i18n_redirected')
-        if (langVal == 'en') {
-            this.$cookies.set('langId', 2)
-        } else if (langVal == 'ru') {
-            this.$cookies.set('langId', 1)
-        } else {
-            this.$cookies.set('langId', 3)
-        }
         this.isLoaded = await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
         setTimeout(() => {
             this.elfsight = true

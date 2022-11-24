@@ -7,6 +7,7 @@
                         <li>
                             <bread-crump-btn-home />
                         </li>
+                        <li>Privacy Notice</li>
                     </ul>
                 </div>
             </div>
@@ -46,31 +47,31 @@
                                 details about any of these topics by clicking the link following each key point or by
                                 using our table of contents below to find the section you are looking for. You can also
                                 click&nbsp;</em></strong><a
-                            href="https://html5css.ru/edithtm/#toc"><strong><em>here</em></strong></a><strong><em>&nbsp;to
+                            href="#toc"><strong><em>here</em></strong></a><strong><em>&nbsp;to
                                 go directly to our table of contents.</em></strong></div>
                     <div><br></div>
                     <div><strong>What personal information do we process?</strong> When you visit, use, or navigate our
                         Services, we may process personal information depending on how you interact with&nbsp;Sky Breeze
                         GO&nbsp;and the Services, the choices you make, and the products and features you use.
-                        Click&nbsp;<a href="https://html5css.ru/edithtm/#personalinfo">here</a> to learn more.</div>
+                        Click&nbsp;<a href="#personalinfo">here</a> to learn more.</div>
                     <div><br></div>
                     <div><strong>Do we process any sensitive personal information?</strong> We do not process sensitive
                         personal information.</div>
                     <div><br></div>
                     <div><strong>Do we receive any information from third parties?</strong> We may receive information
                         from public databases, marketing partners, social media platforms, and other outside sources.
-                        Click&nbsp;<a href="https://html5css.ru/edithtm/#othersources">here</a> to learn more.</div>
+                        Click&nbsp;<a href="#othersources">here</a> to learn more.</div>
                     <div><br></div>
                     <div><strong>How do we process your information?</strong> We process your information to provide,
                         improve, and administer our Services, communicate with you, for security and fraud prevention,
                         and to comply with law. We may also process your information for other purposes with your
                         consent. We process your information only when we have a valid legal reason to do so.
-                        Click&nbsp;<a href="https://html5css.ru/edithtm/#infouse">here</a> to learn more.</div>
+                        Click&nbsp;<a href="#infouse">here</a> to learn more.</div>
                     <div><br></div>
                     <div><strong>In what situations and with which&nbsp;types of&nbsp;parties do we share personal
                             information?</strong> We may share information in specific situations and with
-                        specific&nbsp;categories of&nbsp;third parties. Click&nbsp;<a
-                            href="https://html5css.ru/edithtm/#whoshare">here</a> to learn more.</div>
+                        specific&nbsp;categories of&nbsp;third parties. Click&nbsp;<a href="#whoshare">here</a> to learn
+                        more.</div>
                     <div><br></div>
                     <div><strong>How do we keep your information safe?</strong> We have&nbsp;organizational&nbsp;and
                         technical processes and procedures in place to protect your personal information. However, no
@@ -78,11 +79,11 @@
                         be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or
                         other&nbsp;unauthorized&nbsp;third parties will not be able to defeat our security and
                         improperly collect, access, steal, or modify your information. Click&nbsp;<a
-                            href="https://html5css.ru/edithtm/#infosafe">here</a> to learn more.</div>
+                            href="#infosafe">here</a> to learn more.</div>
                     <div><br></div>
                     <div><strong>What are your rights?</strong> Depending on where you are located geographically, the
                         applicable privacy law may mean you have certain rights regarding your personal information.
-                        Click&nbsp;<a href="https://html5css.ru/edithtm/#privacyrights">here</a> to learn more.</div>
+                        Click&nbsp;<a href="#privacyrights">here</a> to learn more.</div>
                     <div><br></div>
                     <div><strong>How do you exercise your rights?</strong> The easiest way to exercise your rights is by
                         filling out our data subject request form available&nbsp;<a
@@ -91,38 +92,38 @@
                         and act upon any request in accordance with applicable data protection laws.</div>
                     <div><br></div>
                     <div>Want to learn more about what&nbsp;Sky Breeze GO&nbsp;does with any information we collect?
-                        Click&nbsp;<a href="https://html5css.ru/edithtm/#toc">here</a> to review the notice in full.
+                        Click&nbsp;<a href="#toc">here</a> to review the notice in full.
                     </div>
-                    <div><br></div>
+                    <div id="toc"><br></div>
                     <div><br></div>
                     <div><strong>TABLE OF CONTENTS</strong></div>
                     <div><br></div>
-                    <div><a href="https://html5css.ru/edithtm/#infocollect">1. WHAT INFORMATION DO WE COLLECT?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#infouse">2. HOW DO WE PROCESS YOUR INFORMATION?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#whoshare">3. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL
+                    <div><a href="#infocollect">1. WHAT INFORMATION DO WE COLLECT?</a></div>
+                    <div><a href="#infouse">2. HOW DO WE PROCESS YOUR INFORMATION?</a></div>
+                    <div><a href="#whoshare">3. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL
                             INFORMATION?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#cookies">4. DO WE USE COOKIES AND OTHER TRACKING
+                    <div><a href="#cookies">4. DO WE USE COOKIES AND OTHER TRACKING
                             TECHNOLOGIES?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#inforetain">5. HOW LONG DO WE KEEP YOUR INFORMATION?</a>
+                    <div><a href="#inforetain">5. HOW LONG DO WE KEEP YOUR INFORMATION?</a>
                     </div>
-                    <div><a href="https://html5css.ru/edithtm/#infosafe">6. HOW DO WE KEEP YOUR INFORMATION SAFE?</a>
+                    <div><a href="#infosafe">6. HOW DO WE KEEP YOUR INFORMATION SAFE?</a>
                     </div>
-                    <div><a href="https://html5css.ru/edithtm/#infominors">7. DO WE COLLECT INFORMATION FROM MINORS?</a>
+                    <div><a href="#infominors">7. DO WE COLLECT INFORMATION FROM MINORS?</a>
                     </div>
-                    <div><a href="https://html5css.ru/edithtm/#privacyrights">8. WHAT ARE YOUR PRIVACY RIGHTS?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#DNT">9. CONTROLS FOR DO-NOT-TRACK FEATURES</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#caresidents">10. DO CALIFORNIA RESIDENTS HAVE SPECIFIC
+                    <div><a href="#privacyrights">8. WHAT ARE YOUR PRIVACY RIGHTS?</a></div>
+                    <div><a href="#DNT">9. CONTROLS FOR DO-NOT-TRACK FEATURES</a></div>
+                    <div><a href="#caresidents">10. DO CALIFORNIA RESIDENTS HAVE SPECIFIC
                             PRIVACY RIGHTS?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#policyupdates">11. DO WE MAKE UPDATES TO THIS NOTICE?</a>
+                    <div><a href="#policyupdates">11. DO WE MAKE UPDATES TO THIS NOTICE?</a>
                     </div>
-                    <div><a href="https://html5css.ru/edithtm/#contact">12. HOW CAN YOU CONTACT US ABOUT THIS
+                    <div><a href="#contact">12. HOW CAN YOU CONTACT US ABOUT THIS
                             NOTICE?</a></div>
-                    <div><a href="https://html5css.ru/edithtm/#request">13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE
+                    <div><a href="#request">13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE
                             DATA WE COLLECT FROM YOU?</a></div>
                     <div><br></div>
-                    <div><strong>1. WHAT INFORMATION DO WE COLLECT?</strong></div>
+                    <div id="infocollect"><strong>1. WHAT INFORMATION DO WE COLLECT?</strong></div>
                     <div><br></div>
-                    <div><strong>Personal information you disclose to us</strong></div>
+                    <div id="personalinfo"><strong>Personal information you disclose to us</strong></div>
                     <div>
                         <div><br></div>
                         <div><strong><em>In Short:</em></strong><strong><em>&nbsp;</em></strong><em>We collect personal
@@ -214,7 +215,7 @@
                             certain aspects of the Services.</li>
                     </ul>
                     <div><br></div>
-                    <div><strong>Information collected from other sources</strong></div>
+                    <div id="othersources"><strong>Information collected from other sources</strong></div>
                     <div>
                         <div><br></div>
                         <div><strong><em>In Short:&nbsp;</em></strong><em>We may collect limited data from public
@@ -230,7 +231,7 @@
                         event promotion.</div>
                     <div><br></div>
                     <div><br></div>
-                    <div><strong>2. HOW DO WE PROCESS YOUR INFORMATION?</strong></div>
+                    <div id="infouse"><strong>2. HOW DO WE PROCESS YOUR INFORMATION?</strong></div>
                     <div>
                         <div><br></div>
                         <div><strong><em>In Short:&nbsp;</em></strong><em>We process your information to provide,
@@ -284,7 +285,7 @@
                                                 information you send to us for our marketing purposes, if this is in
                                                 accordance with your marketing preferences. You can opt out of our
                                                 marketing emails at any time. For more information, see&nbsp;&quot;<a
-                                                    href="https://html5css.ru/edithtm/#privacyrights">WHAT ARE YOUR
+                                                    href="#privacyrights">WHAT ARE YOUR
                                                     PRIVACY RIGHTS?</a>&quot;&nbsp;below).</li>
                                         </ul>
                                         <div>
@@ -337,7 +338,8 @@
                                                                         <div>
                                                                             <div><br></div>
                                                                             <div><br></div>
-                                                                            <div><strong>3. WHEN AND WITH WHOM DO WE
+                                                                            <div id="whoshare"><strong>3. WHEN AND WITH
+                                                                                    WHOM DO WE
                                                                                     SHARE YOUR PERSONAL
                                                                                     INFORMATION?</strong></div>
                                                                             <div><br></div>
@@ -448,7 +450,8 @@
                                                                                         <div>
                                                                                             <div><br></div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>4. DO WE USE
+                                                                                            <div id="cookies"><strong>4.
+                                                                                                    DO WE USE
                                                                                                     COOKIES AND OTHER
                                                                                                     TRACKING
                                                                                                     TECHNOLOGIES?</strong>
@@ -477,7 +480,8 @@
                                                                                                 out in our Cookie
                                                                                                 Notice.</div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>5. HOW LONG DO
+                                                                                            <div id="inforetain">
+                                                                                                <strong>5. HOW LONG DO
                                                                                                     WE KEEP YOUR
                                                                                                     INFORMATION?</strong>
                                                                                             </div>
@@ -526,10 +530,12 @@
                                                                                                 deletion is possible.
                                                                                             </div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>6. HOW DO WE
+                                                                                            <div id="infosafe">
+                                                                                                <strong>6. HOW DO WE
                                                                                                     KEEP YOUR
                                                                                                     INFORMATION
-                                                                                                    SAFE?</strong></div>
+                                                                                                    SAFE?</strong>
+                                                                                            </div>
                                                                                             <div><br></div>
                                                                                             <div><strong><em>In
                                                                                                         Short:&nbsp;</em></strong><em>We
@@ -577,7 +583,8 @@
                                                                                                 within a secure
                                                                                                 environment.</div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>7. DO WE
+                                                                                            <div id="infominors">
+                                                                                                <strong>7. DO WE
                                                                                                     COLLECT INFORMATION
                                                                                                     FROM
                                                                                                     MINORS?</strong>
@@ -621,7 +628,8 @@
                                                                                                 at&nbsp;help@skybreezego.
                                                                                             </div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>8. WHAT ARE
+                                                                                            <div id="privacyrights">
+                                                                                                <strong>8. WHAT ARE
                                                                                                     YOUR PRIVACY
                                                                                                     RIGHTS?</strong>
                                                                                             </div>
@@ -681,7 +689,7 @@
                                                                                                 us by using the contact
                                                                                                 details provided in the
                                                                                                 section&nbsp;&quot;<a
-                                                                                                    href="https://html5css.ru/edithtm/#contact">HOW
+                                                                                                    href="#contact">HOW
                                                                                                     CAN YOU CONTACT US
                                                                                                     ABOUT THIS
                                                                                                     NOTICE?</a>&quot;&nbsp;below.
@@ -717,7 +725,7 @@
                                                                                                 contacting us using the
                                                                                                 details provided in the
                                                                                                 section&nbsp;&quot;<a
-                                                                                                    href="https://html5css.ru/edithtm/#contact">HOW
+                                                                                                    href="#contact">HOW
                                                                                                     CAN YOU CONTACT US
                                                                                                     ABOUT THIS
                                                                                                     NOTICE?</a>&quot;&nbsp;below.
@@ -767,7 +775,8 @@
                                                                                                 at&nbsp;help@skybreezego.
                                                                                             </div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>9. CONTROLS FOR
+                                                                                            <div id="DNT"><strong>9.
+                                                                                                    CONTROLS FOR
                                                                                                     DO-NOT-TRACK
                                                                                                     FEATURES</strong>
                                                                                             </div>
@@ -806,7 +815,8 @@
                                                                                                 revised version of this
                                                                                                 privacy notice.</div>
                                                                                             <div><br></div>
-                                                                                            <div><strong>10. DO
+                                                                                            <div id="caresidents">
+                                                                                                <strong>10. DO
                                                                                                     CALIFORNIA RESIDENTS
                                                                                                     HAVE SPECIFIC
                                                                                                     PRIVACY
@@ -1600,7 +1610,7 @@
                                                                                                                                 be
                                                                                                                                 found
                                                                                                                                 under&nbsp;&quot;<a
-                                                                                                                                    href="https://html5css.ru/edithtm/#whoshare">WHEN
+                                                                                                                                    href="#whoshare">WHEN
                                                                                                                                     AND
                                                                                                                                     WITH
                                                                                                                                     WHOM
@@ -2355,7 +2365,8 @@
                                                                                                                             <div>
                                                                                                                                 <br>
                                                                                                                             </div>
-                                                                                                                            <div>
+                                                                                                                            <div
+                                                                                                                                id="policyupdates">
                                                                                                                                 <strong>11.
                                                                                                                                     DO
                                                                                                                                     WE
@@ -2473,7 +2484,8 @@
                                                                                                                             <div>
                                                                                                                                 <br>
                                                                                                                             </div>
-                                                                                                                            <div>
+                                                                                                                            <div
+                                                                                                                                id="contact">
                                                                                                                                 <strong>12.
                                                                                                                                     HOW
                                                                                                                                     CAN
@@ -2528,7 +2540,8 @@
                                                                                                                             <div>
                                                                                                                                 <br>
                                                                                                                             </div>
-                                                                                                                            <div>
+                                                                                                                            <div
+                                                                                                                                id="request">
                                                                                                                                 <strong>13.
                                                                                                                                     HOW
                                                                                                                                     CAN

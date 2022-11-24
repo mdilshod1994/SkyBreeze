@@ -223,16 +223,16 @@ export default {
         }
     },
     methods: {
-
-        async langSwitch() {
-            await this.$store.dispatch('lang/getAllInfo', this.$cookies.get('langId'))
+        async langSwitch(e) {
+            await this.$store.dispatch('lang/settingLangID', e)
             this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()
         }
     },
     async mounted() {
-        this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()
+        if (this.$cookies.get('i18n_redirected')) {
+            this.currLang = this.$cookies.get('i18n_redirected').toUpperCase()
+        }
         await this.$store.dispatch('lang/getLangs')
-        await this.langSwitch()
 
         let $windowWidth = window.innerWidth;
 
@@ -287,16 +287,6 @@ export default {
     },
     watch: {
         $route(to, from) {
-            if (to || from) {
-                const langVal = this.$cookies.get('i18n_redirected')
-                if (langVal == 'ru') {
-                    this.$cookies.set('langId', 1)
-                } else if (langVal == 'en') {
-                    this.$cookies.set('langId', 2)
-                } else {
-                    this.$cookies.set('langId', 3)
-                }
-            }
             if (to || from) {
                 let content = document.querySelector('.header__content')
                 let burger = document.querySelector('.header__burger')

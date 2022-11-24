@@ -61,7 +61,7 @@
                     <div class="footer__last-box">
                         <div class="footer__caption">{{ translations[9].text }}</div>
                         <div class="footer__social">
-                            <a href="https://www.instagram.com/skybreeze_us" target="_blank"
+                            <a href="https://www.instagram.com/skybreezego/" target="_blank"
                                 class="footer__social-link">
                                 <img src="@/assets/img/footer/instagram.svg" alt="">
                             </a>
@@ -79,7 +79,7 @@
                                 target="_blank">
                                 <img src="@/assets/img/footer/linkedin.svg" alt="">
                             </a>
-                            <a href="https://twitter.com/SkybreezeUS" class="footer__social-link" target="_blank">
+                            <a href="https://twitter.com/skybreezego" class="footer__social-link" target="_blank">
                                 <img src="@/assets/img/footer/twitter.svg" alt="">
                             </a>
                             <a href="https://m.yelp.com/biz/sky-breeze-santa-clara-3" class="footer__social-link"

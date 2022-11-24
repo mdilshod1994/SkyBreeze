@@ -1,218 +1,241 @@
 <template>
     <div :class="`call-to-action ${isActive ? 'active' : ''}`" @click="closePopup" v-if="translations.length > 0">
-        <div @click.stop="" :class="`call-to-action__body ${show ? 'active' : ''}`">
-            <img src="@/assets/img/icons/close.png" alt="close" class="call-to-action__btn-close" @click="closePopup">
-            <div class="call-to-action__title">
-                {{ translations[0].text }}
-            </div>
-            <form class="call-to-action__form" @submit.prevent="postOrder">
-                <div class="call-to-action__top-block">
-                    <label class="form__label call-to-action__label">
-                        <span class="call-to-action__text">
-                            {{ translations[1].text }}
-                        </span>
-                        <input type="text" :class="`form__field field ${errors.name ? 'errorValid' : ''}`"
-                            :placeholder="translations[1].text" v-model="name">
-                    </label>
-                    <label class="form__label call-to-action__label call-to-action__label--width">
-                        <span class="call-to-action__text">
-                            {{ translations[2].text }}
-                        </span>
-                        <input type="email" :class="`form__field field ${errors.email ? 'errorValid' : ''}`"
-                            :placeholder="translations[2].text" v-model="email">
-                    </label>
-                    <label class="form__label call-to-action__label">
-                        <span class="call-to-action__text">
-                            {{ translations[3].text }}
-                        </span>
-                        <input type="tel" :class="`form__field field ${errors.phone ? 'errorValid' : ''}`"
-                            :placeholder="translations[3].text" v-model="phone">
-                    </label>
-                    <label
-                        class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
-                        v-if="types.length" v-show="toShowTypes">
-                        <span class="call-to-action__text">
-                            <!-- {{ translations[2].text }} -->
-                            {{ promoCodeTranslation[0].typeService }}
-                        </span>
-                        <input type="text" v-for="item in types" :key="item.id"
-                            :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
-                            v-show="item.alias === currType" :value="`${item.alias === currType ? item.name : ''}`"
-                            @click="openTypes">
-                        <img src="@/assets/img/icons/arrow-d.svg" alt="" :class="`${isActiveType ? 'active' : ''}`">
-                        <div :class="`call-to-action__select-types-overlay ${isActiveType ? 'active' : ''}`">
-                        </div>
-                        <div :class="`call-to-action__select-types ${isActiveType ? 'active' : ''}`" @click.stop="">
-                            <ul class="call-to-action__select-list" @click.stop="">
-                                <li v-for="t in types" :key="t.id" @click="setTypes(t)"
-                                    :class="`call-to-action__select-item ${t.alias === currType ? 'active' : ''}`">
-                                    {{ t.name }}
-                                </li>
-                            </ul>
-                        </div>
-                    </label>
-                    <label
-                        class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
-                        v-if="showPacages">
-                        <span class="call-to-action__text">
-                            <!-- {{ translations[2].text }} -->
-                            {{ promoCodeTranslation[0].typePackage }}
+        <div @click.stop="" :class="`call-to-action__body ${show ? 'active' : ''} ${sending ? 'hidden' : ''}`">
+            <div class="call-to-action__wrapper">
+                <img src="@/assets/img/icons/close.png" alt="close" class="call-to-action__btn-close"
+                    @click="closePopup">
+                <div class="call-to-action__title">
+                    {{ translations[0].text }}
+                </div>
+                <form class="call-to-action__form" @submit.prevent="postOrder">
+                    <div class="call-to-action__top-block">
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[1].text }}
+                            </span>
+                            <input type="text" :class="`form__field field ${errors.name ? 'errorValid' : ''}`"
+                                :placeholder="translations[1].text" v-model="name">
+                        </label>
+                        <label class="form__label call-to-action__label call-to-action__label--width">
+                            <span class="call-to-action__text">
+                                {{ translations[2].text }}
+                            </span>
+                            <input type="email" :class="`form__field field ${errors.email ? 'errorValid' : ''}`"
+                                :placeholder="translations[2].text" v-model="email">
+                        </label>
+                        <label class="form__label call-to-action__label">
+                            <span class="call-to-action__text">
+                                {{ translations[3].text }}
+                            </span>
+                            <input type="tel" :class="`form__field field ${errors.phone ? 'errorValid' : ''}`"
+                                :placeholder="translations[3].text" v-model="phone">
+                        </label>
+                        <label
+                            class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
+                            v-if="types.length" v-show="toShowTypes">
+                            <span class="call-to-action__text">
+                                <!-- {{ translations[2].text }} -->
+                                {{ promoCodeTranslation[0].typeService }}
+                            </span>
+                            <input type="text" v-for="item in types" :key="item.id"
+                                :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
+                                v-show="item.alias === currType" :value="`${item.alias === currType ? item.name : ''}`"
+                                @click="openTypes">
+                            <img src="@/assets/img/icons/arrow-d.svg" alt="" :class="`${isActiveType ? 'active' : ''}`">
+                            <div :class="`call-to-action__select-types-overlay ${isActiveType ? 'active' : ''}`">
+                            </div>
+                            <div :class="`call-to-action__select-types ${isActiveType ? 'active' : ''}`" @click.stop="">
+                                <ul class="call-to-action__select-list" @click.stop="">
+                                    <li v-for="t in types" :key="t.id" @click="setTypes(t)"
+                                        :class="`call-to-action__select-item ${t.alias === currType ? 'active' : ''}`">
+                                        {{ t.name }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </label>
 
-                        </span>
-                        <input type="text"
-                            :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
-                            :value="`${currPackage === '' ? 'Выбрать пакет' : currPackage}`" @click="openPackages">
-                        <img src="@/assets/img/icons/arrow-d.svg" alt="" :class="`${isActivePackages ? 'active' : ''}`">
-                        <div :class="`call-to-action__select-types-overlay ${isActivePackages ? 'active' : ''}`">
-                        </div>
-                        <div :class="`call-to-action__select-types-package ${isActivePackages ? 'active' : ''}`"
-                            @click.stop="">
-                            <ul class="call-to-action__select-list" @click.stop="">
-                                <li v-for="t in packages" :key="t.id" @click="setPackage(t)"
-                                    :class="`call-to-action__select-item ${t.name === currPackage ? 'active' : ''}`">
-                                    {{ t.name }}
-                                </li>
-                            </ul>
-                        </div>
-                    </label>
-                    <label class="form__label call-to-action__label call-to-action__label--width">
-                        <span class="call-to-action__text">
-                            <!-- {{ translations[2].text }} -->
-                            {{ promoCodeTranslation[0].textPromoCode }}
-                        </span>
-                        <!-- <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`"
+                        <label class="form__label call-to-action__label call-to-action__label--width">
+                            <span class="call-to-action__text">
+                                <!-- {{ translations[2].text }} -->
+                                {{ promoCodeTranslation[0].textPromoCode }}
+                            </span>
+                            <!-- <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`"
                             :placeholder="translations[2].text" v-model="email"> -->
-                        <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`" placeholder="428BP"
-                            v-model="promoCode">
-                    </label>
-                    <label
-                        class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
-                        <span class="call-to-action__text">
-                            {{ translations[4].text }}
-                        </span>
-                        <input type="text" class="form__field field call-to-action__input"
-                            :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
-                            placeholder="Выбрать диапазон дат" @click="datePick">
-                        <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
-                    </label>
-                    <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
-                        :class="{ active: isOpen }" :locale="$i18n.locale" />
-                    <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }" @click="isOpen = false">
-                    </div>
+                            <input type="text" :class="`form__field field ${false ? 'errorValid' : ''}`"
+                                placeholder="428BP" v-model="promoCode">
+                        </label>
+                        <label
+                            class="form__label call-to-action__label call-to-action__label--type call-to-action__label--width"
+                            v-if="typePackages">
+                            <span class="call-to-action__text">
+                                <!-- {{ translations[2].text }} -->
+                                {{ promoCodeTranslation[0].typePackage }}
 
+                            </span>
+                            <input type="text"
+                                :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
+                                :value="`${currPackage === '' ? 'Выбрать пакет' : currPackage}`" @click="openPackages">
+                            <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                :class="`${isActivePackages ? 'active' : ''}`">
+                            <div :class="`call-to-action__select-types-overlay ${isActivePackages ? 'active' : ''}`">
+                            </div>
+                            <div :class="`call-to-action__select-types-package ${isActivePackages ? 'active' : ''}`"
+                                @click.stop="">
+                                <ul class="call-to-action__select-list" @click.stop="">
+                                    <li v-for="t in packages" :key="t.id" @click="setPackage(t)"
+                                        :class="`call-to-action__select-item ${t.name === currPackage ? 'active' : ''}`">
+                                        {{ t.name }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </label>
+                        <label
+                            class="form__label call-to-action__label call-to-action__label--width call-to-action__calendar">
+                            <span class="call-to-action__text">
+                                {{ translations[4].text }}
+                            </span>
+                            <input type="text" class="form__field field call-to-action__input"
+                                :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
+                                placeholder="Выбрать диапазон дат" @click="datePick">
+                            <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
+                        </label>
+                        <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
+                            :class="{ active: isOpen }" :locale="$i18n.locale" />
+                        <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }"
+                            @click="isOpen = false">
+                        </div>
+
+                    </div>
+                    <div class="call-to-action__bottom">
+                        <div class="call-to-action__sides">
+                            <div class="call-to-action__title call-to-action__title--sides">
+                                {{ translations[5].text }}
+                            </div>
+                            <label class="form__label call-to-action__label">
+                                <span class="call-to-action__text">
+                                    {{ translations[15].text }}
+                                </span>
+                                <input type="text"
+                                    :class="`form__field field ${errors.address_from ? 'errorValid' : ''}`"
+                                    :placeholder="translations[7].text" v-model="address_from">
+                            </label>
+                            <label class="form__label call-to-action__label">
+                                <span class="call-to-action__text">
+                                    {{ translations[8].text }}
+                                </span>
+                                <input type="text" :class="`form__field field ${errors.house_from ? 'errorValid' : ''}`"
+                                    :placeholder="`${$i18n.locale === 'en' ? 'Ex. 1А' : '1A'}`" v-model="house_from">
+                            </label>
+                            <label class="form__label call-to-action__label">
+                                <span class="call-to-action__text">
+                                    {{ translations[9].text }}
+                                </span>
+                                <input type="text" :class="`form__field field ${errors.city_from ? 'errorValid' : ''}`"
+                                    :placeholder="translations[10].text" v-model="city_from">
+                            </label>
+                            <div class="call-to-action__state">
+                                <label class="form__label  call-to-action__label call-to-action__label--first">
+                                    <span class="call-to-action__text">
+                                        {{ translations[11].text }}
+                                    </span>
+                                    <input type="text" class="form__field field" v-model="stateValStart"
+                                        @click="openZipListStart">
+                                    <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                        :class="`${isActiveZipStart ? 'active' : ''}`">
+                                    <div :class="`call-to-action__select ${isActiveZipStart ? 'active' : ''}`">
+                                        <ul class="call-to-action__select-list">
+                                            <li v-for="zip in this.statePost" :key="zip.id" @click="setZipStart(zip)"
+                                                :class="`call-to-action__select-item ${zip.name === stateValStart ? 'active' : ''}`">
+                                                {{ zip.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </label>
+                                <label class="form__label call-to-action__label call-to-action__label--second">
+                                    <span class="call-to-action__text">
+                                        {{ translations[12].text }}
+                                    </span>
+                                    <input type="text"
+                                        :class="`form__field field ${errors.zip_from ? 'errorValid' : ''}`"
+                                        :placeholder="`${$i18n.locale === 'en' ? 'Ex. 95050' : '95050'}`"
+                                        v-model="zip_from">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="call-to-action__devider">
+                        </div>
+                        <div class="call-to-action__sides">
+                            <div class="call-to-action__title call-to-action__title--sides">
+                                {{ translations[6].text }}
+                            </div>
+                            <label class="form__label call-to-action__label">
+                                <span class="call-to-action__text">
+                                    {{ translations[15].text }}
+                                </span>
+                                <input type="text" :class="`form__field field ${errors.address_to ? 'errorValid' : ''}`"
+                                    :placeholder="translations[14].text" v-model="address_to">
+                            </label>
+                            <label class="form__label call-to-action__label">
+                                <span class="call-to-action__text">
+                                    {{ translations[8].text }}
+                                </span>
+                                <input type="text" :class="`form__field field ${errors.house_to ? 'errorValid' : ''}`"
+                                    :placeholder="`${$i18n.locale === 'en' ? 'Ex. 1А' : '1A'}`" v-model="house_to">
+                            </label>
+                            <label class="form__label call-to-action__label">
+                                <span class="call-to-action__text">
+                                    {{ translations[9].text }}
+                                </span>
+                                <input type="text" :class="`form__field field ${errors.city_to ? 'errorValid' : ''}`"
+                                    :placeholder="translations[10].text" v-model="city_to">
+                            </label>
+                            <div class="call-to-action__state">
+                                <label class="form__label call-to-action__label call-to-action__label--first">
+                                    <span class="call-to-action__text">
+                                        {{ translations[11].text }}
+                                    </span>
+                                    <input type="text" class="form__field field" placeholder="" v-model="stateValEnd"
+                                        @click="openZipListEnd">
+                                    <img src="@/assets/img/icons/arrow-d.svg" alt=""
+                                        :class="`${isActiveZipEnd ? 'active' : ''}`">
+                                    <div :class="`call-to-action__select ${isActiveZipEnd ? 'active' : ''}`">
+                                        <ul class="call-to-action__select-list">
+                                            <li v-for="zip in this.statePost" :key="zip.id" @click="setZipEnd(zip)"
+                                                :class="`call-to-action__select-item ${zip.name === stateValEnd ? 'active' : ''}`">
+                                                {{ zip.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </label>
+                                <label class="form__label call-to-action__label call-to-action__label--second">
+                                    <span class="call-to-action__text">
+                                        {{ translations[12].text }}
+                                    </span>
+                                    <input type="text" :class="`form__field field ${errors.zip_to ? 'errorValid' : ''}`"
+                                        :placeholder="`${$i18n.locale === 'en' ? 'Ex. 95050' : '95050'}`"
+                                        v-model="zip_to">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="call-to-action__btn btn" type="submit">
+                        {{ translations[13].text }}
+                    </button>
+                </form>
+            </div>
+            <div :class="`call-to-action__loader ${sending ? 'show' : ''}`">
+                <div class="call-to-action__loader-body">
+                    <div class="call-to-action__loader-text">
+                        {{ translatedForm[0].btnText }}
+                    </div>
+                    <svg class="call-to-action__loader-icon" width="53" height="36" viewBox="0 0 53 36" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M43.8556 9.3651C46.615 8.30852 49.3665 7.24493 52.1259 6.18834C53.1257 5.80349 53.1417 4.57197 52.1579 4.16613C47.4469 2.22789 39.7204 -0.172177 30.0024 0.00975156C15.1653 0.282645 4.68742 6.39126 0.496262 9.21116C0.024357 9.52604 -0.127613 10.0788 0.112339 10.5546C1.8 13.7944 3.48766 17.0271 5.17533 20.2669C5.45527 20.8056 6.15913 21.0575 6.791 20.8406C9.63843 19.868 13.3977 18.8744 17.9088 18.3776C20.8682 18.0557 23.5716 18.0137 25.9232 18.1117C26.579 18.1397 26.675 18.9584 26.0351 19.1053C24.7714 19.3922 23.4117 19.77 21.988 20.2808C19.2365 21.2605 17.029 22.436 15.3573 23.4786C14.8614 23.7865 14.6854 24.3603 14.9414 24.8431C16.597 28.0408 18.2607 31.2386 19.9164 34.4433C20.3723 35.325 21.812 35.311 22.2439 34.4223C23.2757 32.3022 24.2995 30.182 25.3313 28.0618C25.4593 27.7959 25.6992 27.586 25.9952 27.474C27.8828 26.7673 30.2343 26.0536 33.0018 25.5708C36.873 24.892 40.2723 24.892 42.8798 25.074C43.4317 25.116 43.9516 24.8361 44.1595 24.3882C45.0873 22.387 46.0151 20.3928 46.943 18.3916C47.1749 17.8948 46.967 17.328 46.4471 17.0411C43.4877 15.3898 39.2005 13.4305 33.6736 12.199C29.8104 11.3383 26.2191 11.0305 23.1077 11.0165C21.884 11.0095 21.692 9.47706 22.8838 9.23915C24.9954 8.80532 27.3629 8.47645 29.9464 8.3365C35.3693 8.04962 39.8964 8.72135 43.0477 9.42808C43.3037 9.48406 43.5996 9.47006 43.8556 9.3651Z"
+                            fill="#28AECB" />
+                    </svg>
                 </div>
-                <div class="call-to-action__bottom">
-                    <div class="call-to-action__sides">
-                        <div class="call-to-action__title call-to-action__title--sides">
-                            {{ translations[5].text }}
-                        </div>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                {{ translations[15].text }}
-                            </span>
-                            <input type="text" :class="`form__field field ${errors.address_from ? 'errorValid' : ''}`"
-                                :placeholder="translations[7].text" v-model="address_from">
-                        </label>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                {{ translations[8].text }}
-                            </span>
-                            <input type="text" :class="`form__field field ${errors.house_from ? 'errorValid' : ''}`"
-                                :placeholder="`${$i18n.locale === 'en' ? 'Ex. 1А' : '1A'}`" v-model="house_from">
-                        </label>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                {{ translations[9].text }}
-                            </span>
-                            <input type="text" :class="`form__field field ${errors.city_from ? 'errorValid' : ''}`"
-                                :placeholder="translations[10].text" v-model="city_from">
-                        </label>
-                        <div class="call-to-action__state">
-                            <label class="form__label  call-to-action__label call-to-action__label--first">
-                                <span class="call-to-action__text">
-                                    {{ translations[11].text }}
-                                </span>
-                                <input type="text" class="form__field field" v-model="stateValStart"
-                                    @click="openZipListStart">
-                                <img src="@/assets/img/icons/arrow-d.svg" alt=""
-                                    :class="`${isActiveZipStart ? 'active' : ''}`">
-                                <div :class="`call-to-action__select ${isActiveZipStart ? 'active' : ''}`">
-                                    <ul class="call-to-action__select-list">
-                                        <li v-for="zip in this.statePost" :key="zip.id" @click="setZipStart(zip)"
-                                            :class="`call-to-action__select-item ${zip.name === stateValStart ? 'active' : ''}`">
-                                            {{ zip.name }}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </label>
-                            <label class="form__label call-to-action__label call-to-action__label--second">
-                                <span class="call-to-action__text">
-                                    {{ translations[12].text }}
-                                </span>
-                                <input type="text" :class="`form__field field ${errors.zip_from ? 'errorValid' : ''}`"
-                                    :placeholder="`${$i18n.locale === 'en' ? 'Ex. 95050' : '95050'}`" v-model="zip_from">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="call-to-action__devider">
-                    </div>
-                    <div class="call-to-action__sides">
-                        <div class="call-to-action__title call-to-action__title--sides">
-                            {{ translations[6].text }}
-                        </div>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                {{ translations[15].text }}
-                            </span>
-                            <input type="text" :class="`form__field field ${errors.address_to ? 'errorValid' : ''}`"
-                                :placeholder="translations[14].text" v-model="address_to">
-                        </label>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                {{ translations[8].text }}
-                            </span>
-                            <input type="text" :class="`form__field field ${errors.house_to ? 'errorValid' : ''}`"
-                                :placeholder="`${$i18n.locale === 'en' ? 'Ex. 1А' : '1A'}`" v-model="house_to">
-                        </label>
-                        <label class="form__label call-to-action__label">
-                            <span class="call-to-action__text">
-                                {{ translations[9].text }}
-                            </span>
-                            <input type="text" :class="`form__field field ${errors.city_to ? 'errorValid' : ''}`"
-                                :placeholder="translations[10].text" v-model="city_to">
-                        </label>
-                        <div class="call-to-action__state">
-                            <label class="form__label call-to-action__label call-to-action__label--first">
-                                <span class="call-to-action__text">
-                                    {{ translations[11].text }}
-                                </span>
-                                <input type="text" class="form__field field" placeholder="" v-model="stateValEnd"
-                                    @click="openZipListEnd">
-                                <img src="@/assets/img/icons/arrow-d.svg" alt=""
-                                    :class="`${isActiveZipEnd ? 'active' : ''}`">
-                                <div :class="`call-to-action__select ${isActiveZipEnd ? 'active' : ''}`">
-                                    <ul class="call-to-action__select-list">
-                                        <li v-for="zip in this.statePost" :key="zip.id" @click="setZipEnd(zip)"
-                                            :class="`call-to-action__select-item ${zip.name === stateValEnd ? 'active' : ''}`">
-                                            {{ zip.name }}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </label>
-                            <label class="form__label call-to-action__label call-to-action__label--second">
-                                <span class="call-to-action__text">
-                                    {{ translations[12].text }}
-                                </span>
-                                <input type="text" :class="`form__field field ${errors.zip_to ? 'errorValid' : ''}`"
-                                :placeholder="`${$i18n.locale === 'en' ? 'Ex. 95050' : '95050'}`" v-model="zip_to">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button class="call-to-action__btn btn" type="submit">
-                    {{ translations[13].text }}
-                </button>
-            </form>
+            </div>
         </div>
         <div :class="`call-to-action__thanks ${showThanx ? 'active' : ''}`">
             <div class="call-to-action__thanks-title">
@@ -232,6 +255,7 @@ export default {
     },
     data() {
         return {
+            sending: false,
             translate: [
                 {
                     lang: 'ru',
@@ -263,7 +287,6 @@ export default {
                 },
             ],
             isActivePackages: false,
-            showPacages: false,
             isActiveType: false,
             currType: "apartment-moving",
             valueType: "",
@@ -309,10 +332,32 @@ export default {
                 phone: false,
                 zip_from: false,
                 zip_to: false
-            }
+            },
+            translationForm: [
+                {
+                    lang: 'ru',
+                    btnText: 'Отправляем'
+
+                },
+                {
+                    lang: 'en',
+                    btnText: 'Sending'
+                },
+                {
+                    lang: 'es',
+                    btnText: 'Enviando'
+                },
+            ],
         }
     },
     computed: {
+        translatedForm() {
+            return this.translationForm.filter(el => {
+                if (el.lang === this.$i18n.locale) {
+                    return el
+                }
+            })
+        },
         translateThanx() {
             return this.translate.filter(el => {
                 if (el.lang === this.$i18n.locale) {
@@ -360,6 +405,15 @@ export default {
         types() {
             return this.$store.getters['services/SERVICES']
         },
+        typeMoving() {
+            return this.$store.getters['choose-service-popup/TYPE']
+        },
+        typePackages() {
+            return this.$store.getters['choose-service-popup/PACKAGE']
+        },
+        valueForm() {
+            return this.$store.getters['choose-service-popup/VALUE']
+        }
     },
     methods: {
         setPackage(e) {
@@ -372,32 +426,8 @@ export default {
             this.isActiveType = !this.isActiveType
         },
         setTypes(e) {
-            let test = {}
-            if (e.type === 'empty') {
-                this.types.filter(el => {
-                    if (el.alias === this.currType) {
-                        this.valueType = el.name
-                    }
-                })
-                this.toShowTypes = true
-                this.showPacages = false
-            } else if (e.type === 'services') {
-                test = e.info.e
-                if (Object.keys(test).length) {
-                    this.currType = test.alias
-                    this.valueType = test.name
-                }
-                this.toShowTypes = true
-                this.showPacages = false
-            } else {
-                if (e.type === 'packages') {
-                    this.showPacages = true
-                    this.currPackage = e.package
-                    this.toShowTypes = false
-                } else {
-                    this.showPacages = false
-                }
-            }
+            this.currType = e.alias
+            this.valueType = e.name
         },
         setDefault() {
             this.errors = {
@@ -422,6 +452,7 @@ export default {
         },
         async postOrder() {
             try {
+                this.sending = true
                 let options = { weekday: 'long', day: 'numeric', month: 'numeric', year: 'numeric' }
 
                 const orderMessage = {
@@ -448,6 +479,7 @@ export default {
                         return res
                     })
                 if (order) {
+                    this.sending = false
                     this.show = false
                     this.showThanx = true
                     setTimeout(() => {
@@ -465,8 +497,8 @@ export default {
                     this.house_to = ""
                     this.city_to = ""
                     this.zip_to = ""
-                    this.stateValStart = ""
-                    this.stateValEnd = ""
+                    this.stateValStart = "CA"
+                    this.stateValEnd = "CA"
                     this.currPackage = ''
                     this.promoCode = ''
                 }
@@ -483,6 +515,7 @@ export default {
                 this.errors.phone = !!error.response.data.errors.phone
                 this.errors.zip_from = !!error.response.data.errors.zip_from
                 this.errors.zip_to = !!error.response.data.errors.zip_to
+                this.sending = false
                 setTimeout(() => {
                     this.setDefault()
                 }, 5000)
@@ -511,9 +544,18 @@ export default {
         })
     },
     watch: {
-        typeFromPage(e) {
-            if (e) {
-                this.setTypes(e)
+        valueForm(v) {
+            if (v) {
+                this.currType = v.alias
+                this.valueType = v.name
+            } else {
+                this.currType = this.types[0].alias
+                this.valueType = this.types[0].name
+            }
+        },
+        typePackages(newValue) {
+            if (newValue) {
+                this.currPackage = newValue
             }
         },
         range(newVal) {
@@ -522,8 +564,13 @@ export default {
             }
         },
         isActive(e) {
+            const body = document.querySelector('body')
             if (e) {
                 this.show = true
+                body.classList.add('lock')
+            } else {
+                body.classList.remove('lock')
+                this.isOpen = false
             }
         }
     }
@@ -552,6 +599,74 @@ export default {
         opacity: 1;
         z-index: 9999;
         transform: translateY(0);
+    }
+
+    &__loader {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120%;
+        background: rgba(15, 29, 50, 0.1);
+        backdrop-filter: blur(3px);
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        transition: 0.3s ease-in-out;
+
+        &.show {
+            z-index: 99999;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__loader-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    &__loader-text {
+        font-size: 30px;
+        font-weight: bold;
+        color: #28aecb;
+        animation: loading 1.2s infinite linear;
+    }
+
+    @keyframes loading {
+
+        0%,
+        100% {
+            letter-spacing: normal;
+            opacity: 0.5;
+        }
+
+        50% {
+            letter-spacing: 1.5px;
+            opacity: 1;
+        }
+    }
+
+    &__loader-icon {
+        animation: loadingIcon 1.2s infinite linear;
+    }
+
+    @keyframes loadingIcon {
+
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 0.5;
+        }
+
+        50% {
+            transform: scale(1.09);
+            opacity: 1;
+        }
     }
 
     &__thanks {
@@ -736,6 +851,12 @@ export default {
             transform: translateY(0);
         }
 
+        &.hidden {
+            overflow: hidden !important;
+            display: flex;
+            align-items: flex-end;
+        }
+
         &::-webkit-scrollbar {
             width: 10px;
         }
@@ -776,6 +897,7 @@ export default {
 
     &__calendar {
         position: relative;
+        cursor: pointer;
     }
 
     &__input {

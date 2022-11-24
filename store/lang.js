@@ -1,5 +1,6 @@
 export const state = () => ({
-    langs: []
+    langs: [],
+    langid: null
 })
 
 export const getters = {
@@ -8,6 +9,9 @@ export const getters = {
     },
     dataLang(state) {
         return !!state.langs
+    },
+    LANG_ID(state) {
+        return state.langid
     }
 }
 
@@ -15,6 +19,11 @@ export const mutations = {
     setLangs(state, langs) {
         state.langs = langs
     },
+    setLangInfo(state, langinfo) {
+        state.langid = langinfo.id
+        this.$cookies.set('langId', langinfo ? langinfo.id : 2)
+        this.$cookies.set('i18n_redirected', langinfo ? langinfo.alias : 'en')
+    }
 }
 
 export const actions = {
@@ -59,6 +68,13 @@ export const actions = {
             }
         } catch (error) {
             console.error(error);
+        }
+    },
+    async settingLangID(ctx, lang) {
+        const langVal = await lang
+        if (langVal) {
+            ctx.dispatch('getAllInfo', langVal.id)
+            ctx.commit('setLangInfo', langVal)
         }
     }
 }

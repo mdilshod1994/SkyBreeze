@@ -358,9 +358,13 @@
                     <div id="privacypolicy1"><strong><strong><strong>9.</strong>&nbsp;</strong>PRIVACY POLICY</strong>
                     </div>
                     <div><br></div>
-                    <div>We care about data privacy and security.&nbsp;Please review our Privacy Policy:<strong>&nbsp;<a
-                                href="https://skybreezego.com/privacy_policy"
-                                target="_blank">https://skybreezego.com/privacy_policy</a></strong>.&nbsp;By using the
+                    <div>We care about data privacy and security.&nbsp;Please review our Privacy Policy:<strong>&nbsp;
+                            <div @click="$router.push(localePath(`/privacy-notice`))">
+                                <nuxt-link :to="switchLocalePath($i18n.locale)">
+                                    https://skybreezego.com/privacy_policy
+                                </nuxt-link>
+                            </div>
+                        </strong>.&nbsp;By using the
                         Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of
                         Use. Please be advised the Site is hosted in&nbsp;the&nbsp;United States. If you access the Site
                         from any other region of the world with laws or other requirements governing personal data
