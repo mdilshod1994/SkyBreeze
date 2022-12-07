@@ -97,7 +97,6 @@
 		transition: all 0.3s;
 	}
 }
-
 .field {
 	width: 100%;
 	font-family: "Gilroy", sans-serif;
@@ -282,7 +281,7 @@ textarea.field {
 		height: 100%;
 		top: 0px;
 		left: 0px;
-		background-image: url('@/assets/img/reviews/rate-active.svg');
+		background-image: url("@/assets/img/reviews/rate-active.svg");
 		background-repeat: no-repeat;
 		background-size: auto;
 	}

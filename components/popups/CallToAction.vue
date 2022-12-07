@@ -37,10 +37,13 @@
                                 <!-- {{ translations[2].text }} -->
                                 {{ promoCodeTranslation[0].typeService }}
                             </span>
-                            <input type="text" v-for="item in types" :key="item.id"
+                            <span class="call-to-action__btn-index" @click="openTypes">
+                            </span>
+                            <div v-for="item in types" :key="item.id"
                                 :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
-                                v-show="item.alias === currType" :value="`${item.alias === currType ? item.name : ''}`"
-                                @click="openTypes">
+                                v-show="item.alias === currType">
+                                <p v-if="(item.alias === currType)"> {{ item.name }} </p>
+                            </div>
                             <img src="@/assets/img/icons/arrow-d.svg" alt="" :class="`${isActiveType ? 'active' : ''}`">
                             <div :class="`call-to-action__select-types-overlay ${isActiveType ? 'active' : ''}`">
                             </div>
@@ -70,11 +73,18 @@
                             <span class="call-to-action__text">
                                 <!-- {{ translations[2].text }} -->
                                 {{ promoCodeTranslation[0].typePackage }}
-
                             </span>
-                            <input type="text"
-                                :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`"
-                                :value="`${currPackage === '' ? 'Выбрать пакет' : currPackage}`" @click="openPackages">
+                            <span class="call-to-action__btn-index" @click="openPackages">
+                            </span>
+                            <div :class="`form__field field call-to-action__types  ${false ? 'errorValid' : ''}`">
+                                <p v-if="currPackage === ''">
+                                    Выбрать пакет
+                                </p>
+                                <p v-else>
+                                    {{ currPackage }}
+                                </p>
+                            </div>
+
                             <img src="@/assets/img/icons/arrow-d.svg" alt=""
                                 :class="`${isActivePackages ? 'active' : ''}`">
                             <div :class="`call-to-action__select-types-overlay ${isActivePackages ? 'active' : ''}`">
@@ -94,9 +104,16 @@
                             <span class="call-to-action__text">
                                 {{ translations[4].text }}
                             </span>
-                            <input type="text" class="form__field field call-to-action__input"
-                                :value="`${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} - ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`, { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`"
-                                placeholder="Выбрать диапазон дат" @click="datePick">
+                            <span class="call-to-action__btn-index" @click="datePick">
+                            </span>
+                            <div class="form__field field call-to-action__input call-to-action__input--date">
+                                {{
+                                        `${(range.start).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`,
+                                            { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })} -
+                                                                ${(range.end).toLocaleDateString(`${$i18n.locale}-${($i18n.locale).toUpperCase()}`,
+                                                { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' })}`
+                                }}
+                            </div>
                             <img src="@/assets/img/icons/calendar.svg" class="call-to-action__calendar-icon" alt="">
                         </label>
                         <date-picker mode="dateTime" color="blue" is-dark is-range v-model="range" :columns="2"
@@ -104,7 +121,6 @@
                         <div class="call-to-action__calendar-overlay" :class="{ active: isOpen }"
                             @click="isOpen = false">
                         </div>
-
                     </div>
                     <div class="call-to-action__bottom">
                         <div class="call-to-action__sides">
@@ -138,8 +154,11 @@
                                     <span class="call-to-action__text">
                                         {{ translations[11].text }}
                                     </span>
-                                    <input type="text" class="form__field field" v-model="stateValStart"
-                                        @click="openZipListStart">
+                                    <span class="call-to-action__btn-index" @click="openZipListStart">
+                                    </span>
+                                    <div class="form__field field">
+                                        {{ stateValStart }}
+                                    </div>
                                     <img src="@/assets/img/icons/arrow-d.svg" alt=""
                                         :class="`${isActiveZipStart ? 'active' : ''}`">
                                     <div :class="`call-to-action__select ${isActiveZipStart ? 'active' : ''}`">
@@ -194,8 +213,11 @@
                                     <span class="call-to-action__text">
                                         {{ translations[11].text }}
                                     </span>
-                                    <input type="text" class="form__field field" placeholder="" v-model="stateValEnd"
-                                        @click="openZipListEnd">
+                                    <span class="call-to-action__btn-index" @click="openZipListEnd">
+                                    </span>
+                                    <div class="form__field field">
+                                        {{ stateValEnd }}
+                                    </div>
                                     <img src="@/assets/img/icons/arrow-d.svg" alt=""
                                         :class="`${isActiveZipEnd ? 'active' : ''}`">
                                     <div :class="`call-to-action__select ${isActiveZipEnd ? 'active' : ''}`">
@@ -418,6 +440,7 @@ export default {
     methods: {
         setPackage(e) {
             this.currPackage = e.name
+            this.isActivePackages = false
         },
         openPackages() {
             this.isActivePackages = !this.isActivePackages
@@ -428,6 +451,7 @@ export default {
         setTypes(e) {
             this.currType = e.alias
             this.valueType = e.name
+            this.isActiveType = false
         },
         setDefault() {
             this.errors = {
@@ -523,15 +547,17 @@ export default {
 
         },
         openZipListStart() {
-            this.isActiveZipStart = !this.isActiveZipStart
+            this.isActiveZipStart = true
         },
         openZipListEnd() {
-            this.isActiveZipEnd = !this.isActiveZipEnd
+            this.isActiveZipEnd = true
         },
         setZipStart(e) {
+            this.isActiveZipStart = false
             this.stateValStart = e.name
         },
         setZipEnd(e) {
+            this.isActiveZipEnd = false
             this.stateValEnd = e.name
         },
         datePick() {
@@ -577,6 +603,10 @@ export default {
 }
 </script>
 <style lang="scss" >
+.vc-time-picker {
+    display: none !important;
+}
+
 .call-to-action {
     position: fixed;
     top: 0;
@@ -599,6 +629,16 @@ export default {
         opacity: 1;
         z-index: 9999;
         transform: translateY(0);
+    }
+
+    &__btn-index {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        cursor: pointer;
     }
 
     &__loader {
@@ -898,10 +938,19 @@ export default {
     &__calendar {
         position: relative;
         cursor: pointer;
+
+        input {
+            cursor: pointer;
+        }
     }
 
     &__input {
-        padding-left: 50px;
+        padding-left: 35px;
+
+        &--date {
+            white-space: nowrap;
+            overflow: hidden;
+        }
     }
 
     &__top-block {
@@ -941,7 +990,7 @@ export default {
 
     &__calendar-icon {
         position: absolute;
-        left: 25px;
+        left: 16px;
         bottom: 18px;
     }
 
@@ -1077,9 +1126,9 @@ export default {
         }
 
         div {
-            &:nth-child(3) {
-                display: none;
-            }
+            // &:nth-child(3) {
+            //     display: none;
+            // }
         }
     }
 }

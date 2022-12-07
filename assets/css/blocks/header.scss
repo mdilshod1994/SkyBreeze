@@ -83,6 +83,7 @@
 				&.menu-item-has-children {
 					position: relative;
 					z-index: 1000;
+
 					&::before {
 						content: "";
 						position: absolute;
@@ -91,7 +92,7 @@
 						top: 100%;
 						right: 0px;
 					}
-					& > a {
+					& > div {
 						position: relative;
 						padding-right: 18px;
 						&::after {
@@ -135,11 +136,17 @@
 							margin-left: 0;
 						}
 					}
+					.menu-item-has-children__link {
+						transition: all 0.3s;
+					}
 					&:hover {
 						& > ul {
 							visibility: visible;
 							opacity: 1;
 							transform: translateY(0px);
+						}
+						& > .menu-item-has-children__link {
+							color: #28aecb;
 						}
 					}
 				}
@@ -356,6 +363,10 @@
 									padding: 6px 0;
 								}
 							}
+						}
+						.menu-item-has-children__link {
+							// color: #28aecb;
+							max-width: max-content;
 						}
 					}
 					&:last-child {

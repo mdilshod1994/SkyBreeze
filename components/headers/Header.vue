@@ -20,7 +20,7 @@
                         <nav class="header__menu">
                             <ul v-if="translations.length > 0">
                                 <li class="menu-item-has-children">
-                                    <a href="#">{{ translations[0].text }}</a>
+                                    <div class="menu-item-has-children__link">{{ translations[0].text }}</div>
                                     <ul>
                                         <li v-for="link in services" :key="link.id">
                                             <div @click="$router.push(localePath(`/our-services/${link.alias}`))">
@@ -263,7 +263,7 @@ export default {
         }
 
         if ($windowWidth <= '1180') {
-            $(".menu-item-has-children a").on("click", function (e) {
+            $(".menu-item-has-children div").on("click", function (e) {
                 e.preventDefault();
                 $(this).parent().find("ul").slideToggle(300);
             });
